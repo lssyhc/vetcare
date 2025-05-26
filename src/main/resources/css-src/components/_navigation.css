@@ -1,0 +1,14 @@
+@layer components {
+  .nav-item {
+    @apply px-3 py-2;
+    @apply text-gray-600 text-base font-medium;
+    @apply hover:text-primary transition-colors duration-300 ease-in-out;
+  }
+  .nav-item.mobile {
+    @apply block py-3 text-center;
+  }
+
+  #mobile-menu.menu-open {
+    @apply opacity-100 translate-y-0 visible;
+  }
+}
