@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <footer
+    th:fragment="publicFooter"
+    class="bg-slate-800 text-slate-300 py-16 rounded-t-2xl mt-auto"
+  >
+    <div class="container mx-auto px-6 text-center">
+      <a
+        th:href="@{/}"
+        class="text-2xl font-bold text-white hover:text-gray-200 mb-6 inline-block transition-colors duration-300 ease-in-out"
+      >
+        VetCare
+      </a>
+      <p class="mb-6 text-slate-400 max-w-lg mx-auto leading-relaxed">
+        Solusi terpadu untuk kesehatan hewan peliharaan Anda, menyediakan
+        kemudahan reservasi janji temu dokter hewan secara online.
+      </p>
+      <p class="text-sm text-slate-500">
+        &copy;
+        <span th:text="${#dates.year(#dates.createNow())}">2025</span> Vet Care.
+        Didesain dengan ❤️ untuk sahabat terbaik Anda.
+      </p>
+    </div>
+  </footer>
+</html>
