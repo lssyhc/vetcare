@@ -1,14 +1,43 @@
 @layer components {
   .nav-item {
-    @apply px-3 py-2;
+    @apply px-6 py-3;
     @apply text-gray-600 text-base font-medium;
     @apply hover:text-primary transition-colors duration-300 ease-in-out;
   }
   .nav-item.mobile {
-    @apply block py-3 text-center;
+    @apply block text-center py-4;
+  }
+  .nav-item.active {
+    @apply text-primary font-semibold relative;
+  }
+  .nav-item.active::after {
+    @apply content-[''] absolute left-1/2 transform -translate-x-1/2;
+    @apply w-8 h-0.5 bg-primary;
+    bottom: 3px;
+  }
+  .nav-item.mobile.active::after {
+    @apply content-[''] absolute left-1/2 transform -translate-x-1/2;
+    @apply w-8 h-0.5 bg-primary;
+    bottom: -1px;
+  }
+
+  .register-btn {
+    @apply bg-primary text-white px-6 py-3 rounded-xl text-sm font-semibold;
+    @apply hover:bg-primary-dark transition-colors duration-300 ease-in-out;
+    @apply shadow-md hover:shadow-lg transform hover:scale-105;
+  }
+  .register-btn.active {
+    @apply bg-white text-primary;
+    @apply hover:bg-gray-50;
+    @apply outline outline-1 outline-primary outline-offset-0;
   }
 
   #mobile-menu.menu-open {
     @apply opacity-100 translate-y-0 visible;
+  }
+
+  #mobile-menu-backdrop.backdrop-open {
+    @apply opacity-100 visible;
+    pointer-events: auto !important;
   }
 }

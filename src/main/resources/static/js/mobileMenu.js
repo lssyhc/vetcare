@@ -2,10 +2,17 @@ class MobileMenu {
   constructor() {
     this.button = document.getElementById("mobile-menu-button");
     this.menu = document.getElementById("mobile-menu");
+    this.backdrop = document.getElementById("mobile-menu-backdrop");
     this.iconHamburger = document.getElementById("icon-hamburger");
     this.iconClose = document.getElementById("icon-close");
 
-    if (this.button && this.menu && this.iconHamburger && this.iconClose) {
+    if (
+      this.button &&
+      this.menu &&
+      this.backdrop &&
+      this.iconHamburger &&
+      this.iconClose
+    ) {
       this.init();
     }
   }
@@ -13,6 +20,7 @@ class MobileMenu {
   init() {
     this.handleButtonClick = this.handleButtonClick.bind(this);
     this.handleClickOutside = this.handleClickOutside.bind(this);
+    this.handleBackdropClick = this.handleBackdropClick.bind(this);
     this.handleNavClick = this.handleNavClick.bind(this);
     this.setupEventListeners();
   }
@@ -24,11 +32,19 @@ class MobileMenu {
   }
 
   handleClickOutside(e) {
-    if (!this.button.contains(e.target) && !this.menu.contains(e.target)) {
+    if (
+      !this.button.contains(e.target) &&
+      !this.menu.contains(e.target) &&
+      !this.backdrop.contains(e.target)
+    ) {
       if (this.menu.classList.contains("menu-open")) {
         this.setMenuState(false);
       }
     }
+  }
+
+  handleBackdropClick() {
+    this.setMenuState(false);
   }
 
   handleNavClick(e) {
@@ -54,14 +70,31 @@ class MobileMenu {
   setMenuState(shouldBeOpen) {
     if (shouldBeOpen) {
       this.menu.classList.remove("invisible");
+      this.backdrop.classList.remove("invisible");
+
+      this.backdrop.offsetHeight;
+      this.menu.offsetHeight;
+
       requestAnimationFrame(() => {
         this.menu.classList.add("menu-open");
+        this.backdrop.classList.add("backdrop-open");
+
+        this.backdrop.style.pointerEvents = "auto";
+        this.backdrop.style.opacity = "1";
+        this.backdrop.style.visibility = "visible";
       });
     } else {
       this.menu.classList.remove("menu-open");
+      this.backdrop.classList.remove("backdrop-open");
+
+      this.backdrop.style.pointerEvents = "none";
+      this.backdrop.style.opacity = "0";
+
       setTimeout(() => {
         if (!this.menu.classList.contains("menu-open")) {
           this.menu.classList.add("invisible");
+          this.backdrop.classList.add("invisible");
+          this.backdrop.style.visibility = "hidden";
         }
       }, 300);
     }
@@ -75,6 +108,7 @@ class MobileMenu {
 
   setupEventListeners() {
     this.button.addEventListener("click", this.handleButtonClick);
+    this.backdrop.addEventListener("click", this.handleBackdropClick);
     document.addEventListener("click", this.handleClickOutside);
     this.menu.addEventListener("click", this.handleNavClick);
   }
