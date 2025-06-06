@@ -12,12 +12,14 @@
   }
   .nav-item.active::after {
     @apply content-[''] absolute left-1/2 transform -translate-x-1/2;
-    @apply w-8 h-0.5 bg-primary;
+    @apply w-8 bg-primary;
+    height: 1px;
     bottom: 3px;
   }
   .nav-item.mobile.active::after {
     @apply content-[''] absolute left-1/2 transform -translate-x-1/2;
     @apply w-8 h-0.5 bg-primary;
+    height: 1px;
     bottom: -1px;
   }
 

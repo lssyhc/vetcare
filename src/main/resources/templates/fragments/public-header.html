@@ -138,7 +138,7 @@
           <a
             th:href="@{/auth/register}"
             class="nav-item mobile"
-            th:classappend="${currentUri == authRegisterUrl ? 'active' : ''}"
+            th:classappend="${currentUri == authRegisterUrl ? 'text-primary font-semibold relative' : ''}"
             th:aria-current="${currentUri == authRegisterUrl ? 'page' : false}"
           >
             Registrasi
