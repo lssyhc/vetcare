@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="~{fragments/layout :: layout(
+                pageTitle='VetCare - Login',
+                headerFragment=~{fragments/header :: header},
+                footerFragment=~{fragments/footer :: footer},
+                pageContent=~{:: #page-content},
+                pageSpecificStyles=~{:: #page-styles},
+                pageSpecificScripts=~{:: #page-scripts}
+              )}"
+>
+  <th:block id="page-styles">
+    <style>
+      .auth-container {
+        max-width: 400px;
+        margin: 2rem auto;
+        padding: 2rem;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+      .form-group {
+        margin-bottom: 1rem;
+      }
+      .form-label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+        color: #374151;
+      }
+      .form-input {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid #d1d5db;
+        border-radius: 4px;
+        font-size: 1rem;
+      }
+      .form-input:focus {
+        outline: none;
+        border-color: #3b82f6;
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+      }
+      .btn-primary {
+        width: 100%;
+        background-color: #3b82f6;
+        color: white;
+        padding: 0.75rem;
+        border: none;
+        border-radius: 4px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+      }
+      .btn-primary:hover {
+        background-color: #2563eb;
+      }
+      .alert {
+        padding: 0.75rem;
+        margin-bottom: 1rem;
+        border-radius: 4px;
+      }
+      .alert-error {
+        background-color: #fef2f2;
+        color: #dc2626;
+        border: 1px solid #fecaca;
+      }
+      .alert-success {
+        background-color: #f0fdf4;
+        color: #059669;
+        border: 1px solid #bbf7d0;
+      }
+      .text-center {
+        text-align: center;
+      }
+      .mt-4 {
+        margin-top: 1rem;
+      }
+      .text-blue-600 {
+        color: #2563eb;
+      }
+      .text-blue-600:hover {
+        color: #1d4ed8;
+      }
+    </style>
+  </th:block>
+
+  <div id="page-content" class="container">
+    <div class="auth-container">
+      <h2 class="text-center mb-4">Login to VetCare</h2>
+
+      <div th:if="${error}" class="alert alert-error">
+        <span th:text="${error}">Error message</span>
+      </div>
+
+      <div th:if="${message}" class="alert alert-success">
+        <span th:text="${message}">Success message</span>
+      </div>
+
+      <form th:action="@{/auth/login}" method="post">
+        <div class="form-group">
+          <label for="username" class="form-label">Email:</label>
+          <input
+            type="email"
+            id="username"
+            name="username"
+            class="form-input"
+            required
+            placeholder="Enter your email"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="password" class="form-label">Password:</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            class="form-input"
+            required
+            placeholder="Enter your password"
+          />
+        </div>
+
+        <button type="submit" class="btn-primary">Login</button>
+      </form>
+
+      <div class="text-center mt-4">
+        <p>
+          Don't have an account?
+          <a href="/auth/register" class="text-blue-600">Register here</a>
+        </p>
+        <p>
+          <a href="/" class="text-blue-600">← Back to Home</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <th:block id="page-scripts"></th:block>
+</html>
