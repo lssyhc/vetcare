@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <div th:fragment="ownerSidebar" id="sidebar">
+    <nav class="sidebar-nav">
+      <h3>Pet Owner Menu</h3>
+      <ul>
+        <li><a href="/dashboard/owner">Dashboard</a></li>
+        <li><a href="/pets">My Pets</a></li>
+        <li><a href="/appointments/book">Book Appointment</a></li>
+        <li><a href="/appointments">My Appointments</a></li>
+        <li><a href="/profile">My Profile</a></li>
+      </ul>
+      <div class="sidebar-bottom">
+        <a href="/logout" class="logout-link">Logout</a>
+      </div>
+    </nav>
+  </div>
+</html>

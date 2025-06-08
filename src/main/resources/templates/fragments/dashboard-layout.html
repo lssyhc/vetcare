@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  th:fragment="dashboardLayout (
+    pageTitle, 
+    sidebarFragment, 
+    pageContent, 
+    pageSpecificStyles, 
+    pageSpecificScripts
+)"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title th:text="${pageTitle}">VetCare Dashboard</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link href="/css/style.css" rel="stylesheet" />
+    <th:block th:replace="${pageSpecificStyles}"></th:block>
+  </head>
+  <body>
+    <div class="dashboard-container">
+      <div class="dashboard-main">
+        <aside class="dashboard-sidebar">
+          <th:block th:replace="${sidebarFragment}"></th:block>
+        </aside>
+
+        <main class="dashboard-content">
+          <th:block th:replace="${pageContent}"></th:block>
+        </main>
+      </div>
+    </div>
+
+    <th:block th:replace="${pageSpecificScripts}"></th:block>
+  </body>
+</html>

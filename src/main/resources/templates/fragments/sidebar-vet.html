@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <div th:fragment="vetSidebar" id="sidebar">
+    <nav class="sidebar-nav">
+      <h3>Veterinarian Menu</h3>
+      <ul>
+        <li><a href="/dashboard/vet">Dashboard</a></li>
+        <li><a href="/schedule/setup">Setup Schedule</a></li>
+        <li><a href="/appointments">All Appointments</a></li>
+        <li><a href="/profile">My Profile</a></li>
+      </ul>
+      <div class="sidebar-bottom">
+        <a href="/logout" class="logout-link">Logout</a>
+      </div>
+    </nav>
+  </div>
+</html>
