@@ -5,7 +5,15 @@ module.exports = {
     "./src/main/resources/static/js/**/*.js",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary: "#5271ff",
+        "primary-dark": "#415bcf",
+      },
+      fontFamily: {
+        sans: ["Poppins", "sans-serif"],
+      },
+    },
   },
   plugins: [],
 };
