@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  th:fragment="layout (
+    pageTitle,
+    pageContent,
+    headerFragment,
+    footerFragment,
+    pageSpecificStyles,
+    pageSpecificScripts
+  )"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title th:text="${pageTitle ?: 'VetCare'}">VetCare Default Title</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <th:block th:replace="${pageSpecificStyles} ?: ~{}"></th:block>
+  </head>
+  <body>
+    <div
+      th:replace="${headerFragment} ?: ~{fragments/public-header :: publicHeader}"
+    ></div>
+
+    <main class="flex-grow" th:replace="${pageContent}"></main>
+
+    <div
+      th:replace="${footerFragment} ?: ~{fragments/public-footer :: publicFooter}"
+    ></div>
+
+    <script th:src="@{/js/script.js}" type="module"></script>
+    <th:block th:replace="${pageSpecificScripts} ?: ~{}"></th:block>
+  </body>
+</html>

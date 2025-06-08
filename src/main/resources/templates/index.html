@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="~{fragments/layout :: layout(
+                pageTitle='VetCare - Solusi Kesehatan Hewan Peliharaan Anda',
+                headerFragment=~{fragments/header :: header},
+                footerFragment=~{fragments/footer :: footer},
+                pageContent=~{:: #page-content},
+                pageSpecificStyles=~{:: #page-styles},
+                pageSpecificScripts=~{:: #page-scripts}
+              )}"
+>
+  <th:block id="page-styles"></th:block>
+
+  <div id="page-content" class="container p-4">
+    <h1>VetCare</h1>
+    <p>Veterinary Clinic Appointment Booking System</p>
+
+    <div>
+      <a href="/auth/login" class="underline text-primary mr-5">→ Login</a>
+      <a href="/auth/register" class="underline text-primary">→ Register</a>
+    </div>
+  </div>
+
+  <th:block id="page-scripts"></th:block>
+</html>
