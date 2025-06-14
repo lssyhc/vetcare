@@ -1,8 +1,10 @@
 package com.lima.vetcare.controller;
 
 import com.lima.vetcare.model.Owner;
+import com.lima.vetcare.model.Pet;
 import com.lima.vetcare.model.Veterinarian;
 import com.lima.vetcare.service.OwnerService;
+import com.lima.vetcare.service.PetService;
 import com.lima.vetcare.service.VeterinarianService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -10,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/dashboard")
@@ -21,6 +25,9 @@ public class DashboardController {
     @Autowired
     private VeterinarianService veterinarianService;
 
+    @Autowired
+    private PetService petService;
+
     @GetMapping("/owner")
     public String ownerDashboard(Authentication authentication, Model model) {
         String email = authentication.getName();
@@ -30,8 +37,11 @@ public class DashboardController {
             return "redirect:/auth/login?error=true";
         }
 
+        List<Pet> pets = petService.getPetsByOwner(owner);
+
         model.addAttribute("owner", owner);
         model.addAttribute("userName", owner.getName());
+        model.addAttribute("pets", pets);
         return "dashboard/owner";
     }
 
