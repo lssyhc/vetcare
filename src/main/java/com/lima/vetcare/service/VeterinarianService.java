@@ -63,4 +63,13 @@ public class VeterinarianService {
     public boolean existsByEmail(String email) {
         return veterinarianRepository.existsByEmail(email);
     }
+
+    public void changeSpecialization(Veterinarian vet, String specialization) {
+        if (specialization == null || specialization.trim().isEmpty()) {
+            throw new IllegalArgumentException("Spesialisasi tidak boleh kosong");
+        }
+
+        vet.setSpecialization(specialization);
+        veterinarianRepository.save(vet);
+    }
 }

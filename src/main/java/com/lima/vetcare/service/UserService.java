@@ -35,6 +35,30 @@ public class UserService {
         return passwordEncoder.matches(rawPassword, encodedPassword);
     }
 
+    public void changePassword(User user, String currentPassword, String newPassword) {
+        if (!passwordEncoder.matches(currentPassword, user.getPassword())) {
+            throw new IllegalArgumentException("Password saat ini tidak benar");
+        }
+
+        user.setPassword(passwordEncoder.encode(newPassword));
+        userRepository.save(user);
+    }
+
+    public void changeEmail(User user, String newEmail) {
+        Optional<User> existingUserOptional = userRepository.findByEmail(newEmail);
+        User existingUser = existingUserOptional.orElse(null);
+        if (existingUser != null && !existingUser.getId().equals(user.getId())) {
+            throw new IllegalArgumentException("Email sudah digunakan");
+        }
+
+        user.setEmail(newEmail);
+        userRepository.save(user);
+    }
+
+    public void deleteAccount(User user) {
+        userRepository.delete(user);
+    }
+
     public BCryptPasswordEncoder getPasswordEncoder() {
         return passwordEncoder;
     }
