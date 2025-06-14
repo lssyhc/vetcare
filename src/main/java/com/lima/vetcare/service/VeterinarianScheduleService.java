@@ -27,13 +27,17 @@ public class VeterinarianScheduleService {
     }
 
     public VeterinarianSchedule setSchedule(Long veterinarianId, Integer dayOfWeek,
-            LocalTime startTime, LocalTime endTime) {
+            LocalTime startTime, LocalTime endTime, Boolean isActive) {
         if (dayOfWeek < 1 || dayOfWeek > 7) {
             throw new IllegalArgumentException("Day of week must be between 1 (Monday) and 7 (Sunday)");
         }
 
-        if (startTime != null && endTime != null && startTime.isAfter(endTime)) {
+        if (startTime != null && endTime != null && !startTime.isBefore(endTime)) {
             throw new IllegalArgumentException("Start time must be before end time");
+        }
+
+        if (isActive != null && isActive && (startTime == null || endTime == null)) {
+            throw new IllegalArgumentException("Start and end time must be filled when day is active");
         }
 
         Veterinarian veterinarian = veterinarianService.findVeterinarianById(veterinarianId);
@@ -53,8 +57,7 @@ public class VeterinarianScheduleService {
             schedule.setDayOfWeek(dayOfWeek);
         }
 
-        boolean isActive = startTime != null && endTime != null;
-        schedule.setIsActive(isActive);
+        schedule.setIsActive(isActive != null ? isActive : false);
         schedule.setStartTime(startTime);
         schedule.setEndTime(endTime);
 
@@ -111,7 +114,7 @@ public class VeterinarianScheduleService {
         LocalTime currentSlot = startTime;
         while (currentSlot.isBefore(endTime)) {
             slots.add(currentSlot);
-            currentSlot = currentSlot.plusHours(1);
+            currentSlot = currentSlot.plusMinutes(30);
         }
 
         return slots;
