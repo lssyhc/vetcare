@@ -1,89 +1,270 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-  <head th:replace="fragments/layout :: head"></head>
-  <body>
-    <div th:replace="fragments/header :: header"></div>
-    <div class="container mx-auto p-4">
-      <h1 class="text-2xl font-bold mb-4">My Pets</h1>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="~{fragments/dashboard-layout :: dashboardLayout(
+                pageTitle='My Pets - VetCare',
+                sidebarFragment=~{fragments/sidebar-owner :: ownerSidebar},
+                pageContent=~{:: #content},
+                pageSpecificStyles=~{:: #page-styles},
+                pageSpecificScripts=~{:: #page-scripts}
+              )}"
+>
+  <th:block id="page-styles">
+    <style>
+      .dashboard-container {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
 
-      <!-- Error Messages -->
-      <div
-        th:if="${param.error}"
-        class="mb-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded"
-      >
-        <div th:if="${param.error[0] == 'unauthorized'}">
-          You are not authorized to perform this action.
-        </div>
-        <div th:if="${param.error[0] == 'delete_failed'}">
-          Failed to delete pet. Please try again.
-        </div>
+      .dashboard-main {
+        flex: 1;
+        display: flex;
+        max-width: 1200px;
+        margin: 0 auto;
+        width: 100%;
+      }
+
+      .dashboard-sidebar {
+        width: 250px;
+        background-color: #f8f9fa;
+        padding: 1rem;
+      }
+
+      .sidebar-nav {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+      }
+
+      .sidebar-nav h3 {
+        font-size: 1.2rem;
+        color: #495057;
+        margin-bottom: 1rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid #e9ecef;
+      }
+
+      .sidebar-nav ul {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 1rem 0;
+      }
+
+      .sidebar-nav li {
+        margin-bottom: 0.5rem;
+      }
+
+      .sidebar-nav a {
+        display: block;
+        padding: 0.5rem 0.75rem;
+        color: #495057;
+        text-decoration: none;
+        border-radius: 0.25rem;
+        transition: background-color 0.2s;
+      }
+
+      .sidebar-nav a:hover {
+        background-color: #e9ecef;
+        color: #212529;
+      }
+
+      .sidebar-bottom {
+        margin-top: auto;
+        padding-top: 1rem;
+        border-top: 1px solid #e9ecef;
+      }
+
+      .logout-link {
+        display: block;
+        padding: 0.5rem 0.75rem;
+        color: #dc3545;
+        text-decoration: none;
+        border-radius: 0.25rem;
+        text-align: center;
+        border: 1px solid #dc3545;
+      }
+
+      .logout-link:hover {
+        background-color: #dc3545;
+        color: white;
+      }
+      
+      .content-header {
+        margin-bottom: 2rem;
+      }
+      .content-header h1 {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #495057;
+        margin-bottom: 0.5rem;
+      }
+      
+      .pets-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 1rem;
+      }
+      
+      .pets-table th, .pets-table td {
+        border: 1px solid #e9ecef;
+        padding: 0.75rem;
+      }
+      
+      .pets-table th {
+        background-color: #f8f9fa;
+        font-weight: 600;
+        text-align: left;
+      }
+      
+      .pets-table tr:hover {
+        background-color: #f8f9fa;
+      }
+      
+      .add-pet-btn {
+        display: inline-block;
+        background-color: #5271ff;
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 0.25rem;
+        text-decoration: none;
+        margin-bottom: 1rem;
+      }
+      
+      .add-pet-btn:hover {
+        background-color: #4060ee;
+      }
+      
+      .error-message {
+        background-color: #f8d7da;
+        border: 1px solid #f5c6cb;
+        color: #721c24;
+        padding: 1rem;
+        border-radius: 0.25rem;
+        margin-bottom: 1rem;
+      }
+      
+      .no-pets-message {
+        background-color: #f8f9fa;
+        padding: 1rem;
+        border-radius: 0.25rem;
+        color: #6c757d;
+      }
+      
+      .edit-link {
+        color: #5271ff;
+        text-decoration: none;
+        margin-right: 0.75rem;
+      }
+      
+      .edit-link:hover {
+        text-decoration: underline;
+      }
+      
+      .delete-btn {
+        color: #dc3545;
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-weight: 500;
+        padding: 0;
+      }
+      
+      .delete-btn:hover {
+        text-decoration: underline;
+      }
+      
+      .dashboard-content {
+        flex: 1;
+        padding: 1rem;
+      }
+
+      .dashboard-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 1rem;
+        margin-top: 1rem;
+      }
+
+      .card {
+        background-color: #fff;
+        border-radius: 0.25rem;
+        padding: 1.5rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        border: 1px solid #e9ecef;
+      }
+
+      .card h2 {
+        font-size: 1.25rem;
+        margin-bottom: 1rem;
+        color: #343a40;
+      }
+      
+      @media (max-width: 768px) {
+        .dashboard-main {
+          flex-direction: column;
+        }
+        
+        .dashboard-sidebar {
+          width: 100%;
+          margin-bottom: 1rem;
+        }
+        
+        .dashboard-cards {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </th:block>
+
+  <div id="content">
+    <div class="content-header">
+      <h1>My Pets</h1>
+    </div>
+
+    <div th:if="${param.error}" class="error-message">
+      <div th:if="${param.error[0] == 'unauthorized'}">
+        You are not authorized to perform this action.
       </div>
-
-      <a
-        href="/pets/add"
-        class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded mb-4 inline-block"
-      >
-        Add New Pet
-      </a>
-
-      <div th:if="${#lists.isEmpty(pets)}" class="mt-4 p-4 bg-gray-100 rounded">
-        <p class="text-gray-600">
-          You don't have any pets yet.
-          <a href="/pets/add" class="text-blue-500">Add your first pet</a>
-        </p>
-      </div>
-
-      <div th:unless="${#lists.isEmpty(pets)}">
-        <table
-          class="table-auto w-full mt-4 border-collapse border border-gray-300"
-        >
-          <thead class="bg-gray-50">
-            <tr>
-              <th class="border border-gray-300 px-4 py-2 text-left">Name</th>
-              <th class="border border-gray-300 px-4 py-2 text-left">
-                Species
-              </th>
-              <th class="border border-gray-300 px-4 py-2 text-left">
-                Actions
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr th:each="pet : ${pets}" class="hover:bg-gray-50">
-              <td
-                class="border border-gray-300 px-4 py-2"
-                th:text="${pet.name}"
-              ></td>
-              <td
-                class="border border-gray-300 px-4 py-2"
-                th:text="${pet.species}"
-              ></td>
-              <td class="border border-gray-300 px-4 py-2">
-                <a
-                  th:href="@{'/pets/' + ${pet.id} + '/edit'}"
-                  class="text-blue-500 hover:text-blue-700 mr-3"
-                  >Edit</a
-                >
-                |
-                <form
-                  th:action="@{'/pets/' + ${pet.id} + '/delete'}"
-                  method="post"
-                  style="display: inline-block"
-                  onsubmit="return confirm('Apakah anda yakin ingin menghapus pet ini?');"
-                >
-                  <button
-                    type="submit"
-                    class="text-red-500 hover:text-red-700 font-medium"
-                  >
-                    Delete
-                  </button>
-                </form>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      <div th:if="${param.error[0] == 'delete_failed'}">
+        Failed to delete pet. Please try again.
       </div>
     </div>
-    <div th:replace="fragments/footer :: footer"></div>
-  </body>
+
+    <a href="/pets/add" class="add-pet-btn">Add New Pet</a>
+
+    <div th:if="${#lists.isEmpty(pets)}" class="no-pets-message">
+      <p>
+        You don't have any pets yet.
+        <a href="/pets/add" class="edit-link">Add your first pet</a>
+      </p>
+    </div>
+
+    <div th:unless="${#lists.isEmpty(pets)}">
+      <table class="pets-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Species</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="pet : ${pets}">
+            <td th:text="${pet.name}"></td>
+            <td th:text="${pet.species}"></td>
+            <td>
+              <a th:href="@{'/pets/' + ${pet.id} + '/edit'}" class="edit-link">Edit</a>
+              |
+              <form th:action="@{'/pets/' + ${pet.id} + '/delete'}" method="post" style="display: inline-block" onsubmit="return confirm('Are you sure you want to delete this pet?');">
+                <button type="submit" class="delete-btn">Delete</button>
+              </form>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <th:block id="page-scripts"></th:block>
 </html>
