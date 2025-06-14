@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="~{fragments/dashboard-layout :: dashboardLayout(
+                pageTitle='My Appointments - VetCare',
+                sidebarFragment=${isOwner} ? ~{fragments/sidebar-owner :: ownerSidebar} : ~{fragments/sidebar-vet :: vetSidebar},
+                pageContent=~{:: #content},
+                pageSpecificStyles=~{:: #page-styles},
+                pageSpecificScripts=~{:: #page-scripts}
+              )}"
+>
+  <th:block id="page-styles">
+    <style>
+      .dashboard-container {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .dashboard-main {
+        flex: 1;
+        display: flex;
+        max-width: 1200px;
+        margin: 0 auto;
+        width: 100%;
+      }
+
+      .dashboard-sidebar {
+        width: 250px;
+        background-color: #f8f9fa;
+        padding: 1rem;
+      }
+
+      .sidebar-nav {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+      }
+
+      .sidebar-nav h3 {
+        font-size: 1.2rem;
+        color: #495057;
+        margin-bottom: 1rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid #e9ecef;
+      }
+
+      .sidebar-nav ul {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 1rem 0;
+      }
+
+      .sidebar-nav li {
+        margin-bottom: 0.5rem;
+      }
+
+      .sidebar-nav a {
+        display: block;
+        padding: 0.5rem 0.75rem;
+        color: #495057;
+        text-decoration: none;
+        border-radius: 0.25rem;
+        transition: background-color 0.2s;
+      }
+
+      .sidebar-nav a:hover {
+        background-color: #e9ecef;
+        color: #212529;
+      }
+
+      .sidebar-bottom {
+        margin-top: auto;
+        padding-top: 1rem;
+        border-top: 1px solid #e9ecef;
+      }
+
+      .logout-link {
+        display: block;
+        padding: 0.5rem 0.75rem;
+        color: #dc3545;
+        text-decoration: none;
+        border-radius: 0.25rem;
+        text-align: center;
+        border: 1px solid #dc3545;
+      }
+
+      .logout-link:hover {
+        background-color: #dc3545;
+        color: white;
+      }
+      
+      .content-header {
+        margin-bottom: 2rem;
+      }
+      
+      .content-header h1 {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #495057;
+        margin-bottom: 0.5rem;
+      }
+      
+      .appointment-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 1rem;
+      }
+      
+      .appointment-table th, .appointment-table td {
+        border: 1px solid #e9ecef;
+        padding: 0.75rem;
+      }
+      
+      .appointment-table th {
+        background-color: #f8f9fa;
+        font-weight: 600;
+        text-align: left;
+      }
+      
+      .appointment-table tr:hover {
+        background-color: #f8f9fa;
+      }
+      
+      .add-button {
+        display: inline-block;
+        background-color: #5271ff;
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 0.25rem;
+        text-decoration: none;
+        margin-bottom: 1rem;
+      }
+      
+      .add-button:hover {
+        background-color: #4060ee;
+      }
+      
+      .status-badge {
+        display: inline-block;
+        padding: 0.25rem 0.5rem;
+        border-radius: 0.25rem;
+        font-size: 0.75rem;
+        font-weight: 500;
+      }
+      
+      .status-scheduled {
+        background-color: #dbeafe;
+        color: #1e40af;
+      }
+      
+      .status-completed {
+        background-color: #dcfce7;
+        color: #166534;
+      }
+      
+      .status-cancelled {
+        background-color: #fee2e2;
+        color: #b91c1c;
+      }
+      
+      .view-link {
+        color: #5271ff;
+        text-decoration: none;
+        font-weight: 500;
+      }
+      
+      .view-link:hover {
+        text-decoration: underline;
+      }
+      
+      .empty-message {
+        background-color: #f8f9fa;
+        padding: 1rem;
+        border-radius: 0.25rem;
+        color: #6c757d;
+      }
+      
+      .alert-success {
+        background-color: #d1e7dd;
+        border: 1px solid #badbcc;
+        color: #0f5132;
+        padding: 1rem;
+        border-radius: 0.25rem;
+        margin-bottom: 1rem;
+      }
+      
+      .alert-error {
+        background-color: #f8d7da;
+        border: 1px solid #f5c6cb;
+        color: #721c24;
+        padding: 1rem;
+        border-radius: 0.25rem;
+        margin-bottom: 1rem;
+      }
+      
+      .dashboard-content {
+        flex: 1;
+        padding: 1rem;
+      }
+      
+      @media (max-width: 768px) {
+        .dashboard-main {
+          flex-direction: column;
+        }
+        
+        .dashboard-sidebar {
+          width: 100%;
+          margin-bottom: 1rem;
+        }
+        
+        .appointments-header {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        
+        .add-button {
+          margin-top: 0.5rem;
+        }
+      }
+    </style>
+  </th:block>
+
+  <div id="content">
+    <div class="content-header">
+      <h1>Janji Temu Saya</h1>
+    </div>
+
+    <div th:if="${successMessage}" class="alert-success" role="alert">
+      <span th:text="${successMessage}"></span>
+    </div>
+    
+    <div th:if="${errorMessage}" class="alert-error" role="alert">
+      <span th:text="${errorMessage}"></span>
+    </div>
+
+    <a th:if="${isOwner}" href="/appointments/book" class="add-button">Buat Janji Temu Baru</a>
+
+    <div class="empty-message" th:if="${appointments == null || #lists.isEmpty(appointments)}">
+      <p>Anda belum memiliki janji temu.</p>
+      <p th:if="${isOwner}">Klik "Buat Janji Temu Baru" untuk menjadwalkan kunjungan pertama Anda.</p>
+    </div>
+    
+    <div th:if="${appointments != null && not #lists.isEmpty(appointments)}">
+      <table class="appointment-table">
+        <thead>
+          <tr>
+            <th>Tanggal & Waktu</th>
+            <th th:if="${isVeterinarian}">Hewan & Pemilik</th>
+            <th th:if="${isOwner}">Hewan Peliharaan</th>
+            <th th:if="${isOwner}">Veterinarian</th>
+            <th>Durasi</th>
+            <th>Status</th>
+            <th>Tindakan</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="appointment : ${appointments}">
+            <td th:text="${#temporals.format(appointment.appointmentTime, 'dd MMMM yyyy, HH:mm', new java.util.Locale('id', 'ID'))}"></td>
+            
+            <td th:if="${isVeterinarian}" 
+                th:text="${appointment.pet.name} + ' (' + ${appointment.owner.name} + ')'"></td>
+                
+            <td th:if="${isOwner}" 
+                th:text="${appointment.pet.name} + ' (' + ${appointment.pet.species} + ')'"></td>
+                
+            <td th:if="${isOwner}" 
+                th:text="${appointment.veterinarian.name} + ' (' + ${appointment.veterinarian.specialization} + ')'"></td>
+                
+            <td th:text="${appointment.durationMinutes} + ' menit'"></td>
+            
+            <td>
+              <span class="status-badge" 
+                    th:classappend="${'status-' + appointment.status.toString().toLowerCase()}" 
+                    th:text="${appointment.status}"></span>
+            </td>
+            
+            <td>
+              <a th:href="@{/appointments/{id}(id=${appointment.id})}" class="view-link">Lihat Detail</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <th:block id="page-scripts"></th:block>
+</html>

@@ -1,8 +1,10 @@
 package com.lima.vetcare.controller;
 
+import com.lima.vetcare.model.Appointment;
 import com.lima.vetcare.model.Owner;
 import com.lima.vetcare.model.Pet;
 import com.lima.vetcare.model.Veterinarian;
+import com.lima.vetcare.service.AppointmentService;
 import com.lima.vetcare.service.OwnerService;
 import com.lima.vetcare.service.PetService;
 import com.lima.vetcare.service.VeterinarianService;
@@ -28,6 +30,9 @@ public class DashboardController {
     @Autowired
     private PetService petService;
 
+    @Autowired
+    private AppointmentService appointmentService;
+
     @GetMapping("/owner")
     public String ownerDashboard(Authentication authentication, Model model) {
         String email = authentication.getName();
@@ -38,10 +43,12 @@ public class DashboardController {
         }
 
         List<Pet> pets = petService.getPetsByOwner(owner);
+        List<Appointment> upcomingAppointments = appointmentService.getUpcomingAppointments(owner.getId());
 
         model.addAttribute("owner", owner);
         model.addAttribute("userName", owner.getName());
         model.addAttribute("pets", pets);
+        model.addAttribute("upcomingAppointments", upcomingAppointments);
         return "dashboard/owner";
     }
 
@@ -54,9 +61,12 @@ public class DashboardController {
             return "redirect:/auth/login?error=true";
         }
 
+        List<Appointment> todaysAppointments = appointmentService.getTodaysAppointments(vet);
+
         model.addAttribute("veterinarian", vet);
         model.addAttribute("userName", vet.getName());
         model.addAttribute("specialization", vet.getSpecialization());
+        model.addAttribute("todaysAppointments", todaysAppointments);
         return "dashboard/vet";
     }
 
