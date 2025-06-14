@@ -181,6 +181,57 @@
         margin: 0.75rem 0;
       }
 
+      .appointment-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      
+      .appointment-item {
+        margin-bottom: 1rem;
+        padding: 1rem;
+        border-radius: 8px;
+        background-color: #f8f9fa;
+        border-left: 4px solid #5271ff;
+      }
+      
+      .appointment-date {
+        font-weight: 600;
+        color: #3a5ac9;
+        margin-bottom: 0.4rem;
+        font-size: 0.9rem;
+      }
+      
+      .appointment-details {
+        margin-bottom: 0.5rem;
+        color: #333333;
+        font-size: 0.95rem;
+      }
+      
+      .appointment-link {
+        display: inline-block;
+        color: #2c4bcc;
+        font-size: 0.9rem;
+        font-weight: 500;
+        text-decoration: none;
+        margin-top: 0.3rem;
+      }
+      
+      .action-button {
+        color: #ffffff !important;
+        background-color: #3850c8 !important;
+        display: inline-block;
+        margin-top: 1rem;
+        padding: 0.6rem 1.2rem;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 1rem;
+        letter-spacing: 0.02em;
+        text-align: center;
+        font-family: 'Segoe UI', Arial, sans-serif;
+      }
+
       @media (max-width: 768px) {
         .dashboard-main {
           flex-direction: column;
@@ -205,44 +256,57 @@
 
   <div id="content">
     <div class="content-header">
-      <h1>Welcome, <span th:text="${userName}">Owner</span>!</h1>
-      <p>Pet Owner Dashboard</p>
+      <h1>Selamat Datang, <span th:text="${userName}">Pemilik</span>!</h1>
+      <p>Dasbor Pemilik Hewan</p>
     </div>
 
     <div class="dashboard-cards">
       <div class="card">
-        <h2>My Pets Summary</h2>
-        <p>Total pets: <span th:text="${pets != null ? pets.size() : 0}">0</span></p>
+        <h2>Ringkasan Hewan Peliharaan Saya</h2>
+        <p>Total hewan peliharaan: <span th:text="${pets != null ? pets.size() : 0}">0</span></p>
         
         <div th:if="${pets != null and not #lists.isEmpty(pets)}" class="pet-list">
           <div th:each="pet : ${pets}" class="pet-item">
-            <div class="pet-name" th:text="${pet.name}">Pet Name</div>
+            <div class="pet-name" th:text="${pet.name}">Nama Hewan</div>
             <div class="pet-details">
-              <span th:text="${pet.species}">Species</span>
+              <span th:text="${pet.species}">Spesies</span>
             </div>
           </div>
         </div>
         
         <div th:if="${pets == null or #lists.isEmpty(pets)}" class="no-pets">
-          <p>You haven't added any pets yet.</p>
+          <p>Anda belum menambahkan hewan peliharaan.</p>
         </div>
         
-        <a href="/pets" class="btn btn-primary mt-2">Manage Pets</a>
+        <a href="/pets" class="btn btn-primary mt-2">Kelola Hewan Peliharaan</a>
       </div>
 
       <div class="card">
-        <h2>Upcoming Appointments</h2>
-        <p>No upcoming appointments</p>
-        <p><em>(Feature coming soon)</em></p>
-        <a href="/appointments/book">Book New Appointment</a>
+        <h2>Janji Temu Mendatang</h2>
+        <div th:if="${#lists.isEmpty(upcomingAppointments)}">
+          <p>Tidak ada janji temu mendatang</p>
+        </div>
+        <div th:if="${not #lists.isEmpty(upcomingAppointments)}">
+          <ul class="appointment-list">
+            <li th:each="appointment : ${upcomingAppointments}" class="appointment-item">
+              <div class="appointment-date" th:text="${#temporals.format(appointment.appointmentTime, 'dd MMMM yyyy, HH:mm', new java.util.Locale('id', 'ID'))}"></div>
+              <div class="appointment-details">
+                <span th:text="${appointment.pet.name}"></span> dengan 
+                <span th:text="'dr. ' + ${appointment.veterinarian.name}"></span>
+              </div>
+              <a th:href="@{/appointments/{id}(id=${appointment.id})}" class="appointment-link">Lihat Detail</a>
+            </li>
+          </ul>
+        </div>
+        <a href="/appointments/book" class="action-button">Buat Janji Temu Baru</a>
       </div>
 
       <div class="card">
-        <h2>Quick Actions</h2>
+        <h2>Aksi Cepat</h2>
         <ul>
-          <li><a href="/pets">Manage My Pets</a></li>
-          <li><a href="/appointments/book">Book New Appointment</a></li>
-          <li><a href="/appointments">View My Appointments</a></li>
+          <li><a href="/pets">Kelola Hewan Peliharaan Saya</a></li>
+          <li><a href="/appointments/book">Buat Janji Temu Baru</a></li>
+          <li><a href="/appointments">Lihat Janji Temu Saya</a></li>
         </ul>
       </div>
     </div>

@@ -29,29 +29,26 @@
         width: 250px;
         background-color: #f8f9fa;
         padding: 1rem;
-        border-right: 1px solid #e9ecef;
-        display: flex;
-        flex-direction: column;
       }
 
       .sidebar-nav {
-        flex: 1;
         display: flex;
         flex-direction: column;
+        height: 100%;
       }
 
       .sidebar-nav h3 {
-        font-size: 1.1rem;
-        font-weight: bold;
-        margin-bottom: 1rem;
+        font-size: 1.2rem;
         color: #495057;
+        margin-bottom: 1rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid #e9ecef;
       }
 
       .sidebar-nav ul {
         list-style: none;
         padding: 0;
-        margin: 0;
-        flex: 1;
+        margin: 0 0 1rem 0;
       }
 
       .sidebar-nav li {
@@ -64,11 +61,12 @@
         color: #495057;
         text-decoration: none;
         border-radius: 0.25rem;
+        transition: background-color 0.2s;
       }
 
       .sidebar-nav a:hover {
         background-color: #e9ecef;
-        color: #5271ff;
+        color: #212529;
       }
 
       .sidebar-bottom {
@@ -94,50 +92,43 @@
 
       .dashboard-content {
         flex: 1;
-        padding: 2rem;
+        padding: 1rem;
       }
 
       .content-header {
-        margin-bottom: 2rem;
+        margin-bottom: 1.5rem;
       }
 
       .content-header h1 {
-        font-size: 2rem;
-        font-weight: bold;
-        color: #495057;
+        font-size: 1.8rem;
         margin-bottom: 0.5rem;
       }
 
       .content-header p {
         color: #6c757d;
-        font-size: 1.1rem;
       }
 
       .dashboard-cards {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         gap: 1.5rem;
+        grid-template-columns: 1fr;
       }
 
       .card {
         background: white;
-        border: 1px solid #e9ecef;
         border-radius: 0.5rem;
         padding: 1.5rem;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
       }
 
       .card h2 {
         font-size: 1.25rem;
-        font-weight: bold;
         margin-bottom: 1rem;
-        color: #495057;
       }
 
       .card ul {
         list-style: none;
         padding: 0;
-        margin: 0;
       }
 
       .card li {
@@ -153,6 +144,105 @@
         text-decoration: underline;
       }
 
+      .stats {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+        flex-wrap: wrap;
+      }
+
+      .stats li {
+        padding: 0.5rem 1rem;
+        background-color: #f8f9fa;
+        border-radius: 6px;
+        font-size: 0.9rem;
+        display: flex;
+        align-items: center;
+      }
+
+      .stats li span {
+        font-weight: bold;
+        margin-left: 0.3rem;
+        color: #3a5ac9;
+      }
+
+      .schedule-table-container {
+        width: 100%;
+        overflow-x: auto;
+        margin-bottom: 1rem;
+      }
+
+      .schedule-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        min-width: 650px;
+      }
+      
+      .schedule-table thead {
+        background-color: #f1f2f5;
+      }
+      
+      .schedule-table th {
+        text-align: left;
+        padding: 0.75rem 1rem;
+        font-weight: 600;
+        color: #333333;
+        font-size: 0.9rem;
+        white-space: nowrap;
+        border-bottom: 1px solid #e9ecef;
+      }
+      
+      .schedule-table td {
+        padding: 0.75rem 1rem;
+        border-top: 1px solid #e9ecef;
+        vertical-align: middle;
+        font-size: 0.9rem;
+        color: #333333;
+      }
+
+      .schedule-table tr:nth-child(even) {
+        background-color: #f9f9f9;
+      }
+      
+      .status-badge {
+        display: inline-block;
+        padding: 0.25rem 0.75rem;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+      }
+      
+      .status-scheduled {
+        background-color: #e3f2fd;
+        color: #0d47a1;
+      }
+      
+      .status-completed {
+        background-color: #e8f5e9;
+        color: #1b5e20;
+      }
+      
+      .status-cancelled {
+        background-color: #ffebee;
+        color: #b71c1c;
+      }
+      
+      .action-link {
+        display: inline-block;
+        padding: 0.5rem 1rem;
+        background-color: #3850c8;
+        color: #ffffff !important;
+        border-radius: 4px;
+        text-decoration: none;
+        font-size: 0.95rem;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+        text-align: center;
+        white-space: nowrap;
+      }
+
       @media (max-width: 768px) {
         .dashboard-main {
           flex-direction: column;
@@ -160,16 +250,7 @@
 
         .dashboard-sidebar {
           width: 100%;
-          border-right: none;
-          border-bottom: 1px solid #e9ecef;
-        }
-
-        .dashboard-content {
-          padding: 1rem;
-        }
-
-        .dashboard-cards {
-          grid-template-columns: 1fr;
+          margin-bottom: 1rem;
         }
       }
     </style>
@@ -177,36 +258,61 @@
 
   <div id="content">
     <div class="content-header">
-      <h1>Welcome, Dr. <span th:text="${userName}">Veterinarian</span>!</h1>
+      <h1>Selamat Datang, dr. <span th:text="${userName}">Veterinarian</span>!</h1>
       <p>
-        Specialization:
-        <span th:text="${specialization}">General Practice</span>
+        Spesialisasi:
+        <span th:text="${specialization}">Praktik Umum</span>
       </p>
     </div>
 
     <div class="dashboard-cards">
       <div class="card">
-        <h2>Today's Schedule</h2>
-        <p>No appointments today</p>
-        <p><em>(Feature coming soon)</em></p>
-        <a href="/appointments">View All Appointments</a>
-      </div>
-
-      <div class="card">
-        <h2>Statistics</h2>
-        <ul>
-          <li>Total appointments today: <span>0</span></li>
-          <li>Completed: <span>0</span></li>
-          <li>Pending: <span>0</span></li>
+        <h2>Jadwal Hari Ini</h2>
+        <ul class="stats">
+          <li>Total: <span th:text="${#lists.size(todaysAppointments)}">0</span></li>
+          <li>Selesai: <span th:text="${#lists.size(todaysAppointments.?[status.name() == 'COMPLETED'])}">0</span></li>
+          <li>Menunggu: <span th:text="${#lists.size(todaysAppointments.?[status.name() == 'SCHEDULED'])}">0</span></li>
         </ul>
-        <p><em>(Feature coming soon)</em></p>
+        
+        <div th:if="${#lists.isEmpty(todaysAppointments)}">
+          <p>Tidak ada janji temu terjadwal untuk hari ini</p>
+        </div>
+        
+        <div th:if="${not #lists.isEmpty(todaysAppointments)}">
+          <div class="schedule-table-container">
+            <table class="schedule-table">
+              <thead>
+                <tr>
+                  <th>Waktu</th>
+                  <th>Hewan Peliharaan</th>
+                  <th>Pemilik</th>
+                  <th>Status</th>
+                  <th>Tindakan</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr th:each="appointment : ${todaysAppointments}">
+                  <td th:text="${#temporals.format(appointment.appointmentTime, 'HH:mm', new java.util.Locale('id', 'ID'))}"></td>
+                  <td th:text="${appointment.pet.name}"></td>
+                  <td th:text="${appointment.owner.name}"></td>
+                  <td>
+                    <span class="status-badge" th:classappend="${'status-' + appointment.status.toString().toLowerCase()}" th:text="${appointment.status}"></span>
+                  </td>
+                  <td>
+                    <a th:href="@{/appointments/{id}(id=${appointment.id})}" class="action-link">Lihat</a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
 
       <div class="card">
-        <h2>Quick Actions</h2>
+        <h2>Aksi Cepat</h2>
         <ul>
-          <li><a href="/schedule/setup">Setup Working Schedule</a></li>
-          <li><a href="/appointments">View All Appointments</a></li>
+          <li><a href="/schedule/setup">Atur Jadwal Kerja</a></li>
+          <li><a href="/appointments">Lihat Semua Janji Temu</a></li>
         </ul>
       </div>
     </div>
