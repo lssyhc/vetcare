@@ -2,7 +2,7 @@
 <html
   xmlns:th="http://www.thymeleaf.org"
   th:replace="~{fragments/dashboard-layout :: dashboardLayout(
-                pageTitle='My Pets - VetCare',
+                pageTitle='Hewan Peliharaan Saya - VetCare',
                 sidebarFragment=~{fragments/sidebar-owner :: ownerSidebar},
                 pageContent=~{:: #content},
                 pageSpecificStyles=~{:: #page-styles},
@@ -219,24 +219,24 @@
 
   <div id="content">
     <div class="content-header">
-      <h1>My Pets</h1>
+      <h1>Hewan Peliharaan Saya</h1>
     </div>
 
     <div th:if="${param.error}" class="error-message">
       <div th:if="${param.error[0] == 'unauthorized'}">
-        You are not authorized to perform this action.
+        Anda tidak berwenang untuk melakukan tindakan ini.
       </div>
       <div th:if="${param.error[0] == 'delete_failed'}">
-        Failed to delete pet. Please try again.
+        Gagal menghapus hewan peliharaan. Silakan coba lagi.
       </div>
     </div>
 
-    <a href="/pets/add" class="add-pet-btn">Add New Pet</a>
+    <a href="/pets/add" class="add-pet-btn">Tambah Hewan Peliharaan Baru</a>
 
     <div th:if="${#lists.isEmpty(pets)}" class="no-pets-message">
       <p>
-        You don't have any pets yet.
-        <a href="/pets/add" class="edit-link">Add your first pet</a>
+        Anda belum memiliki hewan peliharaan.
+        <a href="/pets/add" class="edit-link">Tambahkan hewan peliharaan pertama Anda</a>
       </p>
     </div>
 
@@ -244,9 +244,9 @@
       <table class="pets-table">
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Species</th>
-            <th>Actions</th>
+            <th>Nama</th>
+            <th>Spesies</th>
+            <th>Tindakan</th>
           </tr>
         </thead>
         <tbody>
@@ -256,8 +256,8 @@
             <td>
               <a th:href="@{'/pets/' + ${pet.id} + '/edit'}" class="edit-link">Edit</a>
               |
-              <form th:action="@{'/pets/' + ${pet.id} + '/delete'}" method="post" style="display: inline-block" onsubmit="return confirm('Are you sure you want to delete this pet?');">
-                <button type="submit" class="delete-btn">Delete</button>
+              <form th:action="@{'/pets/' + ${pet.id} + '/delete'}" method="post" style="display: inline-block" onsubmit="return confirm('Apakah Anda yakin ingin menghapus hewan peliharaan ini?');">
+                <button type="submit" class="delete-btn">Hapus</button>
               </form>
             </td>
           </tr>

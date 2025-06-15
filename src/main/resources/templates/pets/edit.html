@@ -2,7 +2,7 @@
 <html
   xmlns:th="http://www.thymeleaf.org"
   th:replace="~{fragments/dashboard-layout :: dashboardLayout(
-                pageTitle='Edit Pet - VetCare',
+                pageTitle='Edit Hewan Peliharaan - VetCare',
                 sidebarFragment=~{fragments/sidebar-owner :: ownerSidebar},
                 pageContent=~{:: #content},
                 pageSpecificStyles=~{:: #page-styles},
@@ -174,12 +174,12 @@
 
   <div id="content">
     <div class="content-header">
-      <h1>Edit Pet</h1>
+      <h1>Edit Hewan Peliharaan</h1>
     </div>
 
     <form th:action="@{'/pets/' + ${pet.id} + '/edit'}" method="post">
       <div class="form-group">
-        <label for="name" class="form-label">Name</label>
+        <label for="name" class="form-label">Nama</label>
         <input
           type="text"
           id="name"
@@ -190,7 +190,7 @@
         />
       </div>
       <div class="form-group">
-        <label for="species" class="form-label">Species</label>
+        <label for="species" class="form-label">Spesies</label>
         <input
           type="text"
           id="species"
@@ -202,9 +202,9 @@
       </div>
       <div>
         <button type="submit" class="btn-primary">
-          Update Pet
+          Perbarui Hewan Peliharaan
         </button>
-        <a href="/pets" class="btn-link">Cancel</a>
+        <a href="/pets" class="btn-link">Batal</a>
       </div>
     </form>
   </div>
