@@ -6,8 +6,10 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -140,5 +142,11 @@ public class AppointmentService {
 
     public Appointment completeAppointment(Long appointmentId) {
         return updateAppointmentStatus(appointmentId, AppointmentStatus.COMPLETED);
+    }
+
+    public String formatDateTimeIndonesian(LocalDateTime dateTime) {
+        return dateTime.format(
+                DateTimeFormatter.ofPattern("dd MMMM yyyy, HH:mm")
+                        .withLocale(new Locale.Builder().setLanguage("id").setRegion("ID").build()));
     }
 }

@@ -153,7 +153,9 @@ public class AppointmentController {
 
       redirectAttributes.addFlashAttribute("successMessage",
           "Janji temu berhasil dibuat untuk " + pet.getName() + " pada " +
-              appointmentDateTime.format(DateTimeFormatter.ofPattern("dd MMMM yyyy, HH:mm")));
+              appointmentDateTime.format(DateTimeFormatter
+                  .ofPattern("dd MMMM yyyy, HH:mm")
+                  .withLocale(java.util.Locale.of("id", "ID"))));
 
       return "redirect:/appointments";
 
@@ -204,7 +206,7 @@ public class AppointmentController {
       User user = userService.findUserByEmail(email);
 
       if (!(user instanceof Veterinarian)) {
-        redirectAttributes.addFlashAttribute("errorMessage", "Unauthorized");
+        redirectAttributes.addFlashAttribute("errorMessage", "Tidak berwenang");
         return "redirect:/appointments";
       }
 
@@ -217,18 +219,18 @@ public class AppointmentController {
       }
 
       if (!appointment.getVeterinarian().getId().equals(vet.getId())) {
-        redirectAttributes.addFlashAttribute("errorMessage", "Unauthorized");
+        redirectAttributes.addFlashAttribute("errorMessage", "Tidak berwenang");
         return "redirect:/appointments";
       }
 
       AppointmentStatus status = AppointmentStatus.valueOf(statusStr);
       appointmentService.updateAppointmentStatus(appointmentId, status);
 
-      redirectAttributes.addFlashAttribute("successMessage", "Status appointment berhasil diperbarui");
+      redirectAttributes.addFlashAttribute("successMessage", "Status janji temu berhasil diperbarui");
       return "redirect:/appointments/" + appointmentId;
 
     } catch (Exception e) {
-      redirectAttributes.addFlashAttribute("errorMessage", "Error updating status: " + e.getMessage());
+      redirectAttributes.addFlashAttribute("errorMessage", "Kesalahan memperbarui status: " + e.getMessage());
       return "redirect:/appointments/" + appointmentId;
     }
   }
@@ -245,7 +247,7 @@ public class AppointmentController {
       User user = userService.findUserByEmail(email);
 
       if (!(user instanceof Veterinarian)) {
-        redirectAttributes.addFlashAttribute("errorMessage", "Unauthorized");
+        redirectAttributes.addFlashAttribute("errorMessage", "Tidak berwenang");
         return "redirect:/appointments";
       }
 
@@ -258,17 +260,17 @@ public class AppointmentController {
       }
 
       if (!appointment.getVeterinarian().getId().equals(vet.getId())) {
-        redirectAttributes.addFlashAttribute("errorMessage", "Unauthorized");
+        redirectAttributes.addFlashAttribute("errorMessage", "Tidak berwenang");
         return "redirect:/appointments";
       }
 
       appointmentService.addAppointmentNotes(appointmentId, notes);
 
-      redirectAttributes.addFlashAttribute("successMessage", "Catatan appointment berhasil diperbarui");
+      redirectAttributes.addFlashAttribute("successMessage", "Catatan janji temu berhasil diperbarui");
       return "redirect:/appointments/" + appointmentId;
 
     } catch (Exception e) {
-      redirectAttributes.addFlashAttribute("errorMessage", "Error updating notes: " + e.getMessage());
+      redirectAttributes.addFlashAttribute("errorMessage", "Kesalahan memperbarui catatan: " + e.getMessage());
       return "redirect:/appointments/" + appointmentId;
     }
   }
@@ -296,7 +298,7 @@ public class AppointmentController {
 
     } catch (Exception e) {
       response.put("success", false);
-      response.put("message", "Error: " + e.getMessage());
+      response.put("message", "Kesalahan: " + e.getMessage());
       return ResponseEntity.badRequest().body(response);
     }
   }

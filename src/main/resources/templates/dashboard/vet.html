@@ -296,7 +296,7 @@
                   <td th:text="${appointment.pet.name}"></td>
                   <td th:text="${appointment.owner.name}"></td>
                   <td>
-                    <span class="status-badge" th:classappend="${'status-' + appointment.status.toString().toLowerCase()}" th:text="${appointment.status}"></span>
+                    <span class="status-badge" th:classappend="${'status-' + appointment.status.toString().toLowerCase()}" th:text="${appointment.status.getDisplayName()}"></span>
                   </td>
                   <td>
                     <a th:href="@{/appointments/{id}(id=${appointment.id})}" class="action-link">Lihat</a>
