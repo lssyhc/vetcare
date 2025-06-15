@@ -112,14 +112,14 @@ public class VeterinarianSchedule {
 
     public String getDayName() {
         return switch (dayOfWeek) {
-            case 1 -> "Monday";
-            case 2 -> "Tuesday";
-            case 3 -> "Wednesday";
-            case 4 -> "Thursday";
-            case 5 -> "Friday";
-            case 6 -> "Saturday";
-            case 7 -> "Sunday";
-            default -> "Unknown";
+            case 1 -> "Senin";
+            case 2 -> "Selasa";
+            case 3 -> "Rabu";
+            case 4 -> "Kamis";
+            case 5 -> "Jumat";
+            case 6 -> "Sabtu";
+            case 7 -> "Minggu";
+            default -> "Tidak Diketahui";
         };
     }
 

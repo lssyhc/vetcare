@@ -18,18 +18,18 @@ public abstract class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull(message = "Email is required")
-    @Email(message = "Email should be valid")
+    @NotNull(message = "Email wajib diisi")
+    @Email(message = "Format email tidak valid")
     @Column(unique = true, nullable = false)
     private String email;
 
-    @NotNull(message = "Password is required")
-    @Size(min = 6, message = "Password should have at least 6 characters")
+    @NotNull(message = "Password wajib diisi")
+    @Size(min = 6, message = "Password minimal terdiri dari 6 karakter")
     @Column(nullable = false)
     private String password;
 
-    @NotNull(message = "Name is required")
-    @Size(min = 2, max = 100, message = "Name should be between 2 and 100 characters")
+    @NotNull(message = "Nama wajib diisi")
+    @Size(min = 2, max = 100, message = "Nama harus terdiri dari 2 sampai 100 karakter")
     @Column(nullable = false, length = 100)
     private String name;
 

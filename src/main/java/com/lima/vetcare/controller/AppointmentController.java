@@ -136,7 +136,7 @@ public class AppointmentController {
 
       if (!scheduleService.isVetAvailable(veterinarianId, appointmentDateTime)) {
         redirectAttributes.addFlashAttribute("errorMessage",
-            "Dokter hewan tidak tersedia pada waktu ini. Silakan pilih waktu lain.");
+            "Veterinarian tidak tersedia pada waktu ini. Silakan pilih waktu lain.");
         return "redirect:/appointments/book";
       }
 
@@ -212,7 +212,7 @@ public class AppointmentController {
       Appointment appointment = appointmentService.getAppointmentById(appointmentId);
 
       if (appointment == null) {
-        redirectAttributes.addFlashAttribute("errorMessage", "Appointment not found");
+        redirectAttributes.addFlashAttribute("errorMessage", "Janji temu tidak ditemukan");
         return "redirect:/appointments";
       }
 
@@ -253,7 +253,7 @@ public class AppointmentController {
       Appointment appointment = appointmentService.getAppointmentById(appointmentId);
 
       if (appointment == null) {
-        redirectAttributes.addFlashAttribute("errorMessage", "Appointment not found");
+        redirectAttributes.addFlashAttribute("errorMessage", "Janji temu tidak ditemukan");
         return "redirect:/appointments";
       }
 

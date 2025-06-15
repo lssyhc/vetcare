@@ -20,7 +20,7 @@ public class VeterinarianService {
 
     public Veterinarian registerVeterinarian(String email, String password, String name, String specialization) {
         if (userService.emailExists(email)) {
-            throw new IllegalArgumentException("Email already exists");
+            throw new IllegalArgumentException("Email sudah terdaftar");
         }
 
         String encodedPassword = userService.encodePassword(password);

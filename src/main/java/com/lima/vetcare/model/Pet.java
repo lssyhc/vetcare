@@ -21,13 +21,13 @@ public class Pet {
     @JoinColumn(name = "owner_id", nullable = false)
     private Owner owner;
 
-    @NotNull(message = "Pet name is required")
-    @Size(min = 1, max = 50, message = "Pet name should be between 1 and 50 characters")
+    @NotNull(message = "Nama hewan peliharaan wajib diisi")
+    @Size(min = 1, max = 50, message = "Nama hewan peliharaan harus terdiri dari 1 sampai 50 karakter")
     @Column(nullable = false, length = 50)
     private String name;
 
-    @NotNull(message = "Pet species is required")
-    @Size(min = 1, max = 50, message = "Pet species should be between 1 and 50 characters")
+    @NotNull(message = "Jenis hewan wajib diisi")
+    @Size(min = 1, max = 50, message = "Jenis hewan harus terdiri dari 1 sampai 50 karakter")
     @Column(nullable = false, length = 50)
     private String species;
 

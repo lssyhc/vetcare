@@ -119,7 +119,7 @@ public class ProfileController {
     User currentUser = userService.findUserByEmail(auth.getName());
 
     if (!(currentUser instanceof Veterinarian)) {
-      redirectAttributes.addFlashAttribute("error", "Hanya dokter hewan yang dapat mengubah spesialisasi");
+      redirectAttributes.addFlashAttribute("error", "Hanya veterinarian yang dapat mengubah spesialisasi");
       return "redirect:/profile";
     }
 

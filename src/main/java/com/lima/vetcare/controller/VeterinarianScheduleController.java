@@ -1,16 +1,5 @@
 package com.lima.vetcare.controller;
 
-import com.lima.vetcare.model.Veterinarian;
-import com.lima.vetcare.model.VeterinarianSchedule;
-import com.lima.vetcare.service.VeterinarianScheduleService;
-import com.lima.vetcare.service.VeterinarianService;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -19,6 +8,23 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.lima.vetcare.model.Veterinarian;
+import com.lima.vetcare.model.VeterinarianSchedule;
+import com.lima.vetcare.service.VeterinarianScheduleService;
+import com.lima.vetcare.service.VeterinarianService;
 
 @Controller
 @RequestMapping("/schedule")
@@ -41,7 +47,7 @@ public class VeterinarianScheduleController {
             Veterinarian veterinarian = veterinarianService.findVeterinarianByEmail(email);
 
             if (veterinarian == null) {
-                redirectAttributes.addFlashAttribute("errorMessage", "Veterinarian not found");
+                redirectAttributes.addFlashAttribute("errorMessage", "Veterinarian tidak ditemukan");
                 return "redirect:/dashboard/vet";
             }
 
@@ -53,7 +59,7 @@ public class VeterinarianScheduleController {
             return "schedule/setup";
 
         } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("errorMessage", "Error loading schedule: " + e.getMessage());
+            redirectAttributes.addFlashAttribute("errorMessage", "Kesalahan memuat jadwal: " + e.getMessage());
             return "redirect:/dashboard/vet";
         }
     }
@@ -70,7 +76,7 @@ public class VeterinarianScheduleController {
             Veterinarian veterinarian = veterinarianService.findVeterinarianByEmail(email);
 
             if (veterinarian == null) {
-                redirectAttributes.addFlashAttribute("errorMessage", "Veterinarian not found");
+                redirectAttributes.addFlashAttribute("errorMessage", "Veterinarian tidak ditemukan");
                 return "redirect:/schedule/setup";
             }
 
@@ -82,7 +88,7 @@ public class VeterinarianScheduleController {
                     startTime = LocalTime.parse(startTimeStr);
                 } catch (Exception e) {
                     redirectAttributes.addFlashAttribute("errorMessage",
-                            "Invalid start time format. Use HH:MM format");
+                            "Format waktu mulai tidak valid. Gunakan format JJ:MM");
                     return "redirect:/schedule/setup";
                 }
             }
@@ -92,7 +98,7 @@ public class VeterinarianScheduleController {
                     endTime = LocalTime.parse(endTimeStr);
                 } catch (Exception e) {
                     redirectAttributes.addFlashAttribute("errorMessage",
-                            "Invalid end time format. Use HH:MM format");
+                            "Format waktu selesai tidak valid. Gunakan format JJ:MM");
                     return "redirect:/schedule/setup";
                 }
             }
@@ -102,7 +108,7 @@ public class VeterinarianScheduleController {
 
             String dayName = savedSchedule.getDayName();
             redirectAttributes.addFlashAttribute("successMessage",
-                    "Schedule for " + dayName + " saved successfully!");
+                    "Jadwal untuk " + dayName + " berhasil disimpan!");
 
             return "redirect:/schedule/setup";
 
@@ -111,7 +117,7 @@ public class VeterinarianScheduleController {
             return "redirect:/schedule/setup";
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("errorMessage",
-                    "Error saving schedule: " + e.getMessage());
+                    "Kesalahan menyimpan jadwal: " + e.getMessage());
             return "redirect:/schedule/setup";
         }
     }
@@ -125,7 +131,7 @@ public class VeterinarianScheduleController {
             Veterinarian veterinarian = veterinarianService.findVeterinarianByEmail(email);
 
             if (veterinarian == null) {
-                redirectAttributes.addFlashAttribute("errorMessage", "Veterinarian not found");
+                redirectAttributes.addFlashAttribute("errorMessage", "Veterinarian tidak ditemukan");
                 return "redirect:/schedule/setup";
             }
 
@@ -146,7 +152,7 @@ public class VeterinarianScheduleController {
                         try {
                             startTime = LocalTime.parse(startTimeStr);
                         } catch (Exception e) {
-                            errors.add("Day " + dayOfWeek + ": Invalid start time format");
+                            errors.add("Hari " + dayOfWeek + ": Format waktu mulai tidak valid");
                             continue;
                         }
                     }
@@ -155,7 +161,7 @@ public class VeterinarianScheduleController {
                         try {
                             endTime = LocalTime.parse(endTimeStr);
                         } catch (Exception e) {
-                            errors.add("Day " + dayOfWeek + ": Invalid end time format");
+                            errors.add("Hari " + dayOfWeek + ": Format waktu selesai tidak valid");
                             continue;
                         }
                     }
@@ -164,28 +170,28 @@ public class VeterinarianScheduleController {
                     savedCount++;
 
                 } catch (IllegalArgumentException e) {
-                    errors.add("Day " + dayOfWeek + ": " + e.getMessage());
+                    errors.add("Hari " + dayOfWeek + ": " + e.getMessage());
                 } catch (Exception e) {
-                    errors.add("Day " + dayOfWeek + ": Unexpected error");
+                    errors.add("Hari " + dayOfWeek + ": Kesalahan tidak terduga");
                 }
             }
 
             if (errors.isEmpty()) {
                 redirectAttributes.addFlashAttribute("successMessage",
-                        "All " + savedCount + " day schedules saved successfully!");
+                        "Seluruh jadwal selama " + savedCount + " hari berhasil disimpan!");
             } else if (savedCount > 0) {
                 redirectAttributes.addFlashAttribute("errorMessage",
-                        savedCount + " schedules saved. Errors: " + String.join("; ", errors));
+                        savedCount + " jadwal tersimpan. Kesalahan: " + String.join("; ", errors));
             } else {
                 redirectAttributes.addFlashAttribute("errorMessage",
-                        "No schedules saved. Errors: " + String.join("; ", errors));
+                        "Tidak ada jadwal tersimpan. Kesalahan: " + String.join("; ", errors));
             }
 
             return "redirect:/schedule/setup";
 
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("errorMessage",
-                    "Error saving schedules: " + e.getMessage());
+                    "Kesalahan menyimpan jadwal: " + e.getMessage());
             return "redirect:/schedule/setup";
         }
     }
@@ -201,7 +207,7 @@ public class VeterinarianScheduleController {
             if (appointmentDate.isBefore(LocalDate.now())) {
                 Map<String, Object> response = new HashMap<>();
                 response.put("success", false);
-                response.put("message", "Date cannot be in the past");
+                response.put("message", "Tanggal tidak boleh di masa lalu");
                 return ResponseEntity.badRequest().body(response);
             }
 
@@ -221,7 +227,7 @@ public class VeterinarianScheduleController {
         } catch (Exception e) {
             Map<String, Object> response = new HashMap<>();
             response.put("success", false);
-            response.put("message", "Error occurred: " + e.getMessage());
+            response.put("message", "Kesalahan terjadi: " + e.getMessage());
             return ResponseEntity.badRequest().body(response);
         }
     }
@@ -243,14 +249,14 @@ public class VeterinarianScheduleController {
             Map<String, Object> response = new HashMap<>();
             response.put("success", true);
             response.put("available", isAvailable);
-            response.put("message", isAvailable ? "Slot available" : "Slot not available");
+            response.put("message", isAvailable ? "Slot tersedia" : "Slot tidak tersedia");
 
             return ResponseEntity.ok(response);
 
         } catch (Exception e) {
             Map<String, Object> response = new HashMap<>();
             response.put("success", false);
-            response.put("message", "Error occurred: " + e.getMessage());
+            response.put("message", "Kesalahan terjadi: " + e.getMessage());
             return ResponseEntity.badRequest().body(response);
         }
     }

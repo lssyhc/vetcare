@@ -27,10 +27,10 @@ public class AuthController {
             @RequestParam(value = "logout", required = false) String logout,
             Model model) {
         if (error != null) {
-            model.addAttribute("error", "Invalid email or password!");
+            model.addAttribute("error", "Email atau password tidak valid!");
         }
         if (logout != null) {
-            model.addAttribute("message", "You have been logged out successfully.");
+            model.addAttribute("message", "Anda telah berhasil keluar.");
         }
         return "auth/login";
     }
@@ -50,29 +50,29 @@ public class AuthController {
             Model model) {
 
         if (ownerService.existsByEmail(email) || veterinarianService.existsByEmail(email)) {
-            model.addAttribute("error", "Email already exists!");
+            model.addAttribute("error", "Email sudah terdaftar!");
             return "auth/register";
         }
 
         try {
             if ("owner".equals(userType)) {
                 ownerService.registerOwner(email, password, name);
-                redirectAttributes.addFlashAttribute("message", "Registration successful! Please login.");
+                redirectAttributes.addFlashAttribute("message", "Pendaftaran berhasil! Silakan masuk.");
                 return "redirect:/auth/login";
             } else if ("veterinarian".equals(userType)) {
                 if (specialization == null || specialization.trim().isEmpty()) {
-                    model.addAttribute("error", "Specialization is required for veterinarians!");
+                    model.addAttribute("error", "Spesialisasi wajib diisi untuk veterinarian!");
                     return "auth/register";
                 }
                 veterinarianService.registerVeterinarian(email, password, name, specialization);
-                redirectAttributes.addFlashAttribute("message", "Registration successful! Please login.");
+                redirectAttributes.addFlashAttribute("message", "Pendaftaran berhasil! Silakan masuk.");
                 return "redirect:/auth/login";
             } else {
-                model.addAttribute("error", "Invalid user type!");
+                model.addAttribute("error", "Tipe pengguna tidak valid!");
                 return "auth/register";
             }
         } catch (Exception e) {
-            model.addAttribute("error", "Registration failed: " + e.getMessage());
+            model.addAttribute("error", "Pendaftaran gagal: " + e.getMessage());
             return "auth/register";
         }
     }

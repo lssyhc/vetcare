@@ -1,9 +1,9 @@
 package com.lima.vetcare.model;
 
 public enum AppointmentStatus {
-    SCHEDULED("Scheduled"),
-    COMPLETED("Completed"),
-    CANCELLED("Cancelled");
+    SCHEDULED("Terjadwal"),
+    COMPLETED("Selesai"),
+    CANCELLED("Dibatalkan");
 
     private final String displayName;
 

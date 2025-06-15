@@ -27,16 +27,16 @@ public class Appointment {
     @JoinColumn(name = "pet_id", nullable = false)
     private Pet pet;
 
-    @NotNull(message = "Appointment time is required")
+    @NotNull(message = "Waktu janji temu wajib diisi")
     @Column(name = "appointment_time", nullable = false)
     private LocalDateTime appointmentTime;
 
-    @NotNull(message = "Duration is required")
-    @Min(value = 30, message = "Duration must be at least 30 minutes")
+    @NotNull(message = "Durasi wajib diisi")
+    @Min(value = 30, message = "Durasi minimal 30 menit")
     @Column(name = "duration_minutes", nullable = false)
     private Integer durationMinutes;
 
-    @NotNull(message = "Status is required")
+    @NotNull(message = "Status wajib diisi")
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private AppointmentStatus status = AppointmentStatus.SCHEDULED;
@@ -108,7 +108,7 @@ public class Appointment {
 
         if (durationMinutes != null &&
                 durationMinutes != 30 && durationMinutes != 60 && durationMinutes != 90) {
-            throw new IllegalArgumentException("Duration must be 30, 60, or 90 minutes");
+            throw new IllegalArgumentException("Durasi harus 30, 60, atau 90 menit");
         }
         this.durationMinutes = durationMinutes;
     }

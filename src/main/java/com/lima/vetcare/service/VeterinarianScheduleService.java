@@ -29,20 +29,20 @@ public class VeterinarianScheduleService {
     public VeterinarianSchedule setSchedule(Long veterinarianId, Integer dayOfWeek,
             LocalTime startTime, LocalTime endTime, Boolean isActive) {
         if (dayOfWeek < 1 || dayOfWeek > 7) {
-            throw new IllegalArgumentException("Day of week must be between 1 (Monday) and 7 (Sunday)");
+            throw new IllegalArgumentException("Hari harus antara 1 (Senin) dan 7 (Minggu)");
         }
 
         if (startTime != null && endTime != null && !startTime.isBefore(endTime)) {
-            throw new IllegalArgumentException("Start time must be before end time");
+            throw new IllegalArgumentException("Waktu mulai harus sebelum waktu selesai");
         }
 
         if (isActive != null && isActive && (startTime == null || endTime == null)) {
-            throw new IllegalArgumentException("Start and end time must be filled when day is active");
+            throw new IllegalArgumentException("Waktu mulai dan selesai harus diisi saat hari aktif");
         }
 
         Veterinarian veterinarian = veterinarianService.findVeterinarianById(veterinarianId);
         if (veterinarian == null) {
-            throw new IllegalArgumentException("Veterinarian not found");
+            throw new IllegalArgumentException("Veterinarian hewan tidak ditemukan");
         }
 
         Optional<VeterinarianSchedule> existingSchedule = scheduleRepository

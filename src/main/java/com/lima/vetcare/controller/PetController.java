@@ -24,19 +24,16 @@ public class PetController {
 
     @GetMapping
     public String listPets(Authentication authentication, Model model) {
-        // Get current user's email
         String email = authentication.getName();
-        
-        // Find the owner by email
         Owner owner = ownerService.findOwnerByEmail(email);
-        
+
         if (owner == null) {
-            System.out.println("Owner not found for email: " + email);
+            System.out.println("Pemilik tidak ditemukan untuk email: " + email);
             model.addAttribute("pets", List.of());
             return "pets/list";
         }
-         List<Pet> pets = petService.getPetsByOwner(owner);
-        System.out.println("Found " + pets.size() + " pets for owner: " + owner.getName());
+        List<Pet> pets = petService.getPetsByOwner(owner);
+        System.out.println("Ditemukan " + pets.size() + " hewan peliharaan untuk pemilik: " + owner.getName());
         model.addAttribute("pets", pets);
         return "pets/list";
     }
@@ -62,7 +59,8 @@ public class PetController {
         Owner owner = ownerService.findOwnerByEmail(email);
 
         petService.verifyPetOwnership(id, owner);
-        Pet pet = petService.getPetById(id).orElseThrow(() -> new IllegalArgumentException("Pet not found"));
+        Pet pet = petService.getPetById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Hewan peliharaan tidak ditemukan"));
         model.addAttribute("pet", pet);
         return "pets/edit";
     }
@@ -71,34 +69,35 @@ public class PetController {
     public String editPet(@PathVariable Long id, Authentication authentication, @ModelAttribute Pet pet) {
         String email = authentication.getName();
         Owner owner = ownerService.findOwnerByEmail(email);
-        
+
         petService.verifyPetOwnership(id, owner);
         petService.updatePet(id, pet.getName(), pet.getSpecies());
         return "redirect:/pets";
-    }   
-    
+    }
+
     @PostMapping("/{id}/delete")
     public String deletePet(@PathVariable Long id, Authentication authentication) {
         String email = authentication.getName();
         Owner owner = ownerService.findOwnerByEmail(email);
-        
+
         if (owner == null) {
             return "redirect:/auth/login?error=true";
         }
-        
+
         try {
-            // Verify ownership before deleting
             petService.verifyPetOwnership(id, owner);
             petService.deletePet(id);
-            System.out.println("Pet with ID " + id + " deleted successfully by owner: " + owner.getName());
+            System.out
+                    .println("Hewan peliharaan dengan ID " + id + " berhasil dihapus oleh pemilik: " + owner.getName());
         } catch (SecurityException e) {
-            System.err.println("Unauthorized attempt to delete pet with ID " + id + " by user: " + email);
+            System.err.println("Percobaan tidak sah untuk menghapus hewan peliharaan dengan ID " + id
+                    + " oleh pengguna: " + email);
             return "redirect:/pets?error=unauthorized";
         } catch (Exception e) {
-            System.err.println("Error deleting pet with ID " + id + ": " + e.getMessage());
+            System.err.println("Kesalahan menghapus hewan peliharaan dengan ID " + id + ": " + e.getMessage());
             return "redirect:/pets?error=delete_failed";
         }
-        
+
         return "redirect:/pets";
     }
 }

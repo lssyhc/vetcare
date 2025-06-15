@@ -29,15 +29,15 @@ public class AppointmentService {
     public Appointment bookAppointment(Owner owner, Veterinarian vet, Pet pet,
             LocalDateTime appointmentTime, Integer durationMinutes) {
         if (appointmentTime.isBefore(LocalDateTime.now())) {
-            throw new IllegalArgumentException("Cannot book appointment in the past");
+            throw new IllegalArgumentException("Tidak dapat membuat janji temu untuk waktu yang sudah berlalu");
         }
 
         if (!isValidDuration(durationMinutes)) {
-            throw new IllegalArgumentException("Invalid duration. Must be 30, 60, or 90 minutes");
+            throw new IllegalArgumentException("Durasi tidak valid. Harus 30, 60, atau 90 menit");
         }
 
         if (!scheduleService.isSlotAvailable(vet.getId(), appointmentTime, durationMinutes)) {
-            throw new IllegalArgumentException("Veterinarian is not available at this time");
+            throw new IllegalArgumentException("Veterinarian tidak tersedia pada waktu ini");
         }
 
         List<Appointment> conflicts = appointmentRepository.findByVeterinarianIdAndAppointmentTimeBetween(
@@ -46,7 +46,7 @@ public class AppointmentService {
                 appointmentTime.plusMinutes(durationMinutes + 90));
 
         if (!conflicts.isEmpty()) {
-            throw new IllegalArgumentException("Time slot conflicts with existing appointment");
+            throw new IllegalArgumentException("Slot waktu bertabrakan dengan janji temu yang sudah ada");
         }
 
         Appointment appointment = new Appointment();
@@ -79,7 +79,7 @@ public class AppointmentService {
     public Appointment updateAppointmentStatus(Long appointmentId, AppointmentStatus status) {
         Optional<Appointment> appointmentOptional = appointmentRepository.findById(appointmentId);
         if (appointmentOptional.isEmpty()) {
-            throw new IllegalArgumentException("Appointment not found");
+            throw new IllegalArgumentException("Janji temu tidak ditemukan");
         }
 
         Appointment appointment = appointmentOptional.get();
@@ -90,7 +90,7 @@ public class AppointmentService {
     public Appointment addAppointmentNotes(Long appointmentId, String notes) {
         Optional<Appointment> appointmentOptional = appointmentRepository.findById(appointmentId);
         if (appointmentOptional.isEmpty()) {
-            throw new IllegalArgumentException("Appointment not found");
+            throw new IllegalArgumentException("Janji temu tidak ditemukan");
         }
 
         Appointment appointment = appointmentOptional.get();

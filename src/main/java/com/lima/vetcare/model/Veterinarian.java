@@ -11,8 +11,8 @@ import java.util.List;
 @DiscriminatorValue("VETERINARIAN")
 public class Veterinarian extends User {
 
-    @NotNull(message = "Specialization is required")
-    @Size(min = 2, max = 100, message = "Specialization should be between 2 and 100 characters")
+    @NotNull(message = "Spesialisasi wajib diisi")
+    @Size(min = 2, max = 100, message = "Spesialisasi harus terdiri dari 2 sampai 100 karakter")
     @Column(nullable = false, length = 100)
     private String specialization;
 

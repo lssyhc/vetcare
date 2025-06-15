@@ -37,7 +37,7 @@ public class UserService {
 
     public void changePassword(User user, String currentPassword, String newPassword) {
         if (!passwordEncoder.matches(currentPassword, user.getPassword())) {
-            throw new IllegalArgumentException("Password saat ini tidak benar");
+            throw new IllegalArgumentException("Password saat salah");
         }
 
         user.setPassword(passwordEncoder.encode(newPassword));

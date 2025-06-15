@@ -38,7 +38,7 @@ public class PetService {
             pet.setSpecies(species);
             return petRepository.save(pet);
         }
-        throw new IllegalArgumentException("Pet not found");
+        throw new IllegalArgumentException("Hewan peliharaan tidak ditemukan");
     }
 
     public void deletePet(Long petId) {
@@ -48,7 +48,7 @@ public class PetService {
     public void verifyPetOwnership(Long petId, Owner owner) {
         Optional<Pet> optionalPet = petRepository.findById(petId);
         if (optionalPet.isEmpty() || !optionalPet.get().getOwner().equals(owner)) {
-            throw new SecurityException("Unauthorized access to pet");
+            throw new SecurityException("Akses tidak sah pada hewan peliharaan");
         }
     }
 }
