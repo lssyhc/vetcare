@@ -2,7 +2,7 @@
 <html
   xmlns:th="http://www.thymeleaf.org"
   th:replace="~{fragments/dashboard-layout :: dashboardLayout(
-                pageTitle='Book Appointment - VetCare',
+                pageTitle='Buat Janji Temu - VetCare',
                 sidebarFragment=~{fragments/sidebar-owner :: ownerSidebar},
                 pageContent=~{:: #content},
                 pageSpecificStyles=~{:: #page-styles},
@@ -389,7 +389,7 @@
               }
             })
             .catch(error => {
-              console.error('Error fetching durations:', error);
+              console.error('Kesalahan memuat durasi:', error);
               durationSelect.innerHTML = '<option value="">Kesalahan memuat durasi</option>';
               durationSelect.disabled = true;
             });

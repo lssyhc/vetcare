@@ -2,7 +2,7 @@
 <html
   xmlns:th="http://www.thymeleaf.org"
   th:replace="~{fragments/dashboard-layout :: dashboardLayout(
-                pageTitle='Appointment Details - VetCare',
+                pageTitle='Detail Janji Temu - VetCare',
                 sidebarFragment=~{fragments/sidebar-owner :: ownerSidebar},
                 pageContent=~{:: #content},
                 pageSpecificStyles=~{:: #page-styles},
@@ -294,7 +294,7 @@
           <div class="card-title">Detail Janji Temu</div>
           <span class="status-badge" 
                 th:classappend="${'status-' + appointment.status.toString().toLowerCase()}" 
-                th:text="${appointment.status}"></span>
+                th:text="${appointment.status.getDisplayName()}"></span>
         </div>
         
         <div class="details-grid">
@@ -342,8 +342,8 @@
           <div class="form-group">
             <label for="status" class="form-label">Status Baru</label>
             <select id="status" name="status" class="form-select">
-              <option value="COMPLETED">COMPLETED</option>
-              <option value="CANCELLED">CANCELLED</option>
+              <option value="COMPLETED">Selesai</option>
+              <option value="CANCELLED">Dibatalkan</option>
             </select>
           </div>
           

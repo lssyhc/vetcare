@@ -2,7 +2,7 @@
 <html
   xmlns:th="http://www.thymeleaf.org"
   th:replace="~{fragments/dashboard-layout :: dashboardLayout(
-                pageTitle='My Appointments - VetCare',
+                pageTitle='Janji Temu Saya - VetCare',
                 sidebarFragment=${isOwner} ? ~{fragments/sidebar-owner :: ownerSidebar} : ~{fragments/sidebar-vet :: vetSidebar},
                 pageContent=~{:: #content},
                 pageSpecificStyles=~{:: #page-styles},
@@ -272,7 +272,7 @@
             <td>
               <span class="status-badge" 
                     th:classappend="${'status-' + appointment.status.toString().toLowerCase()}" 
-                    th:text="${appointment.status}"></span>
+                    th:text="${appointment.status.getDisplayName()}"></span>
             </td>
             
             <td>
