@@ -2,7 +2,7 @@
 <html
   xmlns:th="http://www.thymeleaf.org"
   th:replace="~{fragments/dashboard-layout :: dashboardLayout(
-                pageTitle='User Profile - VetCare',
+                pageTitle='Profil Pengguna - VetCare',
                 sidebarFragment=${isOwner} ? ~{fragments/sidebar-owner :: ownerSidebar} : ~{fragments/sidebar-vet :: vetSidebar},
                 pageContent=~{:: #content},
                 pageSpecificStyles=~{:: #page-styles},
@@ -535,7 +535,7 @@
           <div class="tab-nav">
               <a href="#" class="active" onclick="showTab('account-settings');return false;">Pengaturan Akun</a>
               <a href="#" th:if="${isVeterinarian}" onclick="showTab('specialization');return false;">Spesialisasi</a>
-              <a href="#" onclick="showTab('danger-zone');return false;">Danger Zone</a>
+              <a href="#" onclick="showTab('danger-zone');return false;">Zona Berbahaya</a>
           </div>
           
           <div id="account-settings" class="tab-content">
@@ -603,7 +603,7 @@
           </div>
           
           <div id="danger-zone" class="tab-content hidden">
-              <h3 class="danger-section-title">Danger Zone</h3>
+              <h3 class="danger-section-title">Zona Berbahaya</h3>
               <div class="danger-box">
                   <h4 class="danger-heading">Hapus Akun</h4>
                   <p class="danger-text">Tindakan ini tidak dapat dibatalkan. Semua data Anda akan dihapus secara permanen.</p>
