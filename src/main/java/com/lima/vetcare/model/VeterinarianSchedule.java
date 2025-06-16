@@ -22,13 +22,13 @@ public class VeterinarianSchedule {
     @JoinColumn(name = "veterinarian_id", nullable = false)
     private Veterinarian veterinarian;
 
-    @NotNull(message = "Day of week is required")
-    @Min(value = 1, message = "Day of week must be between 1 (Monday) and 7 (Sunday)")
-    @Max(value = 7, message = "Day of week must be between 1 (Monday) and 7 (Sunday)")
+    @NotNull(message = "Hari dalam seminggu wajib diisi")
+    @Min(value = 1, message = "Hari dalam seminggu harus antara 1 (Senin) dan 7 (Minggu)")
+    @Max(value = 7, message = "Hari dalam seminggu harus antara 1 (Senin) dan 7 (Minggu)")
     @Column(name = "day_of_week", nullable = false)
     private Integer dayOfWeek;
 
-    @NotNull(message = "Active status is required")
+    @NotNull(message = "Status aktif wajib diisi")
     @Column(name = "is_active", nullable = false)
     private Boolean isActive = false;
 
