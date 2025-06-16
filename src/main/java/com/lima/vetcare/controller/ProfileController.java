@@ -6,7 +6,6 @@ import com.lima.vetcare.model.User;
 import com.lima.vetcare.model.Veterinarian;
 import com.lima.vetcare.service.PetService;
 import com.lima.vetcare.service.UserService;
-import com.lima.vetcare.service.VeterinarianService;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
