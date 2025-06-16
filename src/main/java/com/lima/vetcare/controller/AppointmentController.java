@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.lima.vetcare.model.Appointment;
+import com.lima.vetcare.model.AppointmentDuration;
 import com.lima.vetcare.model.AppointmentStatus;
 import com.lima.vetcare.model.Owner;
 import com.lima.vetcare.model.Pet;
@@ -103,6 +104,7 @@ public class AppointmentController {
       @RequestParam("veterinarianId") Long veterinarianId,
       @RequestParam("appointmentDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate appointmentDate,
       @RequestParam("appointmentTime") String appointmentTimeStr,
+      @RequestParam(value = "durationMinutes", defaultValue = "30") Integer durationMinutes,
       Authentication authentication,
       RedirectAttributes redirectAttributes) {
 
@@ -143,13 +145,13 @@ public class AppointmentController {
       List<Integer> availableDurations = appointmentService.getAvailableDurations(
           veterinarianId, appointmentDateTime);
 
-      if (!availableDurations.contains(30)) {
+      if (!availableDurations.contains(AppointmentDuration.THIRTY_MINUTES.getMinutes())) {
         redirectAttributes.addFlashAttribute("errorMessage",
             "Tidak ada durasi yang tersedia untuk waktu ini. Silakan pilih waktu lain.");
         return "redirect:/appointments/book";
       }
 
-      appointmentService.bookAppointment(owner, veterinarian, pet, appointmentDateTime, 30);
+      appointmentService.bookAppointment(owner, veterinarian, pet, appointmentDateTime, durationMinutes);
 
       redirectAttributes.addFlashAttribute("successMessage",
           "Janji temu berhasil dibuat untuk " + pet.getName() + " pada " +

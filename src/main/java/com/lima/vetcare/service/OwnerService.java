@@ -33,20 +33,6 @@ public class OwnerService {
         return owner.orElse(null);
     }
 
-    public Owner getOwnerWithPets(Long ownerId) {
-        Optional<Owner> owner = ownerRepository.findByIdWithPets(ownerId);
-        return owner.orElse(null);
-    }
-
-    public Owner findOwnerById(Long id) {
-        Optional<Owner> owner = ownerRepository.findById(id);
-        return owner.orElse(null);
-    }
-
-    public Owner saveOwner(Owner owner) {
-        return ownerRepository.save(owner);
-    }
-
     public boolean existsByEmail(String email) {
         return ownerRepository.existsByEmail(email);
     }

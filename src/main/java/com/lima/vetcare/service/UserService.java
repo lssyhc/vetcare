@@ -31,10 +31,6 @@ public class UserService {
         return passwordEncoder.encode(password);
     }
 
-    public boolean verifyPassword(String rawPassword, String encodedPassword) {
-        return passwordEncoder.matches(rawPassword, encodedPassword);
-    }
-
     public void changePassword(User user, String currentPassword, String newPassword) {
         if (!passwordEncoder.matches(currentPassword, user.getPassword())) {
             throw new IllegalArgumentException("Password saat salah");
@@ -57,9 +53,5 @@ public class UserService {
 
     public void deleteAccount(User user) {
         userRepository.delete(user);
-    }
-
-    public BCryptPasswordEncoder getPasswordEncoder() {
-        return passwordEncoder;
     }
 }

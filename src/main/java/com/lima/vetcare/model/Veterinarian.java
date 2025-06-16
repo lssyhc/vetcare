@@ -39,42 +39,6 @@ public class Veterinarian extends User {
         this.specialization = specialization;
     }
 
-    public List<VeterinarianSchedule> getSchedules() {
-        return schedules;
-    }
-
-    public void setSchedules(List<VeterinarianSchedule> schedules) {
-        this.schedules = schedules;
-    }
-
-    public List<Appointment> getAppointments() {
-        return appointments;
-    }
-
-    public void setAppointments(List<Appointment> appointments) {
-        this.appointments = appointments;
-    }
-
-    public void addSchedule(VeterinarianSchedule schedule) {
-        schedules.add(schedule);
-        schedule.setVeterinarian(this);
-    }
-
-    public void removeSchedule(VeterinarianSchedule schedule) {
-        schedules.remove(schedule);
-        schedule.setVeterinarian(null);
-    }
-
-    public void addAppointment(Appointment appointment) {
-        appointments.add(appointment);
-        appointment.setVeterinarian(this);
-    }
-
-    public void removeAppointment(Appointment appointment) {
-        appointments.remove(appointment);
-        appointment.setVeterinarian(null);
-    }
-
     @Override
     public String getUserType() {
         return "VETERINARIAN";

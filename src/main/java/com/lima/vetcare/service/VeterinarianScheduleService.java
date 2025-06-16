@@ -143,18 +143,4 @@ public class VeterinarianScheduleService {
 
         return !appointmentEndTime.isAfter(workEndTime);
     }
-
-    public List<VeterinarianSchedule> getActiveSchedules(Long veterinarianId) {
-        return scheduleRepository.findByVeterinarianIdAndIsActive(veterinarianId, true);
-    }
-
-    public void deleteSchedule(Long veterinarianId, Integer dayOfWeek) {
-        Optional<VeterinarianSchedule> schedule = scheduleRepository.findByVeterinarianIdAndDayOfWeek(veterinarianId,
-                dayOfWeek);
-        schedule.ifPresent(scheduleRepository::delete);
-    }
-
-    public void clearAllSchedules(Long veterinarianId) {
-        scheduleRepository.deleteByVeterinarianId(veterinarianId);
-    }
 }

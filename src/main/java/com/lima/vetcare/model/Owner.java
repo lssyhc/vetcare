@@ -20,24 +20,6 @@ public class Owner extends User {
         super(email, password, name);
     }
 
-    public List<Pet> getPets() {
-        return pets;
-    }
-
-    public void setPets(List<Pet> pets) {
-        this.pets = pets;
-    }
-
-    public void addPet(Pet pet) {
-        pets.add(pet);
-        pet.setOwner(this);
-    }
-
-    public void removePet(Pet pet) {
-        pets.remove(pet);
-        pet.setOwner(null);
-    }
-
     @Override
     public String getUserType() {
         return "OWNER";

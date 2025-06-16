@@ -51,10 +51,6 @@ public class Pet {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public Owner getOwner() {
         return owner;
     }
@@ -81,28 +77,6 @@ public class Pet {
 
     public LocalDateTime getCreatedAt() {
         return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public List<Appointment> getAppointments() {
-        return appointments;
-    }
-
-    public void setAppointments(List<Appointment> appointments) {
-        this.appointments = appointments;
-    }
-
-    public void addAppointment(Appointment appointment) {
-        appointments.add(appointment);
-        appointment.setPet(this);
-    }
-
-    public void removeAppointment(Appointment appointment) {
-        appointments.remove(appointment);
-        appointment.setPet(null);
     }
 
     @Override

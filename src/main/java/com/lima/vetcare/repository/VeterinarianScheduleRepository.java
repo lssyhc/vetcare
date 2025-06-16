@@ -14,18 +14,6 @@ public interface VeterinarianScheduleRepository extends JpaRepository<Veterinari
 
     Optional<VeterinarianSchedule> findByVeterinarianIdAndDayOfWeek(Long veterinarianId, Integer dayOfWeek);
 
-    List<VeterinarianSchedule> findByVeterinarianId(Long veterinarianId);
-
-    List<VeterinarianSchedule> findByVeterinarianIdAndIsActive(Long veterinarianId, Boolean isActive);
-
-    @Query("SELECT vs FROM VeterinarianSchedule vs WHERE vs.veterinarian.id = :veterinarianId AND vs.isActive = true ORDER BY vs.dayOfWeek")
-    List<VeterinarianSchedule> findActiveSchedulesByVeterinarianIdOrderByDayOfWeek(
-            @Param("veterinarianId") Long veterinarianId);
-
     @Query("SELECT vs FROM VeterinarianSchedule vs WHERE vs.veterinarian.id = :veterinarianId ORDER BY vs.dayOfWeek")
     List<VeterinarianSchedule> findByVeterinarianIdOrderByDayOfWeek(@Param("veterinarianId") Long veterinarianId);
-
-    boolean existsByVeterinarianIdAndIsActive(Long veterinarianId, Boolean isActive);
-
-    void deleteByVeterinarianId(Long veterinarianId);
 }

@@ -22,13 +22,17 @@ public class PetController {
     @Autowired
     private OwnerService ownerService;
 
+    private Owner getCurrentOwner(Authentication authentication) {
+        String email = authentication.getName();
+        return ownerService.findOwnerByEmail(email);
+    }
+
     @GetMapping
     public String listPets(Authentication authentication, Model model) {
-        String email = authentication.getName();
-        Owner owner = ownerService.findOwnerByEmail(email);
+        Owner owner = getCurrentOwner(authentication);
 
         if (owner == null) {
-            System.out.println("Pemilik tidak ditemukan untuk email: " + email);
+            System.out.println("Pemilik tidak ditemukan untuk email: " + authentication.getName());
             model.addAttribute("pets", List.of());
             return "pets/list";
         }
@@ -46,18 +50,15 @@ public class PetController {
 
     @PostMapping("/add")
     public String addPet(Authentication authentication, @ModelAttribute Pet pet) {
-        String email = authentication.getName();
-        Owner owner = ownerService.findOwnerByEmail(email);
-
+        Owner owner = getCurrentOwner(authentication);
         petService.addPet(pet.getName(), pet.getSpecies(), owner);
+        System.out.println("Hewan peliharaan baru telah ditambahkan oleh pemilik: " + owner.getName());
         return "redirect:/pets";
     }
 
     @GetMapping("/{id}/edit")
     public String showEditPetForm(@PathVariable Long id, Authentication authentication, Model model) {
-        String email = authentication.getName();
-        Owner owner = ownerService.findOwnerByEmail(email);
-
+        Owner owner = getCurrentOwner(authentication);
         petService.verifyPetOwnership(id, owner);
         Pet pet = petService.getPetById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Hewan peliharaan tidak ditemukan"));
@@ -67,18 +68,16 @@ public class PetController {
 
     @PostMapping("/{id}/edit")
     public String editPet(@PathVariable Long id, Authentication authentication, @ModelAttribute Pet pet) {
-        String email = authentication.getName();
-        Owner owner = ownerService.findOwnerByEmail(email);
-
+        Owner owner = getCurrentOwner(authentication);
         petService.verifyPetOwnership(id, owner);
         petService.updatePet(id, pet.getName(), pet.getSpecies());
+        System.out.println("Hewan peliharaan dengan ID " + id + " telah diperbarui oleh pemilik: " + owner.getName());
         return "redirect:/pets";
     }
 
     @PostMapping("/{id}/delete")
     public String deletePet(@PathVariable Long id, Authentication authentication) {
-        String email = authentication.getName();
-        Owner owner = ownerService.findOwnerByEmail(email);
+        Owner owner = getCurrentOwner(authentication);
 
         if (owner == null) {
             return "redirect:/auth/login?error=true";
@@ -90,8 +89,8 @@ public class PetController {
             System.out
                     .println("Hewan peliharaan dengan ID " + id + " berhasil dihapus oleh pemilik: " + owner.getName());
         } catch (SecurityException e) {
-            System.err.println("Percobaan tidak sah untuk menghapus hewan peliharaan dengan ID " + id
-                    + " oleh pengguna: " + email);
+            System.err.println("Percobaan tidak sah untuk menghapus hewan peliharaan dengan ID " + id +
+                    " oleh pengguna: " + authentication.getName());
             return "redirect:/pets?error=unauthorized";
         } catch (Exception e) {
             System.err.println("Kesalahan menghapus hewan peliharaan dengan ID " + id + ": " + e.getMessage());

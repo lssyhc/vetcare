@@ -52,20 +52,16 @@ public class Appointment {
     }
 
     public Appointment(Owner owner, Veterinarian veterinarian, Pet pet,
-            LocalDateTime appointmentTime, Integer durationMinutes) {
+            LocalDateTime appointmentTime, AppointmentDuration duration) {
         this.owner = owner;
         this.veterinarian = veterinarian;
         this.pet = pet;
         this.appointmentTime = appointmentTime;
-        this.durationMinutes = durationMinutes;
+        this.durationMinutes = duration.getMinutes();
     }
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public Owner getOwner() {
@@ -104,13 +100,10 @@ public class Appointment {
         return durationMinutes;
     }
 
-    public void setDurationMinutes(Integer durationMinutes) {
-
-        if (durationMinutes != null &&
-                durationMinutes != 30 && durationMinutes != 60 && durationMinutes != 90) {
-            throw new IllegalArgumentException("Durasi harus 30, 60, atau 90 menit");
+    public void setDuration(AppointmentDuration duration) {
+        if (duration != null) {
+            this.durationMinutes = duration.getMinutes();
         }
-        this.durationMinutes = durationMinutes;
     }
 
     public AppointmentStatus getStatus() {
@@ -133,48 +126,11 @@ public class Appointment {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
     public LocalDateTime getEndTime() {
         if (appointmentTime != null && durationMinutes != null) {
             return appointmentTime.plusMinutes(durationMinutes);
         }
         return null;
-    }
-
-    public AppointmentDuration getDuration() {
-        if (durationMinutes != null) {
-            return AppointmentDuration.fromMinutes(durationMinutes);
-        }
-        return null;
-    }
-
-    public void setDuration(AppointmentDuration duration) {
-        if (duration != null) {
-            this.durationMinutes = duration.getMinutes();
-        }
-    }
-
-    public boolean isCompleted() {
-        return status == AppointmentStatus.COMPLETED;
-    }
-
-    public boolean isCancelled() {
-        return status == AppointmentStatus.CANCELLED;
-    }
-
-    public boolean isScheduled() {
-        return status == AppointmentStatus.SCHEDULED;
-    }
-
-    public boolean isPast() {
-        return appointmentTime != null && appointmentTime.isBefore(LocalDateTime.now());
-    }
-
-    public boolean isUpcoming() {
-        return appointmentTime != null && appointmentTime.isAfter(LocalDateTime.now());
     }
 
     @Override

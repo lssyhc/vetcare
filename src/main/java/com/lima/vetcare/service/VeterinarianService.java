@@ -34,30 +34,13 @@ public class VeterinarianService {
         return veterinarian.orElse(null);
     }
 
-    public List<Veterinarian> getAllVeterinarians() {
-        return veterinarianRepository.findAll();
-    }
-
-    public List<Veterinarian> getVeterinariansBySpecialization(String specialization) {
-        return veterinarianRepository.findBySpecializationIgnoreCase(specialization);
-    }
-
     public Veterinarian findVeterinarianById(Long id) {
         Optional<Veterinarian> veterinarian = veterinarianRepository.findById(id);
         return veterinarian.orElse(null);
     }
 
-    public Veterinarian getVeterinarianWithSchedules(Long veterinarianId) {
-        Optional<Veterinarian> veterinarian = veterinarianRepository.findByIdWithSchedules(veterinarianId);
-        return veterinarian.orElse(null);
-    }
-
     public List<Veterinarian> getAllVeterinariansWithActiveSchedules() {
         return veterinarianRepository.findAllWithActiveSchedules();
-    }
-
-    public Veterinarian saveVeterinarian(Veterinarian veterinarian) {
-        return veterinarianRepository.save(veterinarian);
     }
 
     public boolean existsByEmail(String email) {

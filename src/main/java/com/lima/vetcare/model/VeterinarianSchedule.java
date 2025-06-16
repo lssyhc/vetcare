@@ -22,13 +22,13 @@ public class VeterinarianSchedule {
     @JoinColumn(name = "veterinarian_id", nullable = false)
     private Veterinarian veterinarian;
 
-    @NotNull(message = "Hari dalam seminggu wajib diisi")
-    @Min(value = 1, message = "Hari dalam seminggu harus antara 1 (Senin) dan 7 (Minggu)")
-    @Max(value = 7, message = "Hari dalam seminggu harus antara 1 (Senin) dan 7 (Minggu)")
+    @NotNull(message = "Day of week is required")
+    @Min(value = 1, message = "Day of week must be between 1 (Monday) and 7 (Sunday)")
+    @Max(value = 7, message = "Day of week must be between 1 (Monday) and 7 (Sunday)")
     @Column(name = "day_of_week", nullable = false)
     private Integer dayOfWeek;
 
-    @NotNull(message = "Status aktif wajib diisi")
+    @NotNull(message = "Active status is required")
     @Column(name = "is_active", nullable = false)
     private Boolean isActive = false;
 
@@ -52,18 +52,6 @@ public class VeterinarianSchedule {
         this.isActive = isActive;
         this.startTime = startTime;
         this.endTime = endTime;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Veterinarian getVeterinarian() {
-        return veterinarian;
     }
 
     public void setVeterinarian(Veterinarian veterinarian) {
@@ -106,10 +94,6 @@ public class VeterinarianSchedule {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
     public String getDayName() {
         return switch (dayOfWeek) {
             case 1 -> "Senin";
@@ -121,17 +105,6 @@ public class VeterinarianSchedule {
             case 7 -> "Minggu";
             default -> "Tidak Diketahui";
         };
-    }
-
-    public boolean isWorkingDay() {
-        return isActive && startTime != null && endTime != null;
-    }
-
-    public int getWorkingHours() {
-        if (!isWorkingDay()) {
-            return 0;
-        }
-        return endTime.getHour() - startTime.getHour();
     }
 
     @Override

@@ -6,10 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Locale;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -34,7 +31,10 @@ public class AppointmentService {
             throw new IllegalArgumentException("Tidak dapat membuat janji temu untuk waktu yang sudah berlalu");
         }
 
-        if (!isValidDuration(durationMinutes)) {
+        AppointmentDuration duration;
+        try {
+            duration = AppointmentDuration.fromMinutes(durationMinutes);
+        } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException("Durasi tidak valid. Harus 30, 60, atau 90 menit");
         }
 
@@ -56,7 +56,7 @@ public class AppointmentService {
         appointment.setVeterinarian(vet);
         appointment.setPet(pet);
         appointment.setAppointmentTime(appointmentTime);
-        appointment.setDurationMinutes(durationMinutes);
+        appointment.setDuration(duration);
         appointment.setStatus(AppointmentStatus.SCHEDULED);
 
         return appointmentRepository.save(appointment);
@@ -115,9 +115,11 @@ public class AppointmentService {
         LocalDateTime workEndTime = appointmentTime.toLocalDate().atTime(schedule.getEndTime());
         long remainingMinutes = java.time.Duration.between(appointmentTime, workEndTime).toMinutes();
 
-        List<Integer> standardDurations = Arrays.asList(30, 60, 90);
-
-        return standardDurations.stream()
+        return List.of(
+                AppointmentDuration.THIRTY_MINUTES.getMinutes(),
+                AppointmentDuration.SIXTY_MINUTES.getMinutes(),
+                AppointmentDuration.NINETY_MINUTES.getMinutes())
+                .stream()
                 .filter(duration -> duration <= remainingMinutes)
                 .collect(Collectors.toList());
     }
@@ -129,24 +131,5 @@ public class AppointmentService {
     public Appointment getAppointmentById(Long appointmentId) {
         Optional<Appointment> appointment = appointmentRepository.findById(appointmentId);
         return appointment.orElse(null);
-    }
-
-    private boolean isValidDuration(Integer durationMinutes) {
-        return durationMinutes != null &&
-                (durationMinutes == 30 || durationMinutes == 60 || durationMinutes == 90);
-    }
-
-    public Appointment cancelAppointment(Long appointmentId) {
-        return updateAppointmentStatus(appointmentId, AppointmentStatus.CANCELLED);
-    }
-
-    public Appointment completeAppointment(Long appointmentId) {
-        return updateAppointmentStatus(appointmentId, AppointmentStatus.COMPLETED);
-    }
-
-    public String formatDateTimeIndonesian(LocalDateTime dateTime) {
-        return dateTime.format(
-                DateTimeFormatter.ofPattern("dd MMMM yyyy, HH:mm")
-                        .withLocale(new Locale.Builder().setLanguage("id").setRegion("ID").build()));
     }
 }
