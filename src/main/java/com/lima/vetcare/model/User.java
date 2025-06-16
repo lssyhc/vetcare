@@ -82,10 +82,6 @@ public abstract class User {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
     public abstract String getUserType();
 
     @Override

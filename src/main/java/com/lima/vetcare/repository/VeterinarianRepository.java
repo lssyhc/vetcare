@@ -16,8 +16,6 @@ public interface VeterinarianRepository extends JpaRepository<Veterinarian, Long
 
     boolean existsByEmail(String email);
 
-    List<Veterinarian> findBySpecialization(String specialization);
-
     List<Veterinarian> findBySpecializationIgnoreCase(String specialization);
 
     @Query("SELECT v FROM Veterinarian v LEFT JOIN FETCH v.schedules WHERE v.id = :veterinarianId")
