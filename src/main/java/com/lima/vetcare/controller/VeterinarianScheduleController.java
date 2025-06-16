@@ -26,6 +26,8 @@ import com.lima.vetcare.model.VeterinarianSchedule;
 import com.lima.vetcare.service.VeterinarianScheduleService;
 import com.lima.vetcare.service.VeterinarianService;
 
+import jakarta.servlet.http.HttpServletRequest;
+
 @Controller
 @RequestMapping("/schedule")
 public class VeterinarianScheduleController {
@@ -41,7 +43,8 @@ public class VeterinarianScheduleController {
 
     @GetMapping("/setup")
     public String showScheduleSetup(Model model, Authentication authentication,
-            RedirectAttributes redirectAttributes) {
+            HttpServletRequest request, RedirectAttributes redirectAttributes) {
+        model.addAttribute("requestUri", request.getRequestURI());
         try {
             String email = authentication.getName();
             Veterinarian veterinarian = veterinarianService.findVeterinarianByEmail(email);

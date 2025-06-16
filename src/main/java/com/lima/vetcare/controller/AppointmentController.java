@@ -35,6 +35,8 @@ import com.lima.vetcare.service.UserService;
 import com.lima.vetcare.service.VeterinarianScheduleService;
 import com.lima.vetcare.service.VeterinarianService;
 
+import jakarta.servlet.http.HttpServletRequest;
+
 @Controller
 @RequestMapping("/appointments")
 public class AppointmentController {
@@ -58,7 +60,8 @@ public class AppointmentController {
   }
 
   @GetMapping
-  public String listAppointments(Model model, Authentication authentication) {
+  public String listAppointments(Model model, Authentication authentication, HttpServletRequest request) {
+    model.addAttribute("requestUri", request.getRequestURI());
     String email = authentication.getName();
     List<Appointment> appointments = new ArrayList<>();
 
@@ -79,7 +82,8 @@ public class AppointmentController {
   }
 
   @GetMapping("/book")
-  public String showBookingForm(Model model, Authentication authentication) {
+  public String showBookingForm(Model model, Authentication authentication, HttpServletRequest request) {
+    model.addAttribute("requestUri", request.getRequestURI());
     String email = authentication.getName();
     User user = userService.findUserByEmail(email);
 
@@ -170,7 +174,9 @@ public class AppointmentController {
   @GetMapping("/{id}")
   public String viewAppointment(@PathVariable("id") Long appointmentId,
       Model model,
-      Authentication authentication) {
+      Authentication authentication,
+      HttpServletRequest request) {
+    model.addAttribute("requestUri", request.getRequestURI());
     Appointment appointment = appointmentService.getAppointmentById(appointmentId);
 
     if (appointment == null) {

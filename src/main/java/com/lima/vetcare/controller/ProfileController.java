@@ -28,13 +28,11 @@ public class ProfileController {
   private UserService userService;
 
   @Autowired
-  private VeterinarianService veterinarianService;
-
-  @Autowired
   private PetService petService;
 
   @GetMapping
-  public String showProfile(Model model) {
+  public String showProfile(HttpServletRequest request, Model model) {
+    model.addAttribute("requestUri", request.getRequestURI());
     Authentication auth = SecurityContextHolder.getContext().getAuthentication();
     User currentUser = userService.findUserByEmail(auth.getName());
 
@@ -108,29 +106,6 @@ public class ProfileController {
       redirectAttributes.addFlashAttribute("emailError", e.getMessage());
       return "redirect:/profile";
     }
-  }
-
-  @PostMapping("/specialization")
-  public String changeSpecialization(
-      @RequestParam("specialization") String specialization,
-      RedirectAttributes redirectAttributes) {
-
-    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-    User currentUser = userService.findUserByEmail(auth.getName());
-
-    if (!(currentUser instanceof Veterinarian)) {
-      redirectAttributes.addFlashAttribute("error", "Hanya veterinarian yang dapat mengubah spesialisasi");
-      return "redirect:/profile";
-    }
-
-    try {
-      veterinarianService.changeSpecialization((Veterinarian) currentUser, specialization);
-      redirectAttributes.addFlashAttribute("specializationSuccess", "Spesialisasi berhasil diperbarui");
-    } catch (Exception e) {
-      redirectAttributes.addFlashAttribute("specializationError", "Gagal memperbarui spesialisasi");
-    }
-
-    return "redirect:/profile";
   }
 
   @PostMapping("/delete")

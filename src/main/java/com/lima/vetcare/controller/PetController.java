@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import jakarta.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -28,7 +29,8 @@ public class PetController {
     }
 
     @GetMapping
-    public String listPets(Authentication authentication, Model model) {
+    public String listPets(Authentication authentication, HttpServletRequest request, Model model) {
+        model.addAttribute("requestUri", request.getRequestURI());
         Owner owner = getCurrentOwner(authentication);
 
         if (owner == null) {
@@ -37,13 +39,13 @@ public class PetController {
             return "pets/list";
         }
         List<Pet> pets = petService.getPetsByOwner(owner);
-        System.out.println("Ditemukan " + pets.size() + " hewan peliharaan untuk pemilik: " + owner.getName());
         model.addAttribute("pets", pets);
         return "pets/list";
     }
 
     @GetMapping("/add")
-    public String showAddPetForm(Model model) {
+    public String showAddPetForm(HttpServletRequest request, Model model) {
+        model.addAttribute("requestUri", request.getRequestURI());
         model.addAttribute("pet", new Pet());
         return "pets/add";
     }
@@ -52,16 +54,17 @@ public class PetController {
     public String addPet(Authentication authentication, @ModelAttribute Pet pet) {
         Owner owner = getCurrentOwner(authentication);
         petService.addPet(pet.getName(), pet.getSpecies(), owner);
-        System.out.println("Hewan peliharaan baru telah ditambahkan oleh pemilik: " + owner.getName());
         return "redirect:/pets";
     }
 
     @GetMapping("/{id}/edit")
-    public String showEditPetForm(@PathVariable Long id, Authentication authentication, Model model) {
+    public String showEditPetForm(@PathVariable Long id, Authentication authentication, HttpServletRequest request,
+            Model model) {
+        model.addAttribute("requestUri", request.getRequestURI());
         Owner owner = getCurrentOwner(authentication);
         petService.verifyPetOwnership(id, owner);
         Pet pet = petService.getPetById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Hewan peliharaan tidak ditemukan"));
+                .orElseThrow(() -> new IllegalArgumentException());
         model.addAttribute("pet", pet);
         return "pets/edit";
     }
@@ -71,26 +74,16 @@ public class PetController {
         Owner owner = getCurrentOwner(authentication);
         petService.verifyPetOwnership(id, owner);
         petService.updatePet(id, pet.getName(), pet.getSpecies());
-        System.out.println("Hewan peliharaan dengan ID " + id + " telah diperbarui oleh pemilik: " + owner.getName());
         return "redirect:/pets";
     }
 
     @PostMapping("/{id}/delete")
     public String deletePet(@PathVariable Long id, Authentication authentication) {
         Owner owner = getCurrentOwner(authentication);
-
-        if (owner == null) {
-            return "redirect:/auth/login?error=true";
-        }
-
         try {
             petService.verifyPetOwnership(id, owner);
             petService.deletePet(id);
-            System.out
-                    .println("Hewan peliharaan dengan ID " + id + " berhasil dihapus oleh pemilik: " + owner.getName());
         } catch (SecurityException e) {
-            System.err.println("Percobaan tidak sah untuk menghapus hewan peliharaan dengan ID " + id +
-                    " oleh pengguna: " + authentication.getName());
             return "redirect:/pets?error=unauthorized";
         } catch (Exception e) {
             System.err.println("Kesalahan menghapus hewan peliharaan dengan ID " + id + ": " + e.getMessage());

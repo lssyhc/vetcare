@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import jakarta.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -34,12 +35,13 @@ public class DashboardController {
     private AppointmentService appointmentService;
 
     @GetMapping("/owner")
-    public String ownerDashboard(Authentication authentication, Model model) {
+    public String ownerDashboard(Authentication authentication, HttpServletRequest request, Model model) {
+        model.addAttribute("requestUri", request.getRequestURI());
         String email = authentication.getName();
         Owner owner = ownerService.findOwnerByEmail(email);
 
         if (owner == null) {
-            return "redirect:/auth/login?error=true";
+            return "redirect:/";
         }
 
         List<Pet> pets = petService.getPetsByOwner(owner);
@@ -53,12 +55,13 @@ public class DashboardController {
     }
 
     @GetMapping("/vet")
-    public String vetDashboard(Authentication authentication, Model model) {
+    public String vetDashboard(Authentication authentication, HttpServletRequest request, Model model) {
+        model.addAttribute("requestUri", request.getRequestURI());
         String email = authentication.getName();
         Veterinarian vet = veterinarianService.findVeterinarianByEmail(email);
 
         if (vet == null) {
-            return "redirect:/auth/login?error=true";
+            return "redirect:/";
         }
 
         List<Appointment> todaysAppointments = appointmentService.getTodaysAppointments(vet);
