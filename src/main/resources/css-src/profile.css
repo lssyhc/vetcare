@@ -1,0 +1,233 @@
+.profile-dashboard {
+  @apply min-h-screen bg-gray-50;
+}
+
+.profile-dashboard-container {
+  @apply max-w-6xl mx-auto px-6 py-8;
+}
+
+.profile-welcome-card {
+  @apply bg-white rounded-xl p-6 border border-gray-200 mb-4;
+}
+
+.profile-welcome-header {
+  @apply flex flex-col sm:flex-row sm:items-center sm:justify-between;
+}
+
+.profile-welcome-title {
+  @apply text-2xl font-semibold text-gray-900;
+}
+
+.profile-welcome-subtitle {
+  @apply text-gray-600 mt-1;
+}
+
+.profile-alert-success {
+  @apply bg-green-50 border border-green-200 text-green-800 px-4 py-3 rounded-lg mb-4 flex items-center;
+}
+
+.profile-alert-danger {
+  @apply bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded-lg mb-4 flex items-center;
+}
+
+.profile-alert-icon {
+  @apply w-5 h-5 mr-2;
+}
+
+.profile-user-info-card {
+  @apply bg-white rounded-xl p-6 border border-gray-200 mb-4;
+}
+
+.profile-user-info-container {
+  @apply flex items-center;
+}
+
+.profile-user-avatar {
+  @apply w-16 h-16 bg-blue-600 text-white rounded-full flex items-center justify-center text-lg font-bold mr-4;
+}
+
+.profile-user-details h2 {
+  @apply text-xl font-semibold text-gray-900 mb-1;
+}
+
+.profile-user-email {
+  @apply text-gray-600 mb-1;
+}
+
+.profile-user-role {
+  @apply text-blue-600 font-medium;
+}
+
+.profile-content-container {
+  @apply bg-white rounded-xl border border-gray-200 p-6;
+}
+
+.profile-tab-nav {
+  @apply flex border-b border-gray-200 space-x-4;
+}
+
+.profile-tab-nav a {
+  @apply px-4 py-4 border-b-2 border-transparent font-medium text-gray-600 hover:text-gray-900 hover:border-gray-300 transition-colors duration-200 text-sm;
+}
+
+.profile-tab-nav a.active {
+  @apply border-blue-600 text-blue-600;
+}
+
+.profile-tab-content {
+  @apply pt-8;
+}
+
+.profile-tab-content.hidden {
+  display: none;
+}
+
+.profile-section {
+  @apply mb-8;
+}
+
+.profile-section:last-child {
+  @apply mb-0;
+}
+
+.profile-section-header {
+  @apply pb-4 border-b border-gray-200 mb-4;
+}
+
+.profile-section-title {
+  @apply text-lg font-semibold text-gray-900;
+}
+
+.profile-section-title.danger {
+  @apply text-red-600;
+}
+
+.profile-section-content {
+  @apply space-y-4;
+}
+
+.profile-form {
+  @apply space-y-6;
+}
+
+.profile-form-section {
+  @apply space-y-3;
+}
+
+.profile-form-group {
+  @apply space-y-2;
+}
+
+.profile-form-label {
+  @apply block text-sm font-medium text-gray-700;
+}
+
+.profile-form-label.required::after {
+  content: "*";
+  @apply text-red-500 ml-1;
+}
+
+.profile-form-input {
+  @apply w-full px-4 py-3 border border-gray-300 rounded-lg text-sm text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200 bg-white;
+}
+
+.profile-form-input:focus {
+  @apply outline-none;
+}
+
+.profile-form-actions {
+  @apply flex flex-col sm:flex-row gap-3;
+}
+
+.profile-btn-primary {
+  @apply inline-flex items-center justify-center px-2 py-2 h-8 bg-primary text-white rounded-lg text-sm hover:bg-primary-dark focus:ring-2 focus:ring-primary focus:ring-offset-2;
+}
+
+.profile-btn-primary:focus {
+  @apply outline-none;
+}
+
+.profile-btn-primary:disabled {
+  @apply bg-gray-400 cursor-not-allowed;
+}
+
+.profile-btn-secondary {
+  @apply inline-flex items-center justify-center px-2 py-2 h-8 bg-white text-gray-700 border border-gray-300 rounded-lg text-sm hover:bg-gray-50 hover:text-gray-900 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2;
+}
+
+.profile-btn-secondary:focus {
+  @apply outline-none;
+}
+
+.profile-btn-icon {
+  @apply w-4 h-4 mr-2;
+}
+
+.profile-btn-primary.danger {
+  @apply bg-red-600 hover:bg-red-700 focus:ring-red-500;
+}
+
+.profile-btn-primary.danger:focus {
+  @apply outline-none ring-2 ring-red-500 ring-offset-2;
+}
+
+.profile-btn-primary.danger:disabled {
+  @apply bg-red-400 cursor-not-allowed;
+}
+
+.profile-modal-overlay {
+  @apply fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50;
+}
+
+.profile-modal-overlay.hidden {
+  display: none;
+}
+
+.profile-modal {
+  @apply bg-white rounded-xl p-6 max-w-md w-full mx-4 shadow-xl;
+}
+
+.profile-modal-header {
+  @apply text-lg font-semibold text-gray-900 mb-4;
+}
+
+.profile-modal-content {
+  @apply text-gray-700 mb-4;
+}
+
+.profile-modal-footer {
+  @apply flex flex-col sm:flex-row gap-3 justify-end;
+}
+
+.profile-modal-footer .profile-btn-secondary,
+.profile-modal-footer .profile-btn-primary {
+  @apply w-full sm:w-auto;
+}
+
+.profile-danger-box {
+  @apply bg-red-50 border border-red-200 rounded-lg p-6;
+}
+
+.profile-danger-text {
+  @apply text-red-700 mb-4;
+}
+
+@media (max-width: 640px) {
+  .profile-welcome-card,
+  .profile-user-info-card,
+  .profile-content-container {
+    @apply p-6;
+  }
+
+  .profile-user-info-container {
+    @apply flex-col text-center;
+  }
+
+  .profile-user-avatar {
+    @apply mr-0 mb-4;
+  }
+
+  .profile-tab-nav {
+    @apply space-x-2;
+  }
+}

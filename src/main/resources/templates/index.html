@@ -10,17 +10,289 @@
                 pageSpecificScripts=~{:: #page-scripts}
               )}"
 >
-  <th:block id="page-styles"></th:block>
+  <th:block id="page-styles"> </th:block>
 
-  <div id="page-content" class="container p-4">
-    <h1>VetCare</h1>
-    <p>Veterinary Clinic Appointment Booking System</p>
+  <div id="page-content">
+    <div class="hero-section">
+      <div class="hero-container">
+        <h1 class="hero-title">Perawatan Terbaik untuk Sahabat Terbaik Anda</h1>
+        <p class="hero-description">
+          Reservasi janji temu dokter hewan kini lebih mudah dengan VetCare.
+          Cepat, praktis, dan terpercaya.
+        </p>
+        <div class="hero-cta-container">
+          <a th:href="@{/auth/register}" class="hero-cta-button">
+            Daftar Sekarang
+          </a>
+        </div>
+      </div>
+    </div>
 
-    <div>
-      <a href="/auth/login" class="underline text-primary mr-5">→ Login</a>
-      <a href="/auth/register" class="underline text-primary">→ Register</a>
+    <div id="services" class="services-section">
+      <div class="services-container">
+        <div class="section-header">
+          <h2 class="section-title">Layanan Unggulan Kami</h2>
+          <p class="section-description">
+            Kami menyediakan berbagai layanan untuk memastikan hewan kesayangan
+            Anda mendapatkan perawatan terbaik.
+          </p>
+        </div>
+        <div class="services-grid">
+          <div class="service-card">
+            <div class="service-icon">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                ></path>
+              </svg>
+            </div>
+            <h3 class="service-title">Reservasi Online Mudah</h3>
+            <p class="service-description">
+              Cari dan pesan jadwal dokter hewan pilihan Anda kapan saja, di
+              mana saja, tanpa antre.
+            </p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                ></path>
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                ></path>
+              </svg>
+            </div>
+            <h3 class="service-title">Dokter Hewan Terpercaya</h3>
+            <p class="service-description">
+              Temukan dokter hewan profesional dan berpengalaman dengan berbagai
+              spesialisasi.
+            </p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"
+                ></path>
+              </svg>
+            </div>
+            <h3 class="service-title">Riwayat Kesehatan Digital</h3>
+            <p class="service-description">
+              Akses mudah ke riwayat janji temu, diagnosis, dan catatan
+              kesehatan hewan kesayangan Anda.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="benefits" class="benefits-section">
+      <div class="benefits-container">
+        <div class="section-header">
+          <h2 class="section-title">Mengapa Memilih VetCare?</h2>
+          <p class="section-description">
+            Kami berkomitmen memberikan kemudahan dan kenyamanan untuk perawatan
+            kesehatan hewan Anda.
+          </p>
+        </div>
+        <div class="benefits-content">
+          <div class="benefits-image-container">
+            <img
+              src="https://images.pexels.com/photos/7788657/pexels-photo-7788657.jpeg"
+              alt="Pemilik Hewan Bahagia dengan Hewan Peliharaan yang Sehat"
+              class="benefits-image"
+            />
+          </div>
+          <div class="benefits-features">
+            <div class="benefit-item">
+              <div class="benefit-icon-container">
+                <div class="benefit-icon">
+                  <svg fill="currentColor" viewBox="0 0 20 20">
+                    <path
+                      fill-rule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                      clip-rule="evenodd"
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+              <div class="benefit-content">
+                <h4 class="benefit-title">Efisien & Hemat Waktu</h4>
+                <p class="benefit-description">
+                  Tidak perlu antri panjang atau repot menelepon klinik. Atur
+                  janji temu dari mana saja.
+                </p>
+              </div>
+            </div>
+            <div class="benefit-item">
+              <div class="benefit-icon-container">
+                <div class="benefit-icon">
+                  <svg fill="currentColor" viewBox="0 0 20 20">
+                    <path
+                      fill-rule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                      clip-rule="evenodd"
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+              <div class="benefit-content">
+                <h4 class="benefit-title">Jadwal Teratur & Pasti</h4>
+                <p class="benefit-description">
+                  Pilih jadwal yang paling sesuai dengan ketersediaan Anda dan
+                  dokter hewan.
+                </p>
+              </div>
+            </div>
+            <div class="benefit-item">
+              <div class="benefit-icon-container">
+                <div class="benefit-icon">
+                  <svg fill="currentColor" viewBox="0 0 20 20">
+                    <path
+                      fill-rule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                      clip-rule="evenodd"
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+              <div class="benefit-content">
+                <h4 class="benefit-title">Informatif & Terpantau</h4>
+                <p class="benefit-description">
+                  Dapatkan notifikasi pengingat janji temu dan akses mudah ke
+                  riwayat kesehatan digital hewan Anda.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="faq" class="faq-section">
+      <div class="faq-container">
+        <div class="section-header">
+          <h2 class="section-title">Pertanyaan Umum (FAQ)</h2>
+          <p class="section-description">
+            Temukan jawaban untuk pertanyaan yang sering diajukan tentang
+            layanan VetCare.
+          </p>
+        </div>
+        <div class="faq-list">
+          <div class="faq-item">
+            <button
+              class="faq-question"
+              aria-expanded="false"
+              aria-controls="faq-1"
+            >
+              <span>Bagaimana cara mendaftar di VetCare?</span>
+              <svg
+                class="faq-arrow"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 9l-7 7-7-7"
+                ></path>
+              </svg>
+            </button>
+            <div class="faq-answer" id="faq-1" aria-hidden="true">
+              <div class="faq-answer-content">
+                <p>
+                  Anda dapat mendaftar dengan mudah melalui tombol "Registrasi"
+                  yang tersedia di bagian atas halaman. Pilih jenis akun Anda
+                  (Pemilik Hewan atau Veterinarian) dan ikuti langkah-langkah
+                  selanjutnya.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button
+              class="faq-question"
+              aria-expanded="false"
+              aria-controls="faq-2"
+            >
+              <span>Apakah layanan VetCare berbayar?</span>
+              <svg
+                class="faq-arrow"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 9l-7 7-7-7"
+                ></path>
+              </svg>
+            </button>
+            <div class="faq-answer" id="faq-2" aria-hidden="true">
+              <div class="faq-answer-content">
+                <p>
+                  Pendaftaran dan penggunaan platform VetCare untuk mencari
+                  dokter dan membuat janji temu adalah gratis. Biaya hanya akan
+                  berlaku untuk layanan konsultasi atau tindakan medis yang
+                  diberikan oleh dokter hewan, sesuai dengan tarif klinik
+                  masing-masing.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button
+              class="faq-question"
+              aria-expanded="false"
+              aria-controls="faq-3"
+            >
+              <span>Bagaimana jika saya perlu membatalkan janji temu?</span>
+              <svg
+                class="faq-arrow"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 9l-7 7-7-7"
+                ></path>
+              </svg>
+            </button>
+            <div class="faq-answer" id="faq-3" aria-hidden="true">
+              <div class="faq-answer-content">
+                <p>
+                  Anda dapat membatalkan janji temu melalui dashboard akun Anda.
+                  Mohon perhatikan kebijakan pembatalan dari klinik terkait,
+                  karena beberapa klinik mungkin memiliki batas waktu tertentu
+                  untuk pembatalan.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
-  <th:block id="page-scripts"></th:block>
+  <th:block id="page-scripts"> </th:block>
 </html>

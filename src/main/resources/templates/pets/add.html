@@ -4,208 +4,97 @@
   th:replace="~{fragments/dashboard-layout :: dashboardLayout(
                 pageTitle='Tambah Hewan Peliharaan Baru - VetCare',
                 sidebarFragment=~{fragments/sidebar-owner :: ownerSidebar},
-                pageContent=~{:: #content},
+                pageContent=~{:: #page-content},
                 pageSpecificStyles=~{:: #page-styles},
                 pageSpecificScripts=~{:: #page-scripts}
               )}"
 >
-  <th:block id="page-styles">
-    <style>
-      .dashboard-container {
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-      }
+  <th:block id="page-styles"> </th:block>
 
-      .dashboard-main {
-        flex: 1;
-        display: flex;
-        max-width: 1200px;
-        margin: 0 auto;
-        width: 100%;
-      }
+  <div id="page-content">
+    <div class="add-pet-dashboard">
+      <div class="add-pet-container">
+        <div class="add-pet-form-card">
+          <div class="pet-section-header">
+            <h2 class="pet-section-title">Tambah Hewan Peliharaan Baru</h2>
+          </div>
+          <div class="pet-content-section">
+            <form
+              action="/pets/add"
+              method="post"
+              class="add-pet-form"
+              autocomplete="on"
+            >
+              <div class="add-pet-form-section">
+                <div class="add-pet-form-group">
+                  <label for="name" class="add-pet-form-label required"
+                    >Nama Hewan Peliharaan</label
+                  >
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    class="add-pet-form-input"
+                    placeholder="Masukkan nama hewan peliharaan"
+                    required
+                  />
+                </div>
 
-      .dashboard-sidebar {
-        width: 250px;
-        background-color: #f8f9fa;
-        padding: 1rem;
-      }
+                <div class="add-pet-form-group">
+                  <label for="species" class="add-pet-form-label required"
+                    >Spesies</label
+                  >
+                  <input
+                    type="text"
+                    id="species"
+                    name="species"
+                    class="add-pet-form-input"
+                    placeholder="Masukkan spesies hewan peliharaan"
+                    required
+                  />
+                </div>
+              </div>
 
-      .sidebar-nav {
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-      }
-
-      .sidebar-nav h3 {
-        font-size: 1.2rem;
-        color: #495057;
-        margin-bottom: 1rem;
-        padding-bottom: 0.5rem;
-        border-bottom: 1px solid #e9ecef;
-      }
-
-      .sidebar-nav ul {
-        list-style: none;
-        padding: 0;
-        margin: 0 0 1rem 0;
-      }
-
-      .sidebar-nav li {
-        margin-bottom: 0.5rem;
-      }
-
-      .sidebar-nav a {
-        display: block;
-        padding: 0.5rem 0.75rem;
-        color: #495057;
-        text-decoration: none;
-        border-radius: 0.25rem;
-        transition: background-color 0.2s;
-      }
-
-      .sidebar-nav a:hover {
-        background-color: #e9ecef;
-        color: #212529;
-      }
-
-      .sidebar-bottom {
-        margin-top: auto;
-        padding-top: 1rem;
-        border-top: 1px solid #e9ecef;
-      }
-
-      .logout-link {
-        display: block;
-        padding: 0.5rem 0.75rem;
-        color: #dc3545;
-        text-decoration: none;
-        border-radius: 0.25rem;
-        text-align: center;
-        border: 1px solid #dc3545;
-      }
-
-      .logout-link:hover {
-        background-color: #dc3545;
-        color: white;
-      }
-      
-      .content-header {
-        margin-bottom: 2rem;
-      }
-      
-      .content-header h1 {
-        font-size: 2rem;
-        font-weight: bold;
-        color: #495057;
-        margin-bottom: 0.5rem;
-      }
-      
-      .dashboard-content {
-        flex: 1;
-        padding: 1rem;
-      }
-
-      .form-group {
-        margin-bottom: 1.5rem;
-      }
-
-      .form-label {
-        display: block;
-        margin-bottom: 0.5rem;
-        font-weight: 500;
-        color: #495057;
-      }
-
-      .form-control {
-        width: 100%;
-        padding: 0.75rem;
-        border: 1px solid #ced4da;
-        border-radius: 0.25rem;
-        font-size: 1rem;
-      }
-
-      .form-control:focus {
-        border-color: #5271ff;
-        outline: none;
-        box-shadow: 0 0 0 0.25rem rgba(82, 113, 255, 0.25);
-      }
-
-      .btn-primary {
-        display: inline-block;
-        background-color: #5271ff;
-        color: white;
-        padding: 0.5rem 1rem;
-        border-radius: 0.25rem;
-        text-decoration: none;
-        border: none;
-        cursor: pointer;
-        font-size: 1rem;
-      }
-
-      .btn-primary:hover {
-        background-color: #4060ee;
-      }
-
-      .btn-link {
-        display: inline-block;
-        color: #5271ff;
-        padding: 0.5rem 1rem;
-        text-decoration: none;
-        font-size: 1rem;
-      }
-
-      .btn-link:hover {
-        text-decoration: underline;
-      }
-      
-      @media (max-width: 768px) {
-        .dashboard-main {
-          flex-direction: column;
-        }
-        
-        .dashboard-sidebar {
-          width: 100%;
-          margin-bottom: 1rem;
-        }
-      }
-    </style>
-  </th:block>
-
-  <div id="content">
-    <div class="content-header">
-      <h1>Tambah Hewan Peliharaan Baru</h1>
+              <div class="add-pet-form-actions">
+                <button type="submit" class="add-pet-btn-primary">
+                  <svg
+                    class="add-pet-btn-icon"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                    ></path>
+                  </svg>
+                  Tambah Hewan Peliharaan
+                </button>
+                <a th:href="@{/pets}" class="add-pet-btn-secondary">
+                  <svg
+                    class="add-pet-btn-icon"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M6 18L18 6M6 6l12 12"
+                    ></path>
+                  </svg>
+                  Batal
+                </a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
-
-    <form action="/pets/add" method="post">
-      <div class="form-group">
-        <label for="name" class="form-label">Nama</label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          class="form-control"
-          required
-        />
-      </div>
-      <div class="form-group">
-        <label for="species" class="form-label">Spesies</label>
-        <input
-          type="text"
-          id="species"
-          name="species"
-          class="form-control"
-          required
-        />
-      </div>
-      <div>
-        <button type="submit" class="btn-primary">
-          Tambah Hewan Peliharaan
-        </button>
-        <a href="/pets" class="btn-link">Batal</a>
-      </div>
-    </form>
   </div>
 
-  <th:block id="page-scripts"></th:block>
+  <th:block id="page-scripts"> </th:block>
 </html>

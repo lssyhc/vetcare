@@ -1,0 +1,79 @@
+.public-footer {
+  @apply bg-slate-800 text-slate-300 py-16 rounded-t-2xl mt-auto;
+}
+
+.footer-container {
+  @apply container mx-auto px-6 text-center;
+}
+
+@screen sm {
+  .footer-container {
+    @apply px-8;
+  }
+}
+
+@screen lg {
+  .footer-container {
+    @apply px-12;
+  }
+}
+
+.footer-logo {
+  @apply text-2xl font-bold text-white hover:text-gray-200 mb-6 inline-block;
+  @apply transition-colors duration-300 ease-in-out;
+  @apply focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-slate-800;
+  @apply rounded-sm px-2 py-1;
+}
+
+@screen sm {
+  .footer-logo {
+    @apply text-3xl;
+  }
+}
+
+.footer-description {
+  @apply mb-6 text-slate-400 max-w-lg mx-auto leading-relaxed;
+  @apply text-sm;
+}
+
+@screen sm {
+  .footer-description {
+    @apply text-base;
+  }
+}
+
+@screen lg {
+  .footer-description {
+    @apply max-w-xl;
+  }
+}
+
+.footer-copyright {
+  @apply text-sm text-slate-500;
+  @apply opacity-80;
+}
+
+@screen sm {
+  .footer-copyright {
+    @apply text-base;
+  }
+}
+
+.footer-year {
+  @apply font-medium;
+}
+
+.footer-heart {
+  @apply text-red-400 inline-block;
+  @apply transition-transform duration-300 ease-in-out;
+}
+
+.footer-heart:hover {
+  @apply scale-110;
+}
+
+@screen md {
+  .public-footer {
+    @apply py-20;
+  }
+}

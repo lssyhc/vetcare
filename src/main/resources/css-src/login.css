@@ -1,0 +1,66 @@
+.login-container {
+  @apply bg-gray-100 flex-1 pt-20;
+}
+
+.login-wrapper {
+  @apply container mx-auto min-h-screen flex flex-col;
+}
+
+.login-main {
+  @apply flex flex-col items-center justify-center flex-1 px-6;
+  padding-top: 4rem;
+  padding-bottom: 18rem;
+}
+
+.login-header {
+  @apply text-center mb-6;
+}
+
+.login-title {
+  @apply text-3xl font-bold text-gray-900 mb-2;
+}
+
+.login-subtitle {
+  @apply text-sm text-gray-600;
+}
+
+.login-register-link {
+  @apply font-medium text-primary hover:text-primary-dark;
+}
+
+.login-form-container {
+  @apply bg-white p-6 sm:p-8 rounded-2xl shadow-xl w-full max-w-md space-y-4;
+}
+
+.login-error {
+  @apply bg-red-100 border-l-4 border-red-500 text-sm font-medium text-red-700 py-3 px-4 rounded-md;
+}
+
+.logout-success {
+  @apply bg-green-50 border-l-4 border-green-500 text-sm font-medium text-green-700 py-3 px-4 rounded-md;
+}
+
+.login-form {
+  @apply space-y-4;
+}
+
+.login-field {
+}
+
+.login-label {
+  @apply block text-sm font-medium text-gray-700 mb-1;
+}
+
+.login-input {
+  @apply w-full px-4 py-3 border border-gray-300 rounded-xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm;
+}
+
+.login-button {
+  @apply w-full flex justify-center py-3 px-4 border border-transparent rounded-xl shadow-lg text-sm font-medium text-white bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-dark transition-all duration-300 ease-in-out transform hover:scale-105;
+}
+
+@media (max-width: 640px) {
+  .login-form-container {
+    @apply p-6;
+  }
+}

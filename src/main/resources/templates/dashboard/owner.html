@@ -2,315 +2,323 @@
 <html
   xmlns:th="http://www.thymeleaf.org"
   th:replace="~{fragments/dashboard-layout :: dashboardLayout(
-                pageTitle='Owner Dashboard - VetCare',
+                pageTitle='Dasbor Pemilik - VetCare',
                 sidebarFragment=~{fragments/sidebar-owner :: ownerSidebar},
-                pageContent=~{:: #content},
+                pageContent=~{:: #page-content},
                 pageSpecificStyles=~{:: #page-styles},
                 pageSpecificScripts=~{:: #page-scripts}
               )}"
 >
-  <th:block id="page-styles">
-    <style>
-      .dashboard-container {
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-      }
+  <th:block id="page-styles"> </th:block>
 
-      .dashboard-main {
-        flex: 1;
-        display: flex;
-        max-width: 1200px;
-        margin: 0 auto;
-        width: 100%;
-      }
-
-      .dashboard-sidebar {
-        width: 250px;
-        background-color: #f8f9fa;
-        padding: 1rem;
-        border-right: 1px solid #e9ecef;
-        display: flex;
-        flex-direction: column;
-      }
-
-      .sidebar-nav {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-      }
-
-      .sidebar-nav h3 {
-        font-size: 1.1rem;
-        font-weight: bold;
-        margin-bottom: 1rem;
-        color: #495057;
-      }
-
-      .sidebar-nav ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        flex: 1;
-      }
-
-      .sidebar-nav li {
-        margin-bottom: 0.5rem;
-      }
-
-      .sidebar-nav a {
-        display: block;
-        padding: 0.5rem 0.75rem;
-        color: #495057;
-        text-decoration: none;
-        border-radius: 0.25rem;
-      }
-
-      .sidebar-nav a:hover {
-        background-color: #e9ecef;
-        color: #5271ff;
-      }
-
-      .sidebar-bottom {
-        margin-top: auto;
-        padding-top: 1rem;
-        border-top: 1px solid #e9ecef;
-      }
-
-      .logout-link {
-        display: block;
-        padding: 0.5rem 0.75rem;
-        color: #dc3545;
-        text-decoration: none;
-        border-radius: 0.25rem;
-        text-align: center;
-        border: 1px solid #dc3545;
-      }
-
-      .logout-link:hover {
-        background-color: #dc3545;
-        color: white;
-      }
-
-      .dashboard-content {
-        flex: 1;
-        padding: 2rem;
-      }
-
-      .content-header {
-        margin-bottom: 2rem;
-      }
-
-      .content-header h1 {
-        font-size: 2rem;
-        font-weight: bold;
-        color: #495057;
-        margin-bottom: 0.5rem;
-      }
-
-      .content-header p {
-        color: #6c757d;
-        font-size: 1.1rem;
-      }
-
-      .dashboard-cards {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 1.5rem;
-      }
-
-      .card {
-        background: white;
-        border: 1px solid #e9ecef;
-        border-radius: 0.5rem;
-        padding: 1.5rem;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      }
-
-      .card h2 {
-        font-size: 1.25rem;
-        font-weight: bold;
-        margin-bottom: 1rem;
-        color: #495057;
-      }
-
-      .card ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-      }
-
-      .card li {
-        margin-bottom: 0.5rem;
-      }
-
-      .card a {
-        color: #5271ff;
-        text-decoration: none;
-      }
-
-      .card a:hover {
-        text-decoration: underline;
-      }
-
-      .pet-list {
-        margin-top: 1rem;
-        margin-bottom: 1rem;
-      }
-
-      .pet-item {
-        padding: 0.75rem;
-        border-radius: 0.25rem;
-        background-color: #f8f9fa;
-        margin-bottom: 0.5rem;
-      }
-
-      .pet-name {
-        font-weight: 600;
-        color: #495057;
-      }
-
-      .pet-details {
-        font-size: 0.9rem;
-        color: #6c757d;
-      }
-
-      .no-pets {
-        font-style: italic;
-        color: #6c757d;
-        margin: 0.75rem 0;
-      }
-
-      .appointment-list {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-      }
-      
-      .appointment-item {
-        margin-bottom: 1rem;
-        padding: 1rem;
-        border-radius: 8px;
-        background-color: #f8f9fa;
-        border-left: 4px solid #5271ff;
-      }
-      
-      .appointment-date {
-        font-weight: 600;
-        color: #3a5ac9;
-        margin-bottom: 0.4rem;
-        font-size: 0.9rem;
-      }
-      
-      .appointment-details {
-        margin-bottom: 0.5rem;
-        color: #333333;
-        font-size: 0.95rem;
-      }
-      
-      .appointment-link {
-        display: inline-block;
-        color: #2c4bcc;
-        font-size: 0.9rem;
-        font-weight: 500;
-        text-decoration: none;
-        margin-top: 0.3rem;
-      }
-      
-      .action-button {
-        color: #ffffff !important;
-        background-color: #3850c8 !important;
-        display: inline-block;
-        margin-top: 1rem;
-        padding: 0.6rem 1.2rem;
-        border-radius: 5px;
-        text-decoration: none;
-        font-weight: 700;
-        font-size: 1rem;
-        letter-spacing: 0.02em;
-        text-align: center;
-        font-family: 'Segoe UI', Arial, sans-serif;
-      }
-
-      @media (max-width: 768px) {
-        .dashboard-main {
-          flex-direction: column;
-        }
-
-        .dashboard-sidebar {
-          width: 100%;
-          border-right: none;
-          border-bottom: 1px solid #e9ecef;
-        }
-
-        .dashboard-content {
-          padding: 1rem;
-        }
-
-        .dashboard-cards {
-          grid-template-columns: 1fr;
-        }
-      }
-    </style>
-  </th:block>
-
-  <div id="content">
-    <div class="content-header">
-      <h1>Selamat Datang, <span th:text="${userName}">Pemilik</span>!</h1>
-      <p>Dasbor Pemilik Hewan</p>
-    </div>
-
-    <div class="dashboard-cards">
-      <div class="card">
-        <h2>Ringkasan Hewan Peliharaan Saya</h2>
-        <p>Total hewan peliharaan: <span th:text="${pets != null ? pets.size() : 0}">0</span></p>
-        
-        <div th:if="${pets != null and not #lists.isEmpty(pets)}" class="pet-list">
-          <div th:each="pet : ${pets}" class="pet-item">
-            <div class="pet-name" th:text="${pet.name}">Nama Hewan</div>
-            <div class="pet-details">
-              <span th:text="${pet.species}">Spesies</span>
+  <div id="page-content">
+    <div class="owner-dashboard">
+      <div class="owner-dashboard-container">
+        <div class="owner-welcome-card">
+          <div class="owner-welcome-header">
+            <div>
+              <h1 class="owner-welcome-title">
+                Selamat Datang,
+                <span th:text="${userName ?: 'Pemilik'}">Pemilik</span>!
+              </h1>
+              <p class="owner-welcome-subtitle">
+                Kelola kesehatan hewan peliharaan Anda
+              </p>
+            </div>
+            <div>
+              <a href="/appointments/book" class="owner-cta-button">
+                <svg
+                  class="owner-cta-icon"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                  ></path>
+                </svg>
+                Buat Janji Temu
+              </a>
             </div>
           </div>
         </div>
-        
-        <div th:if="${pets == null or #lists.isEmpty(pets)}" class="no-pets">
-          <p>Anda belum menambahkan hewan peliharaan.</p>
-        </div>
-        
-        <a href="/pets" class="btn btn-primary mt-2">Kelola Hewan Peliharaan</a>
-      </div>
 
-      <div class="card">
-        <h2>Janji Temu Mendatang</h2>
-        <div th:if="${#lists.isEmpty(upcomingAppointments)}">
-          <p>Tidak ada janji temu mendatang</p>
-        </div>
-        <div th:if="${not #lists.isEmpty(upcomingAppointments)}">
-          <ul class="appointment-list">
-            <li th:each="appointment : ${upcomingAppointments}" class="appointment-item">
-              <div class="appointment-date" th:text="${#temporals.format(appointment.appointmentTime, 'dd MMMM yyyy, HH:mm', new java.util.Locale('id', 'ID'))}"></div>
-              <div class="appointment-details">
-                <span th:text="${appointment.pet.name}"></span> dengan 
-                <span th:text="'dr. ' + ${appointment.veterinarian.name}"></span>
+        <div class="owner-main-grid">
+          <div class="owner-quick-actions-container">
+            <div class="owner-section-header">
+              <h2 class="owner-section-title">Aksi Cepat</h2>
+            </div>
+            <div class="owner-content-section">
+              <div class="owner-quick-actions-grid">
+                <a href="/pets" class="owner-quick-action-card">
+                  <div class="owner-quick-action-icon-bg pets">
+                    <svg
+                      class="owner-quick-action-icon"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                      ></path>
+                    </svg>
+                  </div>
+                  <div class="owner-quick-action-content">
+                    <p class="owner-quick-action-title">Kelola Hewan</p>
+                    <p class="owner-quick-action-subtitle">
+                      Atur hewan peliharaan
+                    </p>
+                  </div>
+                </a>
+
+                <a href="/appointments/book" class="owner-quick-action-card">
+                  <div class="owner-quick-action-icon-bg appointments">
+                    <svg
+                      class="owner-quick-action-icon"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2-2v12a2 2 0 002 2z"
+                      ></path>
+                    </svg>
+                  </div>
+                  <div class="owner-quick-action-content">
+                    <p class="owner-quick-action-title">Buat Janji Temu</p>
+                    <p class="owner-quick-action-subtitle">
+                      Jadwalkan konsultasi
+                    </p>
+                  </div>
+                </a>
+
+                <a href="/appointments" class="owner-quick-action-card">
+                  <div class="owner-quick-action-icon-bg history">
+                    <svg
+                      class="owner-quick-action-icon"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                      ></path>
+                    </svg>
+                  </div>
+                  <div class="owner-quick-action-content">
+                    <p class="owner-quick-action-title">Lihat Janji Temu</p>
+                    <p class="owner-quick-action-subtitle">
+                      Riwayat janji temu
+                    </p>
+                  </div>
+                </a>
+
+                <a href="/profile" class="owner-quick-action-card">
+                  <div class="owner-quick-action-icon-bg profile">
+                    <svg
+                      class="owner-quick-action-icon"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                      ></path>
+                    </svg>
+                  </div>
+                  <div class="owner-quick-action-content">
+                    <p class="owner-quick-action-title">Lihat Profil</p>
+                    <p class="owner-quick-action-subtitle">
+                      Kelola profil pengguna
+                    </p>
+                  </div>
+                </a>
               </div>
-              <a th:href="@{/appointments/{id}(id=${appointment.id})}" class="appointment-link">Lihat Detail</a>
-            </li>
-          </ul>
-        </div>
-        <a href="/appointments/book" class="action-button">Buat Janji Temu Baru</a>
-      </div>
+            </div>
+          </div>
 
-      <div class="card">
-        <h2>Aksi Cepat</h2>
-        <ul>
-          <li><a href="/pets">Kelola Hewan Peliharaan Saya</a></li>
-          <li><a href="/appointments/book">Buat Janji Temu Baru</a></li>
-          <li><a href="/appointments">Lihat Janji Temu Saya</a></li>
-        </ul>
+          <div class="owner-stats-container">
+            <div class="owner-stats-card">
+              <div class="owner-section-header">
+                <h2 class="owner-section-title">Statistik</h2>
+              </div>
+              <div class="owner-stats-grid">
+                <div class="owner-stat-item">
+                  <div class="owner-stat-icon-bg pets">
+                    <svg
+                      class="owner-stat-icon"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                      ></path>
+                    </svg>
+                  </div>
+                  <div class="owner-stat-content">
+                    <p class="owner-stat-title">Total Peliharaan</p>
+                    <p
+                      class="owner-stat-value"
+                      th:text="${pets != null ? pets.size() + ' hewan' : '0 hewan'}"
+                    >
+                      0 hewan
+                    </p>
+                  </div>
+                </div>
+
+                <div class="owner-stat-item">
+                  <div class="owner-stat-icon-bg appointments">
+                    <svg
+                      class="owner-stat-icon"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2-2v12a2 2 0 002 2z"
+                      ></path>
+                    </svg>
+                  </div>
+                  <div class="owner-stat-content">
+                    <p class="owner-stat-title">Janji Mendatang</p>
+                    <p
+                      class="owner-stat-value"
+                      th:text="${upcomingAppointments != null ? upcomingAppointments.size() + ' janji temu' : '0 janji temu'}"
+                    >
+                      0 janji temu
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="owner-pets-card">
+          <div class="owner-pets-header">
+            <h2 class="owner-section-title">Hewan Peliharaan</h2>
+            <a href="/pets" class="owner-view-all-link">Kelola hewan</a>
+          </div>
+          <div class="owner-content-section">
+            <div
+              th:if="${pets != null and not #lists.isEmpty(pets)}"
+              class="owner-pets-grid"
+            >
+              <div th:each="pet : ${pets}" class="owner-pet-card">
+                <div class="owner-pet-avatar">
+                  <span
+                    class="owner-pet-initial"
+                    th:text="${pet.name.substring(0,1)}"
+                    >H</span
+                  >
+                </div>
+                <div class="owner-pet-info">
+                  <p class="owner-pet-name" th:text="${pet.name}">Nama Hewan</p>
+                  <p class="owner-pet-species" th:text="${pet.species}">
+                    Spesies
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div
+              th:if="${pets == null or #lists.isEmpty(pets)}"
+              class="owner-empty-state"
+            >
+              <p>
+                Belum ada hewan peliharaan.
+                <a href="/pets/add" class="owner-empty-link">
+                  Tambahkan hewan peliharaan pertama Anda
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="owner-appointments-card">
+          <div class="owner-pets-header">
+            <h2 class="owner-section-title">Janji Temu Mendatang</h2>
+            <a href="/appointments" class="owner-view-all-link">Lihat semua</a>
+          </div>
+          <div class="owner-content-section">
+            <div
+              th:if="${upcomingAppointments != null and not #lists.isEmpty(upcomingAppointments)}"
+              class="owner-appointments-list"
+            >
+              <div
+                th:each="appointment : ${upcomingAppointments}"
+                class="owner-appointment-card"
+              >
+                <div class="owner-appointment-header">
+                  <div>
+                    <p
+                      class="owner-appointment-doctor"
+                      th:text="'dr. ' + ${appointment.veterinarian.name}"
+                    >
+                      Dr. Sarah Johnson
+                    </p>
+                    <p
+                      class="owner-appointment-pet"
+                      th:text="${appointment.pet.name} + ' - Konsultasi'"
+                    >
+                      Pet - Konsultasi
+                    </p>
+                  </div>
+                  <div class="owner-appointment-time-section">
+                    <p
+                      class="owner-appointment-time"
+                      th:text="${#temporals.format(appointment.appointmentTime, 'dd MMM, HH:mm', new java.util.Locale('id', 'ID'))}"
+                    >
+                      15 Jun, 14:30
+                    </p>
+                    <a
+                      th:href="@{/appointments/{id}(id=${appointment.id})}"
+                      class="owner-appointment-detail-link"
+                      >Lihat Detail</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div
+              th:if="${upcomingAppointments == null or #lists.isEmpty(upcomingAppointments)}"
+              class="owner-empty-state"
+            >
+              <p>
+                Tidak ada janji temu mendatang.
+                <a href="/appointments/book" class="owner-empty-link">
+                  Buat janji temu pertama Anda
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
-  <th:block id="page-scripts"></th:block>
+  <th:block id="page-scripts"> </th:block>
 </html>

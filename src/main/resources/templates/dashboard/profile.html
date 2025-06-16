@@ -9,682 +9,374 @@
                 pageSpecificScripts=~{:: #page-scripts}
               )}"
 >
-  <th:block id="page-styles">
-    <style>
-      .dashboard-container {
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-      }
-
-      .dashboard-main {
-        flex: 1;
-        display: flex;
-        max-width: 1200px;
-        margin: 0 auto;
-        width: 100%;
-      }
-
-      .dashboard-sidebar {
-        width: 250px;
-        background-color: #f8f9fa;
-        padding: 1rem;
-        border-right: 1px solid #e9ecef;
-        display: flex;
-        flex-direction: column;
-      }
-
-      .sidebar-nav {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-      }
-
-      .sidebar-nav h3 {
-        font-size: 1.1rem;
-        font-weight: bold;
-        margin-bottom: 1rem;
-        color: #495057;
-      }
-
-      .sidebar-nav ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        flex: 1;
-      }
-
-      .sidebar-nav li {
-        margin-bottom: 0.5rem;
-      }
-
-      .sidebar-nav a {
-        display: block;
-        padding: 0.5rem 0.75rem;
-        color: #495057;
-        text-decoration: none;
-        border-radius: 0.25rem;
-      }
-
-      .sidebar-nav a:hover {
-        background-color: #e9ecef;
-        color: #5271ff;
-      }
-
-      .sidebar-bottom {
-        margin-top: auto;
-        padding-top: 1rem;
-        border-top: 1px solid #e9ecef;
-      }
-
-      .logout-link {
-        display: block;
-        padding: 0.5rem 0.75rem;
-        color: #dc3545;
-        text-decoration: none;
-        border-radius: 0.25rem;
-        text-align: center;
-        border: 1px solid #dc3545;
-      }
-
-      .logout-link:hover {
-        background-color: #dc3545;
-        color: white;
-      }
-
-      .dashboard-content {
-        flex: 1;
-        padding: 2rem;
-      }
-
-      @media (max-width: 768px) {
-        .dashboard-main {
-          flex-direction: column;
-        }
-
-        .dashboard-sidebar {
-          width: 100%;
-          border-right: none;
-          border-bottom: 1px solid #e9ecef;
-        }
-
-        .dashboard-content {
-          padding: 1rem;
-        }
-      }
-      
-      .profile-section {
-        background: white;
-        border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        padding: 1.5rem;
-        margin-bottom: 1.5rem;
-      }
-      
-      .profile-header {
-        font-size: 1.5rem;
-        font-weight: 700;
-        color: #1f2937;
-        margin-bottom: 1.5rem;
-      }
-      
-      .user-info-box {
-        background-color: #f9fafb;
-        border-radius: 8px;
-        padding: 1rem;
-        margin-bottom: 2rem;
-      }
-      
-      .user-avatar {
-        width: 64px;
-        height: 64px;
-        background-color: #3b82f6;
-        border-radius: 50%;
-        color: white;
-        font-weight: 700;
-        font-size: 1.25rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-right: 1rem;
-      }
-      
-      .user-details h2 {
-        font-size: 1.25rem;
-        font-weight: 700;
-      }
-      
-      .user-details p.user-email {
-        color: #6b7280;
-      }
-      
-      .user-details p.user-role {
-        color: #3b82f6;
-        font-weight: 500;
-      }
-      
-      .tab-nav {
-        display: flex;
-        border-bottom: 1px solid #e5e7eb;
-        margin-bottom: 1rem;
-      }
-      
-      .tab-nav a {
-        padding: 0.75rem 1rem;
-        border-bottom: 2px solid transparent;
-        font-weight: 500;
-        color: #6b7280;
-        text-decoration: none;
-        margin-right: 0.5rem;
-      }
-      
-      .tab-nav a:hover {
-        color: #4b5563;
-      }
-      
-      .tab-nav a.active {
-        border-bottom-color: #3b82f6;
-        color: #3b82f6;
-      }
-      
-      .tab-content {
-        padding: 1rem 0;
-      }
-      
-      .tab-content.hidden {
-        display: none;
-      }
-      
-      .form-group {
-        margin-bottom: 1rem;
-      }
-      
-      .form-label {
-        display: block;
-        font-size: 0.875rem;
-        font-weight: 700;
-        color: #4b5563;
-        margin-bottom: 0.5rem;
-      }
-      
-      .form-input {
-        width: 100%;
-        padding: 0.5rem 0.75rem;
-        border: 1px solid #d1d5db;
-        border-radius: 0.375rem;
-        background-color: white;
-      }
-      
-      .form-input:focus {
-        outline: none;
-        border-color: #93c5fd;
-        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-      }
-      
-      .btn {
-        padding: 0.5rem 1rem;
-        border-radius: 0.375rem;
-        font-weight: 700;
-        cursor: pointer;
-      }
-      
-      .btn-primary {
-        background-color: #3b82f6;
-        color: white;
-        border: none;
-      }
-      
-      .btn-primary:hover {
-        background-color: #2563eb;
-      }
-      
-      .btn-danger {
-        background-color: #ef4444;
-        color: white;
-        border: none;
-      }
-      
-      .btn-danger:hover {
-        background-color: #dc2626;
-      }
-      
-      .btn-secondary {
-        background-color: #9ca3af;
-        color: white;
-        border: none;
-      }
-      
-      .btn-secondary:hover {
-        background-color: #6b7280;
-      }
-      
-      .alert {
-        padding: 0.75rem 1rem;
-        margin-bottom: 1rem;
-        border-radius: 0.375rem;
-        border: 1px solid;
-      }
-      
-      .alert-success {
-        background-color: #d1fae5;
-        border-color: #10b981;
-        color: #047857;
-      }
-      
-      .alert-danger {
-        background-color: #fee2e2;
-        border-color: #ef4444;
-        color: #b91c1c;
-      }
-      
-      .table {
-        width: 100%;
-        background-color: white;
-      }
-      
-      .table th {
-        text-align: left;
-        padding: 0.5rem 1rem;
-        background-color: #f9fafb;
-        border-bottom: 1px solid #e5e7eb;
-      }
-      
-      .table td {
-        padding: 0.5rem 1rem;
-        border-bottom: 1px solid #e5e7eb;
-      }
-      
-      .table tr:hover {
-        background-color: #f9fafb;
-      }
-      
-      .table a {
-        color: #3b82f6;
-        text-decoration: none;
-      }
-      
-      .table a:hover {
-        color: #2563eb;
-      }
-      
-      .modal-overlay {
-        position: fixed;
-        inset: 0;
-        background-color: rgba(0,0,0,0.5);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 50;
-      }
-      
-      .modal {
-        background-color: white;
-        border-radius: 0.5rem;
-        max-width: 28rem;
-        width: 100%;
-        padding: 1.5rem;
-      }
-      
-      .modal-header {
-        font-size: 1.125rem;
-        font-weight: 700;
-        color: #ef4444;
-        margin-bottom: 1rem;
-      }
-      
-      .modal-footer {
-        display: flex;
-        justify-content: flex-end;
-        gap: 0.75rem;
-        margin-top: 1.5rem;
-      }
-      
-      .hidden {
-        display: none !important;
-      }
-      
-      .user-info-container {
-        display: flex; 
-        align-items: center;
-      }
-      
-      .section-gap {
-        margin-bottom: 2rem;
-      }
-      
-      .section-title {
-        font-size: 1.125rem; 
-        font-weight: 600; 
-        margin-bottom: 1rem;
-      }
-      
-      .danger-section-title {
-        font-size: 1.125rem; 
-        font-weight: 600; 
-        color: #ef4444; 
-        margin-bottom: 1rem;
-      }
-      
-      .danger-box {
-        border: 1px solid #fca5a5; 
-        border-radius: 0.5rem; 
-        padding: 1rem; 
-        background-color: #fee2e2;
-      }
-      
-      .danger-heading {
-        color: #b91c1c; 
-        font-weight: 500; 
-        margin-bottom: 0.5rem;
-      }
-      
-      .danger-text {
-        color: #4b5563; 
-        margin-bottom: 1rem;
-      }
-      
-      .pet-header-container {
-        display: flex; 
-        justify-content: space-between; 
-        align-items: center; 
-        margin-bottom: 1rem;
-      }
-      
-      .no-margin {
-        margin-bottom: 0;
-      }
-      
-      .empty-pets {
-        text-align: center; 
-        padding: 2rem 0;
-      }
-      
-      .subtle-text {
-        color: #6b7280;
-      }
-      
-      .table-container {
-        overflow-x: auto;
-      }
-      
-      .text-right {
-        text-align: right;
-      }
-      
-      @media (max-width: 768px) {
-        .profile-section {
-          padding: 1rem;
-        }
-        
-        .user-info-container {
-          flex-direction: column;
-          align-items: center;
-          text-align: center;
-        }
-        
-        .user-avatar {
-          margin-right: 0;
-          margin-bottom: 1rem;
-        }
-        
-        .tab-nav {
-          overflow-x: auto;
-          white-space: nowrap;
-          padding-bottom: 0.25rem;
-        }
-        
-        .form-input {
-          font-size: 16px;
-        }
-        
-        .btn {
-          width: 100%;
-          margin-bottom: 0.5rem;
-        }
-        
-        .table {
-          min-width: 400px;
-        }
-        
-        .pet-header-container {
-          flex-direction: column;
-          align-items: flex-start;
-        }
-        
-        .pet-header-container .btn {
-          margin-top: 0.5rem;
-          width: 100%;
-        }
-      }
-      
-      @media (max-width: 480px) {
-        .profile-header {
-          font-size: 1.25rem;
-        }
-        
-        .section-title {
-          font-size: 1rem;
-        }
-        
-        .modal {
-          width: calc(100% - 2rem);
-          margin: 0 1rem;
-          padding: 1rem;
-        }
-        
-        .tab-nav {
-          flex-direction: column;
-          border-bottom: none;
-        }
-        
-        .tab-nav a {
-          margin-right: 0;
-          margin-bottom: 0.25rem;
-          border-left: 2px solid transparent;
-          border-bottom: none;
-        }
-        
-        .tab-nav a.active {
-          border-left-color: #3b82f6;
-          border-bottom-color: transparent;
-          background-color: #f0f7ff;
-        }
-        
-        .modal-footer {
-          flex-direction: column-reverse;
-        }
-        
-        .modal-footer .btn,
-        .modal-footer form {
-          width: 100%;
-        }
-        
-        .modal-footer form button {
-          width: 100%;
-        }
-      }
-    </style>
-  </th:block>
+  <th:block id="page-styles"> </th:block>
 
   <div id="content">
-    <div class="profile-section">
-      <h1 class="profile-header">Profil Pengguna</h1>
-      
-      <div th:if="${message}" class="alert alert-success" role="alert">
-          <span th:text="${message}"></span>
-      </div>
-      <div th:if="${error}" class="alert alert-danger" role="alert">
-          <span th:text="${error}"></span>
-      </div>
-      
-      <div class="user-info-box">
-          <div class="user-info-container">
-              <div class="user-avatar">
-                  <span th:text="${#strings.substring(user.name, 0, 1).toUpperCase()}">;</span>
-              </div>
-              <div class="user-details">
-                  <h2 th:text="${user.name}">Nama Pengguna</h2>
-                  <p class="user-email" th:text="${user.email}">email@example.com</p>
-                  <p th:if="${isVeterinarian}" class="user-role" th:text="${specialization}">Spesialisasi</p>
-                  <p th:if="${isOwner}" class="user-role">Pemilik Hewan</p>
-              </div>
-          </div>
-      </div>
-      
-      <div>
-          <div class="tab-nav">
-              <a href="#" class="active" onclick="showTab('account-settings');return false;">Pengaturan Akun</a>
-              <a href="#" th:if="${isVeterinarian}" onclick="showTab('specialization');return false;">Spesialisasi</a>
-              <a href="#" onclick="showTab('danger-zone');return false;">Zona Berbahaya</a>
-          </div>
-          
-          <div id="account-settings" class="tab-content">
-              <div class="section-gap">
-                  <h3 class="section-title">Ubah Password</h3>
-                  <div th:if="${passwordSuccess}" class="alert alert-success">
-                      <span th:text="${passwordSuccess}"></span>
-                  </div>
-                  <div th:if="${passwordError}" class="alert alert-danger">
-                      <span th:text="${passwordError}"></span>
-                  </div>
-                  
-                  <form th:action="@{/profile/password}" method="post">
-                      <div class="form-group">
-                          <label for="currentPassword" class="form-label">Password Saat Ini</label>
-                          <input type="password" name="currentPassword" id="currentPassword" class="form-input" required>
-                      </div>
-                      <div class="form-group">
-                          <label for="newPassword" class="form-label">Password Baru</label>
-                          <input type="password" name="newPassword" id="newPassword" class="form-input" required minlength="6">
-                      </div>
-                      <div class="form-group">
-                          <label for="confirmPassword" class="form-label">Konfirmasi Password Baru</label>
-                          <input type="password" name="confirmPassword" id="confirmPassword" class="form-input" required minlength="6">
-                      </div>
-                      <button type="submit" class="btn btn-primary">Ubah Password</button>
-                  </form>
-              </div>
-              
-              <div>
-                  <h3 class="section-title">Ubah Email</h3>
-                  <div th:if="${emailSuccess}" class="alert alert-success">
-                      <span th:text="${emailSuccess}"></span>
-                  </div>
-                  <div th:if="${emailError}" class="alert alert-danger">
-                      <span th:text="${emailError}"></span>
-                  </div>
-                  
-                  <form th:action="@{/profile/email}" method="post">
-                      <div class="form-group">
-                          <label for="newEmail" class="form-label">Email Baru</label>
-                          <input type="email" name="newEmail" id="newEmail" class="form-input" required>
-                      </div>
-                      <button type="submit" class="btn btn-primary">Ubah Email</button>
-                  </form>
-              </div>
-          </div>
-          
-          <div id="specialization" class="tab-content hidden" th:if="${isVeterinarian}">
-              <h3 class="section-title">Ubah Spesialisasi</h3>
-              <div th:if="${specializationSuccess}" class="alert alert-success">
-                  <span th:text="${specializationSuccess}"></span>
-              </div>
-              <div th:if="${specializationError}" class="alert alert-danger">
-                  <span th:text="${specializationError}"></span>
-              </div>
-              
-              <form th:action="@{/profile/specialization}" method="post">
-                  <div class="form-group">
-                      <label for="specialization" class="form-label">Spesialisasi</label>
-                      <input type="text" name="specialization" id="specialization" th:value="${specialization}" class="form-input" required>
-                  </div>
-                  <button type="submit" class="btn btn-primary">Perbarui Spesialisasi</button>
-              </form>
-          </div>
-          
-          <div id="danger-zone" class="tab-content hidden">
-              <h3 class="danger-section-title">Zona Berbahaya</h3>
-              <div class="danger-box">
-                  <h4 class="danger-heading">Hapus Akun</h4>
-                  <p class="danger-text">Tindakan ini tidak dapat dibatalkan. Semua data Anda akan dihapus secara permanen.</p>
-                  <button id="deleteAccountBtn" class="btn btn-danger">Hapus Akun Saya</button>
-              </div>
-          </div>
-      </div>
-    </div>
-    
-    <div th:if="${isOwner}" class="profile-section">
-        <div class="pet-header-container">
-            <h2 class="profile-header no-margin">Hewan Peliharaan Saya</h2>
-            <a th:href="@{/pets/add}" class="btn btn-primary">Tambah Hewan</a>
-        </div>
-        
-        <div th:if="${#lists.isEmpty(pets)}" class="empty-pets">
-            <p class="subtle-text">Anda belum memiliki hewan peliharaan</p>
-        </div>
-        
-        <div th:unless="${#lists.isEmpty(pets)}" class="table-container">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Nama</th>
-                        <th>Jenis</th>
-                        <th class="text-right">Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="pet : ${pets}">
-                        <td th:text="${pet.name}">Nama Hewan</td>
-                        <td th:text="${pet.species}">Jenis Hewan</td>
-                        <td class="text-right">
-                            <a th:href="@{/pets/{id}/edit(id=${pet.id})}">Edit</a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-    
-    <div id="confirmationDialog" class="modal-overlay hidden">
-        <div class="modal">
-            <h3 class="modal-header">Konfirmasi Penghapusan Akun</h3>
-            <p>Apakah Anda yakin ingin menghapus akun Anda? Tindakan ini tidak dapat dibatalkan dan semua data Anda akan dihapus.</p>
-            <div class="modal-footer">
-                <button id="cancelDelete" class="btn btn-secondary">Batal</button>
-                <form id="deleteForm" th:action="@{/profile/delete}" method="post">
-                    <button type="submit" class="btn btn-danger">Ya, Hapus Akun</button>
-                </form>
+    <div class="profile-dashboard">
+      <div class="profile-dashboard-container">
+        <div class="profile-welcome-card">
+          <div class="profile-welcome-header">
+            <div>
+              <h1 class="profile-welcome-title">Profil Pengguna</h1>
+              <p class="profile-welcome-subtitle">
+                Kelola informasi profil dan pengaturan akun Anda
+              </p>
             </div>
+          </div>
         </div>
+
+        <div th:if="${message}" class="profile-alert-success" role="alert">
+          <svg
+            class="profile-alert-icon"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M5 13l4 4L19 7"
+            ></path>
+          </svg>
+          <span th:text="${message}"></span>
+        </div>
+        <div th:if="${error}" class="profile-alert-danger" role="alert">
+          <svg
+            class="profile-alert-icon"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.924-.833-2.464 0L4.35 16.5c-.77.833.192 2.5 1.732 2.5z"
+            ></path>
+          </svg>
+          <span th:text="${error}"></span>
+        </div>
+
+        <div class="profile-user-info-card">
+          <div class="profile-user-info-container">
+            <div class="profile-user-avatar">
+              <span
+                th:text="${#strings.substring(user.name, 0, 1).toUpperCase()}"
+                >;</span
+              >
+            </div>
+            <div class="profile-user-details">
+              <h2 th:text="${user.name}">Nama Pengguna</h2>
+              <p class="profile-user-email" th:text="${user.email}">
+                email@example.com
+              </p>
+              <p th:if="${isVeterinarian}" class="profile-user-role">
+                Veterinarian
+              </p>
+              <p th:if="${isOwner}" class="profile-user-role">Pemilik Hewan</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="profile-content-container">
+          <div class="profile-tab-nav">
+            <a
+              href="#"
+              class="active"
+              onclick="showTab('account-settings');return false;"
+              >Pengaturan Akun</a
+            >
+            <a href="#" onclick="showTab('danger-zone');return false;"
+              >Zona Berbahaya</a
+            >
+          </div>
+
+          <div id="account-settings" class="profile-tab-content">
+            <div class="profile-section">
+              <div class="profile-section-header">
+                <h3 class="profile-section-title">Ubah Password</h3>
+              </div>
+              <div class="profile-section-content">
+                <div th:if="${passwordSuccess}" class="profile-alert-success">
+                  <svg
+                    class="profile-alert-icon"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    ></path>
+                  </svg>
+                  <span th:text="${passwordSuccess}"></span>
+                </div>
+                <div th:if="${passwordError}" class="profile-alert-danger">
+                  <svg
+                    class="profile-alert-icon"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.924-.833-2.464 0L4.35 16.5c-.77.833.192 2.5 1.732 2.5z"
+                    ></path>
+                  </svg>
+                  <span th:text="${passwordError}"></span>
+                </div>
+
+                <form
+                  th:action="@{/profile/password}"
+                  method="post"
+                  class="profile-form"
+                >
+                  <div class="profile-form-section">
+                    <div class="profile-form-group">
+                      <label
+                        for="currentPassword"
+                        class="profile-form-label required"
+                        >Password Saat Ini</label
+                      >
+                      <input
+                        type="password"
+                        name="currentPassword"
+                        id="currentPassword"
+                        class="profile-form-input"
+                        placeholder="Masukkan password saat ini"
+                        required
+                      />
+                    </div>
+                    <div class="profile-form-group">
+                      <label
+                        for="newPassword"
+                        class="profile-form-label required"
+                        >Password Baru</label
+                      >
+                      <input
+                        type="password"
+                        name="newPassword"
+                        id="newPassword"
+                        class="profile-form-input"
+                        placeholder="Masukkan password baru (minimal 6 karakter)"
+                        required
+                        minlength="6"
+                      />
+                    </div>
+                    <div class="profile-form-group">
+                      <label
+                        for="confirmPassword"
+                        class="profile-form-label required"
+                        >Konfirmasi Password Baru</label
+                      >
+                      <input
+                        type="password"
+                        name="confirmPassword"
+                        id="confirmPassword"
+                        class="profile-form-input"
+                        placeholder="Konfirmasi password baru"
+                        required
+                        minlength="6"
+                      />
+                    </div>
+                  </div>
+                  <div class="profile-form-actions">
+                    <button type="submit" class="profile-btn-primary">
+                      <svg
+                        class="profile-btn-icon"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M5 13l4 4L19 7"
+                        ></path>
+                      </svg>
+                      Ubah Password
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            <div class="profile-section">
+              <div class="profile-section-header">
+                <h3 class="profile-section-title">Ubah Email</h3>
+              </div>
+              <div class="profile-section-content">
+                <div th:if="${emailSuccess}" class="profile-alert-success">
+                  <svg
+                    class="profile-alert-icon"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    ></path>
+                  </svg>
+                  <span th:text="${emailSuccess}"></span>
+                </div>
+                <div th:if="${emailError}" class="profile-alert-danger">
+                  <svg
+                    class="profile-alert-icon"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.924-.833-2.464 0L4.35 16.5c-.77.833.192 2.5 1.732 2.5z"
+                    ></path>
+                  </svg>
+                  <span th:text="${emailError}"></span>
+                </div>
+
+                <form
+                  th:action="@{/profile/email}"
+                  method="post"
+                  class="profile-form"
+                >
+                  <div class="profile-form-section">
+                    <div class="profile-form-group">
+                      <label for="password" class="profile-form-label required"
+                        >Password Saat Ini</label
+                      >
+                      <input
+                        type="password"
+                        name="password"
+                        id="password"
+                        class="profile-form-input"
+                        placeholder="Masukkan password untuk verifikasi"
+                        required
+                      />
+                    </div>
+                    <div class="profile-form-group">
+                      <label for="newEmail" class="profile-form-label required"
+                        >Email Baru</label
+                      >
+                      <input
+                        type="email"
+                        name="newEmail"
+                        id="newEmail"
+                        class="profile-form-input"
+                        placeholder="Masukkan alamat email baru"
+                        required
+                      />
+                    </div>
+                  </div>
+                  <div class="profile-form-actions">
+                    <button type="submit" class="profile-btn-primary">
+                      <svg
+                        class="profile-btn-icon"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M3 8l7.89 7.89a2 2 0 002.83 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                        ></path>
+                      </svg>
+                      Ubah Email
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <div id="danger-zone" class="profile-tab-content hidden">
+            <div class="profile-section">
+              <div class="profile-section-header">
+                <h3 class="profile-section-title danger">Hapus Akun</h3>
+              </div>
+              <div class="profile-section-content">
+                <div class="profile-danger-box">
+                  <p class="profile-danger-text">
+                    Setelah akun Anda dihapus, semua sumber daya dan data Anda
+                    akan dihapus secara permanen. Sebelum menghapus akun Anda,
+                    harap unduh data atau informasi yang ingin Anda pertahankan.
+                  </p>
+                  <div class="profile-form-actions">
+                    <button
+                      id="deleteAccountBtn"
+                      class="profile-btn-primary danger"
+                    >
+                      <svg
+                        class="profile-btn-icon"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                        ></path>
+                      </svg>
+                      Hapus Akun
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="confirmationDialog" class="profile-modal-overlay hidden">
+      <div class="profile-modal">
+        <h3 class="profile-modal-header">Konfirmasi Penghapusan Akun</h3>
+        <div class="profile-modal-content">
+          <p>
+            Apakah Anda yakin ingin menghapus akun Anda? Tindakan ini tidak
+            dapat dibatalkan dan semua data Anda akan dihapus.
+          </p>
+        </div>
+        <div class="profile-modal-footer">
+          <button id="cancelDelete" class="profile-btn-secondary">Batal</button>
+          <form id="deleteForm" th:action="@{/profile/delete}" method="post">
+            <button type="submit" class="profile-btn-primary danger">
+              <svg
+                class="profile-btn-icon"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                ></path>
+              </svg>
+              Ya, Hapus Akun
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
   </div>
 
   <th:block id="page-scripts">
-    <script>
-      function showTab(tabId) {
-          document.querySelectorAll('.tab-content').forEach(tab => {
-              tab.classList.add('hidden');
-          });
-          document.getElementById(tabId).classList.remove('hidden');
-          document.querySelectorAll('.tab-nav a').forEach(tab => {
-              tab.classList.remove('active');
-          });
-          event.currentTarget.classList.add('active');
-      }
-      
-      document.addEventListener('DOMContentLoaded', function() {
-          const deleteBtn = document.getElementById('deleteAccountBtn');
-          const confirmDialog = document.getElementById('confirmationDialog');
-          const cancelBtn = document.getElementById('cancelDelete');
-          
-          deleteBtn.addEventListener('click', function() {
-              confirmDialog.classList.remove('hidden');
-          });
-          
-          cancelBtn.addEventListener('click', function() {
-              confirmDialog.classList.add('hidden');
-          });
-      });
-    </script>
+    <script th:src="@{/js/profile.js}"></script>
   </th:block>
 </html>

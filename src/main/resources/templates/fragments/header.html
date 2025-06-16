@@ -1,8 +1,141 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-  <header th:fragment="header" class="p-4">
-    <nav>
-      <a href="/">Beranda</a>
+  <header th:fragment="header" class="public-header">
+    <nav class="header-nav">
+      <div class="header-container">
+        <div class="header-content">
+          <div class="header-logo">
+            <a th:href="@{/}" class="header-logo-link">
+              <span class="header-logo-text">VetCare</span>
+              <div class="header-logo-icon">
+                <img
+                  th:src="@{/images/paw.png}"
+                  alt="VetCare Paw"
+                  class="header-logo-image default"
+                />
+                <img
+                  th:src="@{/images/paw-dark.png}"
+                  alt="VetCare Paw Hover"
+                  class="header-logo-image hover"
+                />
+              </div>
+            </a>
+          </div>
+
+          <div
+            class="header-nav-desktop"
+            th:with="currentUri=${requestUri},
+                        homeUrl=@{/},
+                        loginUrl=@{/auth/login},
+                        registerUrl=@{/auth/register}"
+          >
+            <a
+              th:href="@{/}"
+              class="nav-item"
+              th:classappend="${currentUri == homeUrl ? 'active' : ''}"
+              th:aria-current="${currentUri == homeUrl ? 'page' : false}"
+              >Beranda</a
+            >
+            <a
+              th:href="@{/auth/login}"
+              class="nav-item"
+              th:classappend="${currentUri == loginUrl ? 'active' : ''}"
+              th:aria-current="${currentUri == loginUrl ? 'page' : false}"
+              >Login</a
+            >
+            <div class="register-btn-container">
+              <a
+                th:href="@{/auth/register}"
+                class="register-btn"
+                th:classappend="${currentUri == registerUrl ? 'active' : ''}"
+                th:aria-current="${currentUri == registerUrl ? 'page' : false}"
+              >
+                Registrasi
+              </a>
+            </div>
+          </div>
+
+          <div class="header-mobile-controls">
+            <button
+              id="mobile-menu-button"
+              type="button"
+              class="mobile-menu-button"
+              aria-controls="mobile-menu"
+              aria-expanded="false"
+            >
+              <span class="sr-only">Buka menu utama</span>
+              <svg
+                class="mobile-menu-icon hamburger"
+                id="icon-hamburger"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
+              <svg
+                class="mobile-menu-icon close hidden"
+                id="icon-close"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div id="mobile-menu-backdrop" class="mobile-menu-backdrop"></div>
+
+      <div
+        id="mobile-menu"
+        class="mobile-menu"
+        th:with="currentUri=${requestUri},
+                    homeUrl=@{/},
+                    authLoginUrl=@{/auth/login},
+                    authRegisterUrl=@{/auth/register}"
+      >
+        <div class="mobile-menu-content">
+          <a
+            th:href="@{/}"
+            class="nav-item mobile border-y"
+            th:classappend="${currentUri == homeUrl ? 'active' : ''}"
+            th:aria-current="${currentUri == homeUrl ? 'page' : false}"
+            >Beranda</a
+          >
+          <a
+            th:href="@{/auth/login}"
+            class="nav-item mobile border-bottom"
+            th:classappend="${currentUri == authLoginUrl ? 'active' : ''}"
+            th:aria-current="${currentUri == authLoginUrl ? 'page' : false}"
+            >Login</a
+          >
+          <a
+            th:href="@{/auth/register}"
+            class="nav-item mobile"
+            th:classappend="${currentUri == authRegisterUrl ? 'register-active' : ''}"
+            th:aria-current="${currentUri == authRegisterUrl ? 'page' : false}"
+          >
+            Registrasi
+          </a>
+        </div>
+      </div>
     </nav>
   </header>
 </html>

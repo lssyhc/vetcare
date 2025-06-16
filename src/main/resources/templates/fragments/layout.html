@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html
+  lang="id"
   xmlns:th="http://www.thymeleaf.org"
   th:fragment="layout (
     pageTitle,
@@ -25,16 +26,26 @@
     <link rel="stylesheet" th:href="@{/css/style.css}" />
     <th:block th:replace="${pageSpecificStyles} ?: ~{}"></th:block>
   </head>
-  <body>
-    <div
-      th:replace="${headerFragment} ?: ~{fragments/public-header :: publicHeader}"
-    ></div>
+  <body class="layout-body">
+    <header class="layout-header">
+      <div
+        th:replace="${headerFragment} ?: ~{fragments/header :: header}"
+      ></div>
+    </header>
 
-    <main class="flex-grow" th:replace="${pageContent}"></main>
+    <main class="layout-main" th:replace="${pageContent}">
+      <div class="layout-default-content">
+        <p class="layout-default-message">
+          Mohon sediakan konten untuk halaman ini.
+        </p>
+      </div>
+    </main>
 
-    <div
-      th:replace="${footerFragment} ?: ~{fragments/public-footer :: publicFooter}"
-    ></div>
+    <footer class="layout-footer">
+      <div
+        th:replace="${footerFragment} ?: ~{fragments/footer :: footer}"
+      ></div>
+    </footer>
 
     <script th:src="@{/js/script.js}" type="module"></script>
     <th:block th:replace="${pageSpecificScripts} ?: ~{}"></th:block>

@@ -1,0 +1,571 @@
+.appointment-dashboard {
+  @apply min-h-screen bg-gray-50;
+}
+
+.appointment-container {
+  @apply max-w-6xl mx-auto px-6 py-8;
+}
+
+.appointment-header-card {
+  @apply bg-white rounded-xl p-6 border border-gray-200 mb-6;
+}
+
+.appointment-header {
+  @apply flex flex-col sm:flex-row sm:items-center sm:justify-between;
+}
+
+.appointment-title {
+  @apply text-2xl font-semibold text-gray-900 mb-2 sm:mb-0;
+}
+
+.appointment-add-button {
+  @apply inline-flex items-center px-6 py-3 bg-primary text-white rounded-xl font-medium hover:bg-primary-dark transition-colors duration-200 mt-4 sm:mt-0;
+}
+
+.appointment-add-button:hover {
+  @apply text-white no-underline;
+}
+
+.appointment-add-button svg {
+  @apply w-4 h-4 mr-2;
+}
+
+.appointment-alert {
+  @apply rounded-xl p-4 mb-6 border;
+}
+
+.appointment-alert-success {
+  @apply bg-green-50 border-green-200 text-green-800;
+}
+
+.appointment-alert-error {
+  @apply bg-red-50 border-red-200 text-red-800;
+}
+
+.appointment-content-card {
+  @apply bg-white rounded-xl border border-gray-200 shadow-sm;
+}
+
+.appointment-section-header {
+  @apply p-6 border-b border-gray-200 flex items-center justify-between;
+}
+
+.appointment-section-title {
+  @apply text-lg font-semibold text-gray-900;
+}
+
+.appointment-content-section {
+  @apply p-6;
+}
+
+.appointment-empty-state {
+  @apply text-center py-12;
+}
+
+.appointment-empty-message {
+  @apply text-gray-500 text-base mb-4;
+}
+
+.appointment-empty-subtitle {
+  @apply text-gray-400 text-sm;
+}
+
+.appointment-table-wrapper {
+  @apply w-full overflow-x-auto rounded-xl border border-gray-200;
+}
+
+.appointment-table {
+  @apply w-full border-collapse min-w-full bg-white;
+}
+
+.appointment-table thead {
+  @apply bg-gradient-to-r from-gray-50 to-gray-100;
+}
+
+.appointment-table th {
+  @apply text-left px-6 py-4 font-semibold text-gray-900 text-sm whitespace-nowrap border-b border-gray-200;
+}
+
+.appointment-table th:first-child {
+  @apply pl-6;
+}
+
+.appointment-table th:last-child {
+  @apply pr-6 text-center;
+}
+
+.appointment-table td {
+  @apply px-6 py-4 align-middle text-sm text-gray-900 border-b border-gray-200;
+}
+
+.appointment-table td:first-child {
+  @apply pl-6 font-medium text-gray-900;
+}
+
+.appointment-table td:last-child {
+  @apply pr-6 text-center;
+}
+
+.appointment-table tbody tr {
+  @apply transition-colors duration-150 ease-in-out;
+}
+
+.appointment-table tbody tr:hover {
+  @apply bg-gray-50;
+}
+
+.appointment-table tbody tr:last-child td {
+  @apply border-b-0;
+}
+
+.appointment-status-badge {
+  @apply inline-block px-3 py-1 rounded-full text-xs font-semibold uppercase;
+}
+
+.appointment-status-scheduled {
+  @apply bg-blue-100 text-blue-800;
+}
+
+.appointment-status-completed {
+  @apply bg-green-100 text-green-800;
+}
+
+.appointment-status-cancelled {
+  @apply bg-red-100 text-red-800;
+}
+
+.appointment-action-link {
+  @apply inline-flex items-center justify-center px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-1 transition-all duration-200 no-underline shadow-sm;
+}
+
+.appointment-action-link:hover {
+  @apply text-white no-underline;
+}
+
+.appointment-action-link svg {
+  @apply w-4 h-4 mr-1;
+}
+
+.appointment-col-datetime {
+  @apply w-1/5;
+}
+
+.appointment-col-pet {
+  @apply w-1/5;
+}
+
+.appointment-col-vet {
+  @apply w-1/5;
+}
+
+.appointment-col-duration {
+  @apply w-1/6;
+}
+
+.appointment-col-status {
+  @apply w-1/6;
+}
+
+.appointment-col-actions {
+  @apply w-1/6 text-center;
+}
+
+.appointment-stats {
+  @apply flex gap-4 mb-6 flex-wrap;
+}
+
+.appointment-stat-item {
+  @apply px-4 py-2 bg-gray-50 rounded-lg text-sm flex items-center;
+}
+
+.appointment-stat-value {
+  @apply font-semibold ml-1 text-primary;
+}
+
+.book-appointment-dashboard {
+  @apply min-h-screen bg-gray-50;
+}
+
+.book-appointment-container {
+  @apply max-w-6xl mx-auto px-6 py-8;
+}
+
+.book-appointment-form-card {
+  @apply bg-white rounded-xl border border-gray-200 shadow-sm;
+}
+
+.book-appointment-header {
+  @apply p-6 border-b border-gray-200;
+}
+
+.book-appointment-title {
+  @apply text-2xl font-semibold text-gray-900 mb-2;
+}
+
+.book-appointment-alert {
+  @apply rounded-xl p-4 mb-6 border;
+}
+
+.book-appointment-alert-error {
+  @apply bg-red-50 border-red-200 text-red-800;
+}
+
+.book-appointment-form {
+  @apply space-y-6;
+}
+
+.book-appointment-form-section {
+  @apply space-y-6 p-6;
+}
+
+.book-appointment-form-group {
+  @apply space-y-2;
+}
+
+.book-appointment-form-label {
+  @apply block text-sm font-medium text-gray-700;
+}
+
+.book-appointment-form-label.required::after {
+  content: "*";
+  @apply text-red-500 ml-1;
+}
+
+.book-appointment-form-select,
+.book-appointment-form-input {
+  @apply w-full px-4 py-3 border border-gray-300 rounded-lg text-sm text-gray-900 bg-white focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200;
+}
+
+.book-appointment-form-select:focus,
+.book-appointment-form-input:focus {
+  @apply outline-none;
+}
+
+.book-appointment-form-select:disabled,
+.book-appointment-form-input:disabled {
+  @apply bg-gray-100 text-gray-500 cursor-not-allowed;
+}
+
+.book-appointment-form-help {
+  @apply text-xs text-gray-500 mt-1;
+}
+
+.book-appointment-form-input[type="date"] {
+  @apply w-full px-4 py-3 border border-gray-300 rounded-lg text-sm text-gray-900 bg-white focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200;
+  position: relative;
+}
+
+.book-appointment-form-input[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.book-appointment-form-input[type="date"]::-webkit-inner-spin-button,
+.book-appointment-form-input[type="date"]::-webkit-clear-button {
+  display: none;
+  -webkit-appearance: none;
+}
+
+.book-appointment-form-input[type="date"]::-moz-focus-inner {
+  border: 0;
+}
+
+.book-appointment-form-input[type="date"] {
+  -moz-appearance: textfield;
+}
+
+.book-appointment-date-container {
+  @apply relative;
+}
+
+.book-appointment-calendar-icon {
+  @apply absolute right-3 top-1/2 transform -translate-y-1/2 text-primary pointer-events-none w-5 h-5;
+  z-index: 1;
+}
+
+.book-appointment-date-container:hover .book-appointment-form-input {
+  @apply border-primary;
+}
+
+.book-appointment-date-container:hover .book-appointment-calendar-icon {
+  @apply text-primary-dark;
+}
+
+.book-appointment-form-actions {
+  @apply flex flex-col sm:flex-row gap-3 justify-start pt-6 border-t border-gray-200;
+}
+
+.book-appointment-btn-cancel {
+  @apply inline-flex items-center justify-center px-2 py-2 h-8 bg-white text-gray-700 border border-gray-300 rounded-lg text-sm font-medium hover:bg-gray-50 hover:text-gray-900 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-all duration-200 no-underline;
+}
+
+.book-appointment-btn-cancel:hover {
+  @apply no-underline text-gray-900;
+}
+
+.book-appointment-btn-submit {
+  @apply inline-flex items-center justify-center px-2 py-2 h-8 bg-primary text-white rounded-lg text-sm font-medium hover:bg-primary-dark focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all duration-200 border-0 cursor-pointer;
+}
+
+.book-appointment-btn-submit:focus {
+  @apply outline-none;
+}
+
+.book-appointment-btn-submit:disabled {
+  @apply bg-gray-400 cursor-not-allowed;
+}
+
+.book-appointment-btn-icon {
+  @apply w-4 h-4 mr-2;
+}
+
+.book-appointment-form-select:focus + .book-appointment-calendar-icon {
+  @apply text-primary-dark;
+}
+
+@media (max-width: 640px) {
+  .book-appointment-form-card {
+    @apply p-4;
+  }
+
+  .book-appointment-form-section {
+    @apply p-4;
+  }
+
+  .book-appointment-title {
+    @apply text-xl;
+  }
+
+  .book-appointment-form-actions {
+    @apply flex-col;
+  }
+
+  .book-appointment-btn-cancel,
+  .book-appointment-btn-submit {
+    @apply w-full justify-center;
+  }
+}
+
+@media (max-width: 768px) {
+  .appointment-header {
+    @apply flex-col items-start space-y-4;
+  }
+
+  .appointment-table th,
+  .appointment-table td {
+    @apply px-3 py-3 text-xs;
+  }
+
+  .appointment-table th:first-child,
+  .appointment-table td:first-child {
+    @apply pl-4;
+  }
+
+  .appointment-table th:last-child,
+  .appointment-table td:last-child {
+    @apply pr-4;
+  }
+
+  .appointment-action-link {
+    @apply px-3 py-1 text-xs;
+  }
+
+  .appointment-status-badge {
+    @apply text-xs px-2 py-1;
+  }
+}
+
+@media (max-width: 640px) {
+  .appointment-table {
+    @apply text-xs;
+  }
+
+  .appointment-table th,
+  .appointment-table td {
+    @apply px-2 py-2;
+  }
+
+  .appointment-action-link {
+    @apply px-2 py-1;
+  }
+}
+
+.appointment-datetime-text {
+  @apply font-medium text-gray-900;
+}
+
+.appointment-pet-info {
+  @apply text-gray-900;
+}
+
+.appointment-vet-info {
+  @apply text-gray-700;
+}
+
+.appointment-duration-text {
+  @apply text-gray-600 font-medium;
+}
+
+.appointment-skeleton {
+  @apply bg-gray-200 rounded;
+}
+
+.appointment-details-dashboard {
+  @apply min-h-screen bg-gray-50;
+}
+
+.appointment-details-container {
+  @apply max-w-6xl mx-auto px-6 py-8;
+}
+
+.appointment-details-back-link {
+  @apply inline-flex items-center text-primary hover:text-primary-dark font-medium text-sm mb-6 transition-colors duration-200 no-underline;
+}
+
+.appointment-details-back-link:hover {
+  @apply no-underline text-primary-dark;
+}
+
+.appointment-details-card {
+  @apply bg-white rounded-xl border border-gray-200 shadow-sm mb-6;
+}
+
+.appointment-details-header {
+  @apply p-6 border-b border-gray-200 flex flex-col sm:flex-row sm:items-center sm:justify-between;
+}
+
+.appointment-details-title {
+  @apply text-xl font-semibold text-gray-900 mb-2 sm:mb-0;
+}
+
+.appointment-details-status-badge {
+  @apply inline-block px-3 py-1 rounded-full text-xs font-semibold uppercase;
+}
+
+.appointment-details-status-scheduled {
+  @apply bg-blue-100 text-blue-800;
+}
+
+.appointment-details-status-completed {
+  @apply bg-green-100 text-green-800;
+}
+
+.appointment-details-status-cancelled {
+  @apply bg-red-100 text-red-800;
+}
+
+.appointment-details-content {
+  @apply p-6;
+}
+
+.appointment-details-grid {
+  @apply grid grid-cols-1 md:grid-cols-2 gap-6;
+}
+
+.appointment-details-item {
+  @apply space-y-1;
+}
+
+.appointment-details-label {
+  @apply text-sm font-medium text-gray-600;
+}
+
+.appointment-details-value {
+  @apply text-gray-900 font-medium;
+}
+
+.appointment-details-notes-section {
+  @apply mt-6 pt-6 border-t border-gray-200;
+}
+
+.appointment-details-notes-title {
+  @apply text-sm font-medium text-gray-600 mb-3;
+}
+
+.appointment-details-notes-content {
+  @apply p-4 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed;
+}
+
+.appointment-details-empty-notes {
+  @apply text-gray-500 italic;
+}
+
+.appointment-details-form-section {
+  @apply p-6;
+}
+
+.appointment-details-form-title {
+  @apply text-lg font-semibold text-gray-900 mb-4;
+}
+
+.appointment-details-form-group {
+  @apply space-y-2 mb-4;
+}
+
+.appointment-details-form-label {
+  @apply block text-sm font-medium text-gray-700;
+}
+
+.appointment-details-form-select,
+.appointment-details-form-textarea {
+  @apply w-full px-4 py-3 border border-gray-300 rounded-lg text-sm text-gray-900 bg-white focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200;
+}
+
+.appointment-details-form-select:focus,
+.appointment-details-form-textarea:focus {
+  @apply outline-none;
+}
+
+.appointment-details-form-textarea {
+  @apply min-h-[100px] resize-y;
+}
+
+.appointment-details-form-actions {
+  @apply flex justify-end mt-4;
+}
+
+.appointment-details-btn-primary {
+  @apply inline-flex items-center justify-center px-2 py-2 h-8 bg-primary text-white rounded-lg text-sm font-medium hover:bg-primary-dark focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all duration-200 border-0 cursor-pointer;
+}
+
+.appointment-details-btn-primary:focus {
+  @apply outline-none;
+}
+
+.appointment-details-btn-primary:disabled {
+  @apply bg-gray-400 cursor-not-allowed;
+}
+
+.appointment-details-alert {
+  @apply rounded-xl p-4 mb-6 border;
+}
+
+.appointment-details-alert-success {
+  @apply bg-green-50 border-green-200 text-green-800;
+}
+
+.appointment-details-alert-error {
+  @apply bg-red-50 border-red-200 text-red-800;
+}
+
+@media (max-width: 768px) {
+  .appointment-details-header {
+    @apply flex-col items-start space-y-3;
+  }
+
+  .appointment-details-grid {
+    @apply grid-cols-1;
+  }
+
+  .appointment-details-content {
+    @apply p-4;
+  }
+
+  .appointment-details-form-section {
+    @apply p-4;
+  }
+}

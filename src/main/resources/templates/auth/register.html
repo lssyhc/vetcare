@@ -2,7 +2,7 @@
 <html
   xmlns:th="http://www.thymeleaf.org"
   th:replace="~{fragments/layout :: layout(
-                pageTitle='VetCare - Register',
+                pageTitle='Register - VetCare',
                 headerFragment=~{fragments/header :: header},
                 footerFragment=~{fragments/footer :: footer},
                 pageContent=~{:: #page-content},
@@ -10,199 +10,128 @@
                 pageSpecificScripts=~{:: #page-scripts}
               )}"
 >
-  <th:block id="page-styles">
-    <style>
-      .auth-container {
-        max-width: 500px;
-        margin: 2rem auto;
-        padding: 2rem;
-        background: white;
-        border-radius: 8px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      }
-      .form-group {
-        margin-bottom: 1rem;
-      }
-      .form-label {
-        display: block;
-        margin-bottom: 0.5rem;
-        font-weight: 600;
-        color: #374151;
-      }
-      .form-input,
-      .form-select {
-        width: 100%;
-        padding: 0.75rem;
-        border: 1px solid #d1d5db;
-        border-radius: 4px;
-        font-size: 1rem;
-      }
-      .form-input:focus,
-      .form-select:focus {
-        outline: none;
-        border-color: #3b82f6;
-        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-      }
-      .btn-primary {
-        width: 100%;
-        background-color: #3b82f6;
-        color: white;
-        padding: 0.75rem;
-        border: none;
-        border-radius: 4px;
-        font-size: 1rem;
-        font-weight: 600;
-        cursor: pointer;
-      }
-      .btn-primary:hover {
-        background-color: #2563eb;
-      }
-      .alert {
-        padding: 0.75rem;
-        margin-bottom: 1rem;
-        border-radius: 4px;
-      }
-      .alert-error {
-        background-color: #fef2f2;
-        color: #dc2626;
-        border: 1px solid #fecaca;
-      }
-      .text-center {
-        text-align: center;
-      }
-      .mt-4 {
-        margin-top: 1rem;
-      }
-      .text-blue-600 {
-        color: #2563eb;
-      }
-      .text-blue-600:hover {
-        color: #1d4ed8;
-      }
-      .hidden {
-        display: none;
-      }
-      .required {
-        color: #dc2626;
-      }
-    </style>
-  </th:block>
+  <th:block id="page-styles"> </th:block>
 
-  <div id="page-content" class="container">
-    <div class="auth-container">
-      <h2 class="text-center mb-4">Register for VetCare</h2>
-
-      <div th:if="${error}" class="alert alert-error">
-        <span th:text="${error}">Error message</span>
-      </div>
-
-      <form th:action="@{/auth/register}" method="post" id="registerForm">
-        <div class="form-group">
-          <label for="userType" class="form-label"
-            >Register as: <span class="required">*</span></label
-          >
-          <select
-            id="userType"
-            name="userType"
-            class="form-select"
-            required
-            onchange="toggleVetFields()"
-          >
-            <option value="">Select user type</option>
-            <option value="owner">Pet Owner</option>
-            <option value="veterinarian">Veterinarian</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="name" class="form-label"
-            >Full Name: <span class="required">*</span></label
-          >
-          <input
-            type="text"
-            id="name"
-            name="name"
-            class="form-input"
-            required
-            placeholder="Enter your full name"
-          />
-        </div>
-
-        <div class="form-group">
-          <label for="email" class="form-label"
-            >Email: <span class="required">*</span></label
-          >
-          <input
-            type="email"
-            id="email"
-            name="email"
-            class="form-input"
-            required
-            placeholder="Enter your email"
-          />
-        </div>
-
-        <div class="form-group">
-          <label for="password" class="form-label"
-            >Password: <span class="required">*</span></label
-          >
-          <input
-            type="password"
-            id="password"
-            name="password"
-            class="form-input"
-            required
-            placeholder="Enter your password"
-            minlength="6"
-          />
-        </div>
-
-        <div id="vetFields" class="hidden">
-          <div class="form-group">
-            <label for="specialization" class="form-label"
-              >Specialization: <span class="required">*</span></label
-            >
-            <input
-              type="text"
-              id="specialization"
-              name="specialization"
-              class="form-input"
-              placeholder="e.g., Small Animals, Surgery, Internal Medicine"
-            />
+  <div id="page-content">
+    <div class="register-container">
+      <div class="register-wrapper">
+        <main class="register-main">
+          <div class="register-header">
+            <h2 class="register-title">Daftar akun</h2>
+            <p class="register-subtitle">
+              Atau
+              <a th:href="@{/auth/login}" class="register-login-link">
+                masuk jika sudah punya akun
+              </a>
+            </p>
           </div>
-        </div>
 
-        <button type="submit" class="btn-primary">Register</button>
-      </form>
+          <div class="register-form-container">
+            <div th:if="${error}" class="register-error" role="alert">
+              <p th:text="${error}">Error message here</p>
+            </div>
 
-      <div class="text-center mt-4">
-        <p>
-          Already have an account?
-          <a href="/auth/login" class="text-blue-600">Login here</a>
-        </p>
-        <p>
-          <a href="/" class="text-blue-600">← Back to Home</a>
-        </p>
+            <form
+              th:action="@{/auth/register}"
+              method="post"
+              class="register-form"
+            >
+              <div class="register-field">
+                <label class="register-label">Daftar Sebagai</label>
+                <div class="register-role-grid">
+                  <div>
+                    <input
+                      type="radio"
+                      id="role-pemilik"
+                      name="userType"
+                      value="owner"
+                      class="register-role-input"
+                      checked
+                    />
+                    <label for="role-pemilik" class="register-role-label">
+                      Pemilik Hewan
+                    </label>
+                  </div>
+                  <div>
+                    <input
+                      type="radio"
+                      id="role-vet"
+                      name="userType"
+                      value="veterinarian"
+                      class="register-role-input"
+                    />
+                    <label for="role-vet" class="register-role-label">
+                      Dokter Hewan
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="register-field">
+                <label for="nama" class="register-label">Nama Lengkap</label>
+                <input
+                  type="text"
+                  id="nama"
+                  name="name"
+                  required
+                  class="register-input"
+                  placeholder="Masukkan nama lengkap"
+                />
+              </div>
+
+              <div class="register-field">
+                <label for="email" class="register-label">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  required
+                  class="register-input"
+                  placeholder="anda@email.com"
+                />
+              </div>
+
+              <div
+                id="spesialisasi-container"
+                class="register-specialization-container"
+              >
+                <label for="spesialisasi" class="register-label"
+                  >Spesialisasi</label
+                >
+                <input
+                  type="text"
+                  id="spesialisasi"
+                  name="specialization"
+                  class="register-input"
+                  placeholder="Contoh: Bedah, Dermatologi, dll."
+                />
+              </div>
+
+              <div class="register-field">
+                <label for="password" class="register-label">Password</label>
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  required
+                  class="register-input"
+                  placeholder="Masukkan password"
+                />
+              </div>
+
+              <div class="register-field">
+                <button type="submit" class="register-button">
+                  Daftar Sekarang
+                </button>
+              </div>
+            </form>
+          </div>
+        </main>
       </div>
     </div>
   </div>
 
   <th:block id="page-scripts">
-    <script>
-      function toggleVetFields() {
-        const userType = document.getElementById("userType").value;
-        const vetFields = document.getElementById("vetFields");
-        const specializationField = document.getElementById("specialization");
-
-        if (userType === "veterinarian") {
-          vetFields.classList.remove("hidden");
-          specializationField.setAttribute("required", "required");
-        } else {
-          vetFields.classList.add("hidden");
-          specializationField.removeAttribute("required");
-          specializationField.value = "";
-        }
-      }
-    </script>
+    <script th:src="@{/js/toggleRole.js}"></script>
   </th:block>
 </html>

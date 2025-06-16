@@ -2,269 +2,176 @@
 <html
   xmlns:th="http://www.thymeleaf.org"
   th:replace="~{fragments/dashboard-layout :: dashboardLayout(
-                pageTitle='Hewan Peliharaan Saya - VetCare',
+                pageTitle='Hewan Peliharaan - VetCare',
                 sidebarFragment=~{fragments/sidebar-owner :: ownerSidebar},
-                pageContent=~{:: #content},
+                pageContent=~{:: #page-content},
                 pageSpecificStyles=~{:: #page-styles},
                 pageSpecificScripts=~{:: #page-scripts}
               )}"
 >
-  <th:block id="page-styles">
-    <style>
-      .dashboard-container {
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-      }
+  <th:block id="page-styles"> </th:block>
 
-      .dashboard-main {
-        flex: 1;
-        display: flex;
-        max-width: 1200px;
-        margin: 0 auto;
-        width: 100%;
-      }
+  <div id="page-content">
+    <div class="pet-dashboard">
+      <div class="pet-dashboard-container">
+        <div class="pet-welcome-card">
+          <div class="pet-welcome-header">
+            <div>
+              <h1 class="pet-welcome-title">Hewan Peliharaan Saya</h1>
+              <p class="pet-welcome-subtitle">
+                Kelola informasi hewan peliharaan Anda
+              </p>
+            </div>
+          </div>
+        </div>
 
-      .dashboard-sidebar {
-        width: 250px;
-        background-color: #f8f9fa;
-        padding: 1rem;
-      }
+        <div th:if="${param.error}" class="pet-error-card">
+          <div
+            th:if="${param.error[0] == 'unauthorized'}"
+            class="pet-error-text"
+          >
+            <svg
+              class="pet-error-icon"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.924-.833-2.464 0L4.35 16.5c-.77.833.192 2.5 1.732 2.5z"
+              ></path>
+            </svg>
+            Anda tidak berwenang untuk melakukan tindakan ini.
+          </div>
+          <div
+            th:if="${param.error[0] == 'delete_failed'}"
+            class="pet-error-text"
+          >
+            <svg
+              class="pet-error-icon"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.924-.833-2.464 0L4.35 16.5c-.77.833.192 2.5 1.732 2.5z"
+              ></path>
+            </svg>
+            Gagal menghapus hewan peliharaan. Silakan coba lagi.
+          </div>
+        </div>
 
-      .sidebar-nav {
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-      }
+        <div class="pet-table-container">
+          <div class="pet-section-header">
+            <h2 class="pet-section-title">Daftar Hewan Peliharaan</h2>
+          </div>
+          <div class="pet-content-section">
+            <div th:if="${#lists.isEmpty(pets)}" class="pet-empty-state">
+              <p>
+                Anda belum memiliki hewan peliharaan.
+                <a href="/pets/add" class="pet-empty-link">
+                  Tambahkan hewan peliharaan pertama Anda
+                </a>
+              </p>
+            </div>
 
-      .sidebar-nav h3 {
-        font-size: 1.2rem;
-        color: #495057;
-        margin-bottom: 1rem;
-        padding-bottom: 0.5rem;
-        border-bottom: 1px solid #e9ecef;
-      }
+            <div th:unless="${#lists.isEmpty(pets)}">
+              <div class="pet-table-wrapper">
+                <table class="pet-table">
+                  <thead>
+                    <tr>
+                      <th class="pet-col-name">Nama</th>
+                      <th class="pet-col-species">Spesies</th>
+                      <th class="pet-col-actions">Tindakan</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr th:each="pet : ${pets}">
+                      <td th:text="${pet.name}">Nama Hewan</td>
+                      <td th:text="${pet.species}">Spesies</td>
+                      <td>
+                        <div class="pet-actions-container">
+                          <a
+                            th:href="@{'/pets/' + ${pet.id} + '/edit'}"
+                            class="pet-action-edit"
+                            title="Edit"
+                          >
+                            <svg
+                              class="pet-action-icon"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+                              />
+                            </svg>
+                          </a>
+                          <form
+                            th:action="@{'/pets/' + ${pet.id} + '/delete'}"
+                            method="post"
+                            class="pet-form-inline"
+                            onsubmit="return confirm('Apakah Anda yakin ingin menghapus hewan peliharaan ini?');"
+                          >
+                            <button
+                              type="submit"
+                              class="pet-action-delete"
+                              title="Hapus"
+                            >
+                              <svg
+                                class="pet-action-icon"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                              >
+                                <path
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  stroke-width="2"
+                                  d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                                />
+                              </svg>
+                            </button>
+                          </form>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
 
-      .sidebar-nav ul {
-        list-style: none;
-        padding: 0;
-        margin: 0 0 1rem 0;
-      }
-
-      .sidebar-nav li {
-        margin-bottom: 0.5rem;
-      }
-
-      .sidebar-nav a {
-        display: block;
-        padding: 0.5rem 0.75rem;
-        color: #495057;
-        text-decoration: none;
-        border-radius: 0.25rem;
-        transition: background-color 0.2s;
-      }
-
-      .sidebar-nav a:hover {
-        background-color: #e9ecef;
-        color: #212529;
-      }
-
-      .sidebar-bottom {
-        margin-top: auto;
-        padding-top: 1rem;
-        border-top: 1px solid #e9ecef;
-      }
-
-      .logout-link {
-        display: block;
-        padding: 0.5rem 0.75rem;
-        color: #dc3545;
-        text-decoration: none;
-        border-radius: 0.25rem;
-        text-align: center;
-        border: 1px solid #dc3545;
-      }
-
-      .logout-link:hover {
-        background-color: #dc3545;
-        color: white;
-      }
-      
-      .content-header {
-        margin-bottom: 2rem;
-      }
-      .content-header h1 {
-        font-size: 2rem;
-        font-weight: bold;
-        color: #495057;
-        margin-bottom: 0.5rem;
-      }
-      
-      .pets-table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 1rem;
-      }
-      
-      .pets-table th, .pets-table td {
-        border: 1px solid #e9ecef;
-        padding: 0.75rem;
-      }
-      
-      .pets-table th {
-        background-color: #f8f9fa;
-        font-weight: 600;
-        text-align: left;
-      }
-      
-      .pets-table tr:hover {
-        background-color: #f8f9fa;
-      }
-      
-      .add-pet-btn {
-        display: inline-block;
-        background-color: #5271ff;
-        color: white;
-        padding: 0.5rem 1rem;
-        border-radius: 0.25rem;
-        text-decoration: none;
-        margin-bottom: 1rem;
-      }
-      
-      .add-pet-btn:hover {
-        background-color: #4060ee;
-      }
-      
-      .error-message {
-        background-color: #f8d7da;
-        border: 1px solid #f5c6cb;
-        color: #721c24;
-        padding: 1rem;
-        border-radius: 0.25rem;
-        margin-bottom: 1rem;
-      }
-      
-      .no-pets-message {
-        background-color: #f8f9fa;
-        padding: 1rem;
-        border-radius: 0.25rem;
-        color: #6c757d;
-      }
-      
-      .edit-link {
-        color: #5271ff;
-        text-decoration: none;
-        margin-right: 0.75rem;
-      }
-      
-      .edit-link:hover {
-        text-decoration: underline;
-      }
-      
-      .delete-btn {
-        color: #dc3545;
-        background: none;
-        border: none;
-        cursor: pointer;
-        font-weight: 500;
-        padding: 0;
-      }
-      
-      .delete-btn:hover {
-        text-decoration: underline;
-      }
-      
-      .dashboard-content {
-        flex: 1;
-        padding: 1rem;
-      }
-
-      .dashboard-cards {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-        gap: 1rem;
-        margin-top: 1rem;
-      }
-
-      .card {
-        background-color: #fff;
-        border-radius: 0.25rem;
-        padding: 1.5rem;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        border: 1px solid #e9ecef;
-      }
-
-      .card h2 {
-        font-size: 1.25rem;
-        margin-bottom: 1rem;
-        color: #343a40;
-      }
-      
-      @media (max-width: 768px) {
-        .dashboard-main {
-          flex-direction: column;
-        }
-        
-        .dashboard-sidebar {
-          width: 100%;
-          margin-bottom: 1rem;
-        }
-        
-        .dashboard-cards {
-          grid-template-columns: 1fr;
-        }
-      }
-    </style>
-  </th:block>
-
-  <div id="content">
-    <div class="content-header">
-      <h1>Hewan Peliharaan Saya</h1>
-    </div>
-
-    <div th:if="${param.error}" class="error-message">
-      <div th:if="${param.error[0] == 'unauthorized'}">
-        Anda tidak berwenang untuk melakukan tindakan ini.
+              <div class="pet-button-container">
+                <a href="/pets/add" class="pet-add-button">
+                  <svg
+                    class="pet-action-icon"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                    />
+                  </svg>
+                  <span>Tambah Hewan Peliharaan</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div th:if="${param.error[0] == 'delete_failed'}">
-        Gagal menghapus hewan peliharaan. Silakan coba lagi.
-      </div>
-    </div>
-
-    <a href="/pets/add" class="add-pet-btn">Tambah Hewan Peliharaan Baru</a>
-
-    <div th:if="${#lists.isEmpty(pets)}" class="no-pets-message">
-      <p>
-        Anda belum memiliki hewan peliharaan.
-        <a href="/pets/add" class="edit-link">Tambahkan hewan peliharaan pertama Anda</a>
-      </p>
-    </div>
-
-    <div th:unless="${#lists.isEmpty(pets)}">
-      <table class="pets-table">
-        <thead>
-          <tr>
-            <th>Nama</th>
-            <th>Spesies</th>
-            <th>Tindakan</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr th:each="pet : ${pets}">
-            <td th:text="${pet.name}"></td>
-            <td th:text="${pet.species}"></td>
-            <td>
-              <a th:href="@{'/pets/' + ${pet.id} + '/edit'}" class="edit-link">Edit</a>
-              |
-              <form th:action="@{'/pets/' + ${pet.id} + '/delete'}" method="post" style="display: inline-block" onsubmit="return confirm('Apakah Anda yakin ingin menghapus hewan peliharaan ini?');">
-                <button type="submit" class="delete-btn">Hapus</button>
-              </form>
-            </td>
-          </tr>
-        </tbody>
-      </table>
     </div>
   </div>
 
-  <th:block id="page-scripts"></th:block>
+  <th:block id="page-scripts"> </th:block>
 </html>

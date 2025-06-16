@@ -1,0 +1,223 @@
+.owner-dashboard {
+  @apply min-h-screen bg-gray-50;
+}
+
+.owner-dashboard-container {
+  @apply max-w-6xl mx-auto px-6 py-8;
+}
+
+.owner-welcome-card {
+  @apply bg-white rounded-xl p-6 border border-gray-200 mb-4;
+}
+
+.owner-welcome-header {
+  @apply flex flex-col sm:flex-row sm:items-center sm:justify-between;
+}
+
+.owner-welcome-title {
+  @apply text-2xl font-semibold text-gray-900;
+}
+
+.owner-welcome-subtitle {
+  @apply text-gray-600 mt-1;
+}
+
+.owner-cta-button {
+  @apply inline-flex items-center px-6 py-3 bg-primary text-white rounded-xl font-medium hover:bg-primary-dark transition-colors duration-200 mt-4 sm:mt-0;
+}
+
+.owner-cta-icon {
+  @apply w-4 h-4 mr-2;
+}
+
+.owner-main-grid {
+  @apply grid grid-cols-1 lg:grid-cols-6 gap-4 mb-4;
+}
+
+.owner-quick-actions-container {
+  @apply lg:col-span-4 bg-white rounded-xl border border-gray-200 order-1;
+}
+
+.owner-stats-container {
+  @apply lg:col-span-2 order-2;
+}
+
+.owner-section-header {
+  @apply p-6 border-b border-gray-200;
+}
+
+.owner-section-title {
+  @apply text-lg font-semibold text-gray-900;
+}
+
+.owner-quick-actions-grid {
+  @apply grid grid-cols-1 sm:grid-cols-2 gap-4;
+}
+
+.owner-quick-action-card {
+  @apply flex items-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200;
+}
+
+.owner-quick-action-icon {
+  @apply w-5 h-5 text-white;
+}
+
+.owner-quick-action-icon-bg {
+  @apply p-2 rounded-lg;
+}
+
+.owner-quick-action-icon-bg.pets {
+  @apply bg-primary;
+}
+
+.owner-quick-action-icon-bg.appointments {
+  @apply bg-green-600;
+}
+
+.owner-quick-action-icon-bg.history {
+  @apply bg-purple-600;
+}
+
+.owner-quick-action-icon-bg.profile {
+  @apply bg-indigo-600;
+}
+
+.owner-quick-action-content {
+  @apply ml-3;
+}
+
+.owner-quick-action-title {
+  @apply font-medium text-gray-900;
+}
+
+.owner-quick-action-subtitle {
+  @apply text-sm text-gray-600;
+}
+
+.owner-stats-card {
+  @apply bg-white rounded-xl border border-gray-200;
+}
+
+.owner-stats-grid {
+  @apply p-6 space-y-4;
+}
+
+.owner-stat-item {
+  @apply flex items-center p-4 bg-gray-50 rounded-lg;
+}
+
+.owner-stat-icon-bg {
+  @apply p-2 rounded-lg;
+}
+
+.owner-stat-icon-bg.pets {
+  @apply bg-primary;
+}
+
+.owner-stat-icon-bg.appointments {
+  @apply bg-green-600;
+}
+
+.owner-stat-icon {
+  @apply w-5 h-5 text-white;
+}
+
+.owner-stat-content {
+  @apply ml-3;
+}
+
+.owner-stat-title {
+  @apply text-sm text-gray-600;
+}
+
+.owner-stat-value {
+  @apply font-medium text-gray-900;
+}
+
+.owner-pets-card {
+  @apply bg-white rounded-xl border border-gray-200 mb-4;
+}
+
+.owner-pets-header {
+  @apply p-6 border-b border-gray-200 flex items-center justify-between;
+}
+
+.owner-view-all-link {
+  @apply text-sm text-primary hover:text-primary-dark font-medium;
+}
+
+.owner-pets-grid {
+  @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4;
+}
+
+.owner-pet-card {
+  @apply flex flex-col items-center p-4 bg-gray-50 rounded-lg text-center;
+}
+
+.owner-pet-avatar {
+  @apply w-12 h-12 bg-blue-200 rounded-full flex items-center justify-center mb-3;
+}
+
+.owner-pet-initial {
+  @apply text-sm font-medium text-blue-800;
+}
+
+.owner-pet-info {
+  @apply w-full;
+}
+
+.owner-pet-name {
+  @apply font-medium text-gray-900 mb-1;
+}
+
+.owner-pet-species {
+  @apply text-sm text-gray-600;
+}
+
+.owner-empty-state {
+  @apply text-center py-8 text-gray-500;
+}
+
+.owner-empty-link {
+  @apply text-primary hover:text-primary-dark font-medium underline;
+}
+
+.owner-appointments-card {
+  @apply bg-white rounded-xl border border-gray-200;
+}
+
+.owner-appointments-list {
+  @apply grid grid-cols-1 lg:grid-cols-2 gap-4;
+}
+
+.owner-appointment-card {
+  @apply p-4 bg-gray-50 rounded-lg border-l-4 border-primary;
+}
+
+.owner-appointment-header {
+  @apply flex justify-between items-start;
+}
+
+.owner-appointment-doctor {
+  @apply font-medium text-gray-900;
+}
+
+.owner-appointment-pet {
+  @apply text-sm text-gray-600;
+}
+
+.owner-appointment-time {
+  @apply text-xs text-gray-500;
+}
+
+.owner-appointment-time-section {
+  @apply text-right;
+}
+
+.owner-appointment-detail-link {
+  @apply text-xs text-primary hover:text-primary-dark font-medium;
+}
+
+.owner-content-section {
+  @apply p-6;
+}

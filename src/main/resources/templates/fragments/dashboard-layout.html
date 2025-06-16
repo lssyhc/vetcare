@@ -1,42 +1,66 @@
 <!DOCTYPE html>
 <html
+  lang="id"
   xmlns:th="http://www.thymeleaf.org"
   th:fragment="dashboardLayout (
-    pageTitle, 
-    sidebarFragment, 
-    pageContent, 
-    pageSpecificStyles, 
+    pageTitle,
+    sidebarFragment,
+    pageContent,
+    pageSpecificStyles,
     pageSpecificScripts
-)"
+  )"
 >
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title th:text="${pageTitle}">Dasbor Vetcare</title>
+    <title th:text="${pageTitle ?: 'Dashboard - VetCare'}">
+      Dashboard - VetCare
+    </title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
       rel="stylesheet"
     />
 
-    <link href="/css/style.css" rel="stylesheet" />
-    <th:block th:replace="${pageSpecificStyles}"></th:block>
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
+    <th:block th:replace="${pageSpecificStyles} ?: ~{}"></th:block>
   </head>
-  <body>
-    <div class="dashboard-container">
-      <div class="dashboard-main">
-        <aside class="dashboard-sidebar">
-          <th:block th:replace="${sidebarFragment}"></th:block>
-        </aside>
+  <body class="dashboard-layout-body">
+    <th:block th:replace="${sidebarFragment} ?: ~{}"></th:block>
 
-        <main class="dashboard-content">
-          <th:block th:replace="${pageContent}"></th:block>
-        </main>
-      </div>
+    <div class="dashboard-sidebar-overlay hidden" id="sidebar-overlay"></div>
+
+    <div class="dashboard-main-container">
+      <main class="dashboard-main-content">
+        <th:block th:replace="${pageContent}"></th:block>
+      </main>
     </div>
 
-    <th:block th:replace="${pageSpecificScripts}"></th:block>
+    <button
+      type="button"
+      class="dashboard-toggle-button"
+      id="mobile-menu-button"
+    >
+      <svg
+        class="dashboard-toggle-icon"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        id="arrow-icon"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M9 5l7 7-7 7"
+        />
+      </svg>
+    </button>
+
+    <th:block th:replace="${pageSpecificScripts} ?: ~{}"></th:block>
+
+    <script th:src="@{/js/sidebarToggle.js}"></script>
   </body>
 </html>

@@ -2,321 +2,240 @@
 <html
   xmlns:th="http://www.thymeleaf.org"
   th:replace="~{fragments/dashboard-layout :: dashboardLayout(
-                pageTitle='Veterinarian Dashboard - VetCare',
+                pageTitle='Dasbor Veterinarian - VetCare',
                 sidebarFragment=~{fragments/sidebar-vet :: vetSidebar},
-                pageContent=~{:: #content},
+                pageContent=~{:: #page-content},
                 pageSpecificStyles=~{:: #page-styles},
                 pageSpecificScripts=~{:: #page-scripts}
               )}"
 >
-  <th:block id="page-styles">
-    <style>
-      .dashboard-container {
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-      }
+  <th:block id="page-styles"> </th:block>
 
-      .dashboard-main {
-        flex: 1;
-        display: flex;
-        max-width: 1200px;
-        margin: 0 auto;
-        width: 100%;
-      }
-
-      .dashboard-sidebar {
-        width: 250px;
-        background-color: #f8f9fa;
-        padding: 1rem;
-      }
-
-      .sidebar-nav {
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-      }
-
-      .sidebar-nav h3 {
-        font-size: 1.2rem;
-        color: #495057;
-        margin-bottom: 1rem;
-        padding-bottom: 0.5rem;
-        border-bottom: 1px solid #e9ecef;
-      }
-
-      .sidebar-nav ul {
-        list-style: none;
-        padding: 0;
-        margin: 0 0 1rem 0;
-      }
-
-      .sidebar-nav li {
-        margin-bottom: 0.5rem;
-      }
-
-      .sidebar-nav a {
-        display: block;
-        padding: 0.5rem 0.75rem;
-        color: #495057;
-        text-decoration: none;
-        border-radius: 0.25rem;
-        transition: background-color 0.2s;
-      }
-
-      .sidebar-nav a:hover {
-        background-color: #e9ecef;
-        color: #212529;
-      }
-
-      .sidebar-bottom {
-        margin-top: auto;
-        padding-top: 1rem;
-        border-top: 1px solid #e9ecef;
-      }
-
-      .logout-link {
-        display: block;
-        padding: 0.5rem 0.75rem;
-        color: #dc3545;
-        text-decoration: none;
-        border-radius: 0.25rem;
-        text-align: center;
-        border: 1px solid #dc3545;
-      }
-
-      .logout-link:hover {
-        background-color: #dc3545;
-        color: white;
-      }
-
-      .dashboard-content {
-        flex: 1;
-        padding: 1rem;
-      }
-
-      .content-header {
-        margin-bottom: 1.5rem;
-      }
-
-      .content-header h1 {
-        font-size: 1.8rem;
-        margin-bottom: 0.5rem;
-      }
-
-      .content-header p {
-        color: #6c757d;
-      }
-
-      .dashboard-cards {
-        display: grid;
-        gap: 1.5rem;
-        grid-template-columns: 1fr;
-      }
-
-      .card {
-        background: white;
-        border-radius: 0.5rem;
-        padding: 1.5rem;
-        box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-      }
-
-      .card h2 {
-        font-size: 1.25rem;
-        margin-bottom: 1rem;
-      }
-
-      .card ul {
-        list-style: none;
-        padding: 0;
-      }
-
-      .card li {
-        margin-bottom: 0.5rem;
-      }
-
-      .card a {
-        color: #5271ff;
-        text-decoration: none;
-      }
-
-      .card a:hover {
-        text-decoration: underline;
-      }
-
-      .stats {
-        display: flex;
-        gap: 1rem;
-        margin-bottom: 1.5rem;
-        flex-wrap: wrap;
-      }
-
-      .stats li {
-        padding: 0.5rem 1rem;
-        background-color: #f8f9fa;
-        border-radius: 6px;
-        font-size: 0.9rem;
-        display: flex;
-        align-items: center;
-      }
-
-      .stats li span {
-        font-weight: bold;
-        margin-left: 0.3rem;
-        color: #3a5ac9;
-      }
-
-      .schedule-table-container {
-        width: 100%;
-        overflow-x: auto;
-        margin-bottom: 1rem;
-      }
-
-      .schedule-table {
-        width: 100%;
-        border-collapse: separate;
-        border-spacing: 0;
-        min-width: 650px;
-      }
-      
-      .schedule-table thead {
-        background-color: #f1f2f5;
-      }
-      
-      .schedule-table th {
-        text-align: left;
-        padding: 0.75rem 1rem;
-        font-weight: 600;
-        color: #333333;
-        font-size: 0.9rem;
-        white-space: nowrap;
-        border-bottom: 1px solid #e9ecef;
-      }
-      
-      .schedule-table td {
-        padding: 0.75rem 1rem;
-        border-top: 1px solid #e9ecef;
-        vertical-align: middle;
-        font-size: 0.9rem;
-        color: #333333;
-      }
-
-      .schedule-table tr:nth-child(even) {
-        background-color: #f9f9f9;
-      }
-      
-      .status-badge {
-        display: inline-block;
-        padding: 0.25rem 0.75rem;
-        border-radius: 20px;
-        font-size: 0.75rem;
-        font-weight: 600;
-        text-transform: uppercase;
-      }
-      
-      .status-scheduled {
-        background-color: #e3f2fd;
-        color: #0d47a1;
-      }
-      
-      .status-completed {
-        background-color: #e8f5e9;
-        color: #1b5e20;
-      }
-      
-      .status-cancelled {
-        background-color: #ffebee;
-        color: #b71c1c;
-      }
-      
-      .action-link {
-        display: inline-block;
-        padding: 0.5rem 1rem;
-        background-color: #3850c8;
-        color: #ffffff !important;
-        border-radius: 4px;
-        text-decoration: none;
-        font-size: 0.95rem;
-        font-weight: 700;
-        letter-spacing: 0.02em;
-        text-align: center;
-        white-space: nowrap;
-      }
-
-      @media (max-width: 768px) {
-        .dashboard-main {
-          flex-direction: column;
-        }
-
-        .dashboard-sidebar {
-          width: 100%;
-          margin-bottom: 1rem;
-        }
-      }
-    </style>
-  </th:block>
-
-  <div id="content">
-    <div class="content-header">
-      <h1>Selamat Datang, dr. <span th:text="${userName}">Veterinarian</span>!</h1>
-      <p>
-        Spesialisasi:
-        <span th:text="${specialization}">Praktik Umum</span>
-      </p>
-    </div>
-
-    <div class="dashboard-cards">
-      <div class="card">
-        <h2>Jadwal Hari Ini</h2>
-        <ul class="stats">
-          <li>Total: <span th:text="${#lists.size(todaysAppointments)}">0</span></li>
-          <li>Selesai: <span th:text="${#lists.size(todaysAppointments.?[status.name() == 'COMPLETED'])}">0</span></li>
-          <li>Menunggu: <span th:text="${#lists.size(todaysAppointments.?[status.name() == 'SCHEDULED'])}">0</span></li>
-        </ul>
-        
-        <div th:if="${#lists.isEmpty(todaysAppointments)}">
-          <p>Tidak ada janji temu terjadwal untuk hari ini</p>
-        </div>
-        
-        <div th:if="${not #lists.isEmpty(todaysAppointments)}">
-          <div class="schedule-table-container">
-            <table class="schedule-table">
-              <thead>
-                <tr>
-                  <th>Waktu</th>
-                  <th>Hewan Peliharaan</th>
-                  <th>Pemilik</th>
-                  <th>Status</th>
-                  <th>Tindakan</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr th:each="appointment : ${todaysAppointments}">
-                  <td th:text="${#temporals.format(appointment.appointmentTime, 'HH:mm', new java.util.Locale('id', 'ID'))}"></td>
-                  <td th:text="${appointment.pet.name}"></td>
-                  <td th:text="${appointment.owner.name}"></td>
-                  <td>
-                    <span class="status-badge" th:classappend="${'status-' + appointment.status.toString().toLowerCase()}" th:text="${appointment.status.getDisplayName()}"></span>
-                  </td>
-                  <td>
-                    <a th:href="@{/appointments/{id}(id=${appointment.id})}" class="action-link">Lihat</a>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+  <div id="page-content">
+    <div class="vet-dashboard">
+      <div class="vet-dashboard-container">
+        <div class="vet-welcome-card">
+          <div class="vet-welcome-header">
+            <div>
+              <h1 class="vet-welcome-title">
+                Selamat Datang, dr.
+                <span th:text="${userName ?: 'Veterinarian'}">Veterinarian</span
+                >!
+              </h1>
+              <p class="vet-welcome-subtitle">
+                Spesialisasi:
+                <span th:text="${specialization ?: 'Praktik Umum'}"
+                  >Praktik Umum</span
+                >
+              </p>
+            </div>
+            <div>
+              <a href="/appointments" class="vet-cta-button">
+                <svg
+                  class="vet-cta-icon"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                  ></path>
+                </svg>
+                Kelola Janji
+              </a>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="card">
-        <h2>Aksi Cepat</h2>
-        <ul>
-          <li><a href="/schedule/setup">Atur Jadwal Kerja</a></li>
-          <li><a href="/appointments">Lihat Semua Janji Temu</a></li>
-        </ul>
+        <div class="vet-main-grid">
+          <div class="vet-quick-actions-container">
+            <div class="vet-section-header">
+              <h2 class="vet-section-title">Aksi Cepat</h2>
+            </div>
+            <div class="vet-content-section">
+              <div class="vet-quick-actions-grid">
+                <a href="/schedule/setup" class="vet-quick-action-card">
+                  <div class="vet-quick-action-icon-bg schedule">
+                    <svg
+                      class="vet-quick-action-icon"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2-2v12a2 2 0 002 2z"
+                      ></path>
+                    </svg>
+                  </div>
+                  <div class="vet-quick-action-content">
+                    <p class="vet-quick-action-title">Atur Jadwal</p>
+                    <p class="vet-quick-action-subtitle">Kelola jadwal kerja</p>
+                  </div>
+                </a>
+
+                <a href="/appointments" class="vet-quick-action-card">
+                  <div class="vet-quick-action-icon-bg appointments">
+                    <svg
+                      class="vet-quick-action-icon"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                      ></path>
+                    </svg>
+                  </div>
+                  <div class="vet-quick-action-content">
+                    <p class="vet-quick-action-title">Kelola Janji</p>
+                    <p class="vet-quick-action-subtitle">
+                      Lihat semua janji temu
+                    </p>
+                  </div>
+                </a>
+
+                <a href="/profile" class="vet-quick-action-card">
+                  <div class="vet-quick-action-icon-bg profile">
+                    <svg
+                      class="vet-quick-action-icon"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                      ></path>
+                    </svg>
+                  </div>
+                  <div class="vet-quick-action-content">
+                    <p class="vet-quick-action-title">Lihat Profil</p>
+                    <p class="vet-quick-action-subtitle">
+                      Kelola profil dokter
+                    </p>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="vet-schedule-container">
+            <div class="vet-section-header">
+              <h2 class="vet-section-title">Jadwal Hari Ini</h2>
+              <a href="/appointments" class="vet-view-all-link">Lihat semua</a>
+            </div>
+            <div class="vet-content-section">
+              <ul class="vet-stats">
+                <li class="vet-stat-item">
+                  Total:
+                  <span
+                    class="vet-stat-value"
+                    th:text="${#lists.size(todaysAppointments)}"
+                    >0</span
+                  >
+                </li>
+                <li class="vet-stat-item">
+                  Selesai:
+                  <span
+                    class="vet-stat-value"
+                    th:text="${#lists.size(todaysAppointments.?[status.name() == 'COMPLETED'])}"
+                    >0</span
+                  >
+                </li>
+                <li class="vet-stat-item">
+                  Menunggu:
+                  <span
+                    class="vet-stat-value"
+                    th:text="${#lists.size(todaysAppointments.?[status.name() == 'SCHEDULED'])}"
+                    >0</span
+                  >
+                </li>
+              </ul>
+
+              <div
+                th:if="${#lists.isEmpty(todaysAppointments)}"
+                class="vet-empty-state"
+              >
+                <p>Tidak ada janji temu terjadwal untuk hari ini</p>
+              </div>
+
+              <div th:if="${not #lists.isEmpty(todaysAppointments)}">
+                <div class="vet-table-wrapper">
+                  <table class="vet-table">
+                    <thead>
+                      <tr>
+                        <th class="vet-col-time">Waktu</th>
+                        <th class="vet-col-pet">Hewan Peliharaan</th>
+                        <th class="vet-col-owner">Pemilik</th>
+                        <th class="vet-col-status">Status</th>
+                        <th class="vet-col-actions">Tindakan</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr th:each="appointment : ${todaysAppointments}">
+                        <td
+                          th:text="${#temporals.format(appointment.appointmentTime, 'HH:mm', new java.util.Locale('id', 'ID'))}"
+                        ></td>
+                        <td th:text="${appointment.pet.name}"></td>
+                        <td th:text="${appointment.owner.name}"></td>
+                        <td>
+                          <span
+                            class="vet-status-badge"
+                            th:classappend="${'vet-status-' + appointment.status.toString().toLowerCase()}"
+                            th:text="${appointment.status.getDisplayName()}"
+                          ></span>
+                        </td>
+                        <td>
+                          <div class="vet-actions-container">
+                            <a
+                              th:href="@{/appointments/{id}(id=${appointment.id})}"
+                              class="vet-action-view"
+                              title="Lihat Detail"
+                            >
+                              <svg
+                                class="vet-action-icon"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                              >
+                                <path
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  stroke-width="2"
+                                  d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                                ></path>
+                                <path
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  stroke-width="2"
+                                  d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                                ></path>
+                              </svg>
+                            </a>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
-  <th:block id="page-scripts"></th:block>
+  <th:block id="page-scripts"> </th:block>
 </html>

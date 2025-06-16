@@ -1,0 +1,51 @@
+.layout-body {
+  @apply min-h-screen flex flex-col bg-gray-50;
+}
+
+.layout-main {
+  @apply flex-grow;
+}
+
+.layout-default-content {
+  @apply container mx-auto p-4;
+}
+
+.layout-default-message {
+  @apply text-center text-gray-600 py-8;
+}
+
+.layout-container {
+  @apply min-h-screen flex flex-col;
+}
+
+.layout-header {
+  @apply w-full;
+}
+
+.layout-footer {
+  @apply w-full mt-auto;
+}
+
+.layout-content-wrapper {
+  @apply flex-1 flex flex-col;
+}
+
+.layout-responsive-container {
+  @apply container mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+.layout-page-padding {
+  @apply py-4 sm:py-6 lg:py-8;
+}
+
+.layout-full-width {
+  @apply w-full;
+}
+
+.layout-centered {
+  @apply flex items-center justify-center;
+}
+
+.layout-spacing-y {
+  @apply space-y-4 sm:space-y-6 lg:space-y-8;
+}

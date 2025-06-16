@@ -9,883 +9,524 @@
                 pageSpecificScripts=~{:: #page-scripts}
               )}"
 >
-  <th:block id="page-styles">
-    <style>
-      .dashboard-container {
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-      }
-
-      .dashboard-main {
-        flex: 1;
-        display: flex;
-        max-width: 1200px;
-        margin: 0 auto;
-        width: 100%;
-      }
-
-      .dashboard-sidebar {
-        width: 250px;
-        background-color: #f8f9fa;
-        padding: 1rem;
-        border-right: 1px solid #e9ecef;
-        display: flex;
-        flex-direction: column;
-      }
-
-      .sidebar-nav {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-      }
-
-      .sidebar-nav h3 {
-        font-size: 1.1rem;
-        font-weight: bold;
-        margin-bottom: 1rem;
-        color: #495057;
-      }
-
-      .sidebar-nav ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        flex: 1;
-      }
-
-      .sidebar-nav li {
-        margin-bottom: 0.5rem;
-      }
-
-      .sidebar-nav a {
-        display: block;
-        padding: 0.5rem 0.75rem;
-        color: #495057;
-        text-decoration: none;
-        border-radius: 0.25rem;
-      }
-
-      .sidebar-nav a:hover {
-        background-color: #e9ecef;
-        color: #5271ff;
-      }
-
-      .sidebar-bottom {
-        margin-top: auto;
-        padding-top: 1rem;
-        border-top: 1px solid #e9ecef;
-      }
-
-      .logout-link {
-        display: block;
-        padding: 0.5rem 0.75rem;
-        color: #dc3545;
-        text-decoration: none;
-        border-radius: 0.25rem;
-        text-align: center;
-        border: 1px solid #dc3545;
-      }
-
-      .logout-link:hover {
-        background-color: #dc3545;
-        color: white;
-      }
-
-      .dashboard-content {
-        flex: 1;
-        padding: 2rem;
-      }
-
-      .content-header {
-        margin-bottom: 2rem;
-      }
-
-      .content-header h1 {
-        font-size: 2rem;
-        font-weight: bold;
-        color: #495057;
-        margin-bottom: 0.5rem;
-      }
-
-      .content-header p {
-        color: #6c757d;
-        font-size: 1.1rem;
-      }
-
-      .schedule-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-        gap: 1.5rem;
-      }
-
-      .day-schedule {
-        background: white;
-        border: 1px solid #e9ecef;
-        border-radius: 0.5rem;
-        padding: 1.5rem;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      }
-
-      .day-schedule h3 {
-        font-size: 1.25rem;
-        font-weight: bold;
-        margin-bottom: 1rem;
-        color: #495057;
-        margin-top: 0;
-      }
-
-      .form-check {
-        margin-bottom: 1rem;
-      }
-
-      .form-check input[type="checkbox"] {
-        margin-right: 0.5rem;
-      }
-
-      .form-check label {
-        color: #495057;
-        font-weight: 500;
-      }
-
-      .time-inputs {
-        display: flex;
-        gap: 1rem;
-        margin-bottom: 1rem;
-      }
-
-      .time-input-group {
-        flex: 1;
-        min-width: 120px;
-      }
-
-      .time-input-group label {
-        display: block;
-        font-size: 0.875rem;
-        font-weight: 500;
-        color: #6c757d;
-        margin-bottom: 0.25rem;
-      }
-
-      .time-input-group input[type="time"],
-      .time-input-group input[type="text"] {
-        width: 100%;
-        padding: 0.5rem;
-        border: 1px solid #ced4da;
-        border-radius: 0.25rem;
-        font-size: 0.875rem;
-        background-color: #fff;
-        appearance: none;
-        -webkit-appearance: none;
-        -moz-appearance: textfield;
-      }
-
-      .time-input-group input[type="time"]:focus,
-      .time-input-group input[type="text"]:focus {
-        outline: none;
-        border-color: #5271ff;
-        box-shadow: 0 0 0 2px rgba(82, 113, 255, 0.25);
-      }
-
-      .time-input-group input[type="time"]::-webkit-calendar-picker-indicator {
-        display: none;
-        appearance: none;
-        -webkit-appearance: none;
-      }
-
-      .time-input-group input[type="time"]::-webkit-datetime-edit-fields-wrapper {
-        display: none;
-      }
-
-      .time-input-group input[type="time"]::-webkit-datetime-edit {
-        display: none;
-      }
-
-      .time-input-group input[type="time"]::-webkit-datetime-edit-hour-field {
-        display: none;
-      }
-
-      .time-input-group input[type="time"]::-webkit-datetime-edit-minute-field {
-        display: none;
-      }
-
-      .time-input-group input[type="time"]::-webkit-datetime-edit-ampm-field {
-        display: none;
-      }
-
-      .time-input-group input[type="time"]::-webkit-inner-spin-button {
-        display: none;
-        appearance: none;
-        -webkit-appearance: none;
-      }
-
-      .btn {
-        display: inline-block;
-        padding: 0.5rem 1rem;
-        font-size: 0.875rem;
-        font-weight: 500;
-        text-align: center;
-        text-decoration: none;
-        border: 1px solid transparent;
-        border-radius: 0.25rem;
-        cursor: pointer;
-        transition: all 0.15s ease-in-out;
-      }
-
-      .btn-primary {
-        color: white;
-        background-color: #5271ff;
-        border-color: #5271ff;
-      }
-
-      .btn-primary:hover {
-        background-color: #4056d9;
-        border-color: #3c50cc;
-      }
-
-      .btn-outline {
-        color: #5271ff;
-        border-color: #5271ff;
-        background-color: transparent;
-      }
-
-      .btn-outline:hover {
-        color: white;
-        background-color: #5271ff;
-      }
-
-      .existing-schedule {
-        margin-top: 1rem;
-        padding-top: 1rem;
-        border-top: 1px solid #e9ecef;
-        font-size: 0.875rem;
-      }
-
-      .existing-schedule p {
-        margin: 0;
-        color: #495057;
-      }
-
-      .existing-schedule em {
-        color: #6c757d;
-      }
-
-      .navigation {
-        border-top: 1px solid #e9ecef;
-        margin-top: 1.5rem;
-        padding-top: 1.5rem;
-        display: flex;
-        gap: 0.5rem;
-        align-items: center;
-        justify-content: flex-start;
-      }
-
-      .success-message {
-        background-color: #d4edda;
-        border: 1px solid #c3e6cb;
-        color: #155724;
-        padding: 0.75rem 1rem;
-        border-radius: 0.25rem;
-        margin-bottom: 1rem;
-      }
-
-      .error-message {
-        background-color: #f8d7da;
-        border: 1px solid #f5c6cb;
-        color: #721c24;
-        padding: 0.75rem 1rem;
-        border-radius: 0.25rem;
-        margin-bottom: 1rem;
-      }
-
-      .save-all-container {
-        margin-bottom: 2rem;
-        text-align: center;
-      }
-
-      .btn-save-all {
-        background-color: #28a745;
-        border-color: #28a745;
-        color: white;
-        padding: 0.5rem 1rem;
-        font-size: 0.875rem;
-        font-weight: 500;
-        border-radius: 0.25rem;
-        border: 1px solid transparent;
-        cursor: pointer;
-        transition: all 0.15s ease-in-out;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-      }
-
-      .btn-save-all:hover {
-        background-color: #218838;
-        border-color: #1e7e34;
-      }
-
-      .btn-save-all:disabled {
-        background-color: #6c757d;
-        border-color: #6c757d;
-        cursor: not-allowed;
-      }
-
-      @media (max-width: 768px) {
-        .dashboard-main {
-          flex-direction: column;
-        }
-
-        .dashboard-sidebar {
-          width: 100%;
-          border-right: none;
-          border-bottom: 1px solid #e9ecef;
-        }
-
-        .dashboard-content {
-          padding: 1rem;
-        }
-
-        .schedule-container {
-          grid-template-columns: 1fr;
-        }
-
-        .time-inputs {
-          flex-direction: column;
-          gap: 0.75rem;
-        }
-
-        .time-input-group {
-          min-width: auto;
-        }
-
-        .time-input-group input[type="time"],
-        .time-input-group input[type="text"] {
-          padding: 0.75rem;
-          font-size: 1rem;
-        }
-
-        .navigation {
-          flex-direction: column;
-          align-items: stretch;
-        }
-
-        .navigation .btn {
-          width: 100%;
-        }
-
-        .navigation .btn:last-child {
-          margin-bottom: 0;
-        }
-      }
-    </style>
-  </th:block>
+  <th:block id="page-styles"> </th:block>
 
   <div id="content">
-    <div class="content-header">
-      <h1>Pengaturan Jadwal Mingguan</h1>
-      <p>Atur jam kerja Anda untuk setiap hari dalam seminggu</p>
-    </div>
+    <div class="schedule-setup-dashboard">
+      <div class="schedule-setup-container">
+        <div class="pet-welcome-card">
+          <div class="pet-welcome-header">
+            <div>
+              <h1 class="pet-welcome-title">Pengaturan Jadwal Mingguan</h1>
+              <p class="pet-welcome-subtitle">
+                Atur jam kerja Anda untuk setiap hari dalam seminggu
+              </p>
+            </div>
+          </div>
+        </div>
 
-    <div th:if="${successMessage}" class="success-message" th:text="${successMessage}"></div>
-    <div th:if="${errorMessage}" class="error-message" th:text="${errorMessage}"></div>
+        <div th:if="${successMessage}" class="schedule-success-message">
+          <svg class="schedule-success-icon" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+          </svg>
+          <span th:text="${successMessage}"></span>
+        </div>
+        
+        <div th:if="${errorMessage}" class="schedule-error-message">
+          <svg class="schedule-error-icon" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
+          </svg>
+          <span th:text="${errorMessage}"></span>
+        </div>
 
-    <div class="save-all-container">
-      <form method="post" action="/schedule/setup/save-all" id="save-all-form">
-        <th:block th:with="mondaySchedule=${weeklySchedule != null ? weeklySchedule.?[dayOfWeek == 1] : null}">
-          <input type="hidden" name="day1_isActive" th:value="${mondaySchedule != null and !mondaySchedule.empty and mondaySchedule[0].isActive}">
-          <input type="hidden" name="day1_startTime" th:value="${mondaySchedule != null and !mondaySchedule.empty and mondaySchedule[0].startTime != null ? mondaySchedule[0].startTime : ''}">
-          <input type="hidden" name="day1_endTime" th:value="${mondaySchedule != null and !mondaySchedule.empty and mondaySchedule[0].endTime != null ? mondaySchedule[0].endTime : ''}">
-        </th:block>
+        <div class="schedule-grid-container">
         
-        <th:block th:with="tuesdaySchedule=${weeklySchedule != null ? weeklySchedule.?[dayOfWeek == 2] : null}">
-          <input type="hidden" name="day2_isActive" th:value="${tuesdaySchedule != null and !tuesdaySchedule.empty and tuesdaySchedule[0].isActive}">
-          <input type="hidden" name="day2_startTime" th:value="${tuesdaySchedule != null and !tuesdaySchedule.empty and tuesdaySchedule[0].startTime != null ? tuesdaySchedule[0].startTime : ''}">
-          <input type="hidden" name="day2_endTime" th:value="${tuesdaySchedule != null and !tuesdaySchedule.empty and tuesdaySchedule[0].endTime != null ? tuesdaySchedule[0].endTime : ''}">
-        </th:block>
-        
-        <th:block th:with="wednesdaySchedule=${weeklySchedule != null ? weeklySchedule.?[dayOfWeek == 3] : null}">
-          <input type="hidden" name="day3_isActive" th:value="${wednesdaySchedule != null and !wednesdaySchedule.empty and wednesdaySchedule[0].isActive}">
-          <input type="hidden" name="day3_startTime" th:value="${wednesdaySchedule != null and !wednesdaySchedule.empty and wednesdaySchedule[0].startTime != null ? wednesdaySchedule[0].startTime : ''}">
-          <input type="hidden" name="day3_endTime" th:value="${wednesdaySchedule != null and !wednesdaySchedule.empty and wednesdaySchedule[0].endTime != null ? wednesdaySchedule[0].endTime : ''}">
-        </th:block>
-        
-        <th:block th:with="thursdaySchedule=${weeklySchedule != null ? weeklySchedule.?[dayOfWeek == 4] : null}">
-          <input type="hidden" name="day4_isActive" th:value="${thursdaySchedule != null and !thursdaySchedule.empty and thursdaySchedule[0].isActive}">
-          <input type="hidden" name="day4_startTime" th:value="${thursdaySchedule != null and !thursdaySchedule.empty and thursdaySchedule[0].startTime != null ? thursdaySchedule[0].startTime : ''}">
-          <input type="hidden" name="day4_endTime" th:value="${thursdaySchedule != null and !thursdaySchedule.empty and thursdaySchedule[0].endTime != null ? thursdaySchedule[0].endTime : ''}">
-        </th:block>
-        
-        <th:block th:with="fridaySchedule=${weeklySchedule != null ? weeklySchedule.?[dayOfWeek == 5] : null}">
-          <input type="hidden" name="day5_isActive" th:value="${fridaySchedule != null and !fridaySchedule.empty and fridaySchedule[0].isActive}">
-          <input type="hidden" name="day5_startTime" th:value="${fridaySchedule != null and !fridaySchedule.empty and fridaySchedule[0].startTime != null ? fridaySchedule[0].startTime : ''}">
-          <input type="hidden" name="day5_endTime" th:value="${fridaySchedule != null and !fridaySchedule.empty and fridaySchedule[0].endTime != null ? fridaySchedule[0].endTime : ''}">
-        </th:block>
-        
-        <th:block th:with="saturdaySchedule=${weeklySchedule != null ? weeklySchedule.?[dayOfWeek == 6] : null}">
-          <input type="hidden" name="day6_isActive" th:value="${saturdaySchedule != null and !saturdaySchedule.empty and saturdaySchedule[0].isActive}">
-          <input type="hidden" name="day6_startTime" th:value="${saturdaySchedule != null and !saturdaySchedule.empty and saturdaySchedule[0].startTime != null ? saturdaySchedule[0].startTime : ''}">
-          <input type="hidden" name="day6_endTime" th:value="${saturdaySchedule != null and !saturdaySchedule.empty and saturdaySchedule[0].endTime != null ? saturdaySchedule[0].endTime : ''}">
-        </th:block>
-        
-        <th:block th:with="sundaySchedule=${weeklySchedule != null ? weeklySchedule.?[dayOfWeek == 7] : null}">
-          <input type="hidden" name="day7_isActive" th:value="${sundaySchedule != null and !sundaySchedule.empty and sundaySchedule[0].isActive}">
-          <input type="hidden" name="day7_startTime" th:value="${sundaySchedule != null and !sundaySchedule.empty and sundaySchedule[0].startTime != null ? sundaySchedule[0].startTime : ''}">
-          <input type="hidden" name="day7_endTime" th:value="${sundaySchedule != null and !sundaySchedule.empty and sundaySchedule[0].endTime != null ? sundaySchedule[0].endTime : ''}">
-        </th:block>
-      </form>
-    </div>
-
-    <div class="schedule-container">
-        
-        <div class="day-schedule">
-            <h3>Senin</h3>
-            <form method="post" action="/schedule/setup">
-                <input type="hidden" name="dayOfWeek" value="1">
+        <div class="schedule-day-card">
+            <div class="schedule-day-header">
+                <h3 class="schedule-day-title">Senin</h3>
+            </div>
+            <div class="schedule-day-content">
+                <form method="post" action="/schedule/setup" class="schedule-form">
+                    <div class="schedule-form-check">
+                        <th:block th:with="mondaySchedule=${weeklySchedule != null ? weeklySchedule.?[dayOfWeek == 1] : null}">
+                            <input type="checkbox" name="isActive" value="true" id="monday-active" class="schedule-form-checkbox"
+                                   th:checked="${mondaySchedule != null and !mondaySchedule.empty and mondaySchedule[0].isActive}">
+                            <label for="monday-active" class="schedule-form-check-label">Bekerja di hari Senin</label>
+                        </th:block>
+                    </div>
+                    
+                    <div class="schedule-time-inputs">
+                        <div class="schedule-time-group">
+                            <label for="monday-start" class="schedule-time-label">Waktu Mulai</label>
+                            <th:block th:with="mondaySchedule=${weeklySchedule != null ? weeklySchedule.?[dayOfWeek == 1] : null}">
+                                <input type="time" name="startTime" id="monday-start" class="schedule-time-input"
+                                       th:value="${mondaySchedule != null and !mondaySchedule.empty and mondaySchedule[0].startTime != null ? mondaySchedule[0].startTime : '08:00'}">
+                            </th:block>
+                        </div>
+                        <div class="schedule-time-group">
+                            <label for="monday-end" class="schedule-time-label">Waktu Selesai</label>
+                            <th:block th:with="mondaySchedule=${weeklySchedule != null ? weeklySchedule.?[dayOfWeek == 1] : null}">
+                                <input type="time" name="endTime" id="monday-end" class="schedule-time-input"
+                                       th:value="${mondaySchedule != null and !mondaySchedule.empty and mondaySchedule[0].endTime != null ? mondaySchedule[0].endTime : '17:00'}">
+                            </th:block>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="schedule-btn-primary">
+                        <svg class="schedule-btn-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                        </svg>
+                        Simpan Senin
+                    </button>
+                    <input type="hidden" name="dayOfWeek" value="1">
+                </form>
                 
-                <div class="form-check">
+                <div class="schedule-existing-info">
                     <th:block th:with="mondaySchedule=${weeklySchedule != null ? weeklySchedule.?[dayOfWeek == 1] : null}">
-                        <input type="checkbox" name="isActive" value="true" id="monday-active"
-                               th:checked="${mondaySchedule != null and !mondaySchedule.empty and mondaySchedule[0].isActive}">
-                        <label for="monday-active">Bekerja di hari Senin</label>
-                    </th:block>
-                </div>
-                
-                <div class="time-inputs">
-                    <div class="time-input-group">
-                        <label for="monday-start">Waktu Mulai</label>
-                        <th:block th:with="mondaySchedule=${weeklySchedule != null ? weeklySchedule.?[dayOfWeek == 1] : null}">
-                            <input type="time" name="startTime" id="monday-start" 
-                                   th:value="${mondaySchedule != null and !mondaySchedule.empty and mondaySchedule[0].startTime != null ? mondaySchedule[0].startTime : '08:00'}">
-                        </th:block>
-                    </div>
-                    <div class="time-input-group">
-                        <label for="monday-end">Waktu Selesai</label>
-                        <th:block th:with="mondaySchedule=${weeklySchedule != null ? weeklySchedule.?[dayOfWeek == 1] : null}">
-                            <input type="time" name="endTime" id="monday-end" 
-                                   th:value="${mondaySchedule != null and !mondaySchedule.empty and mondaySchedule[0].endTime != null ? mondaySchedule[0].endTime : '17:00'}">
-                        </th:block>
-                    </div>
-                </div>
-                
-                <button type="submit" class="btn btn-primary">Simpan Senin</button>
-            </form>
-            
-            <div class="existing-schedule">
-                <th:block th:with="mondaySchedule=${weeklySchedule != null ? weeklySchedule.?[dayOfWeek == 1] : null}">
-                    <th:block th:if="${mondaySchedule != null and !mondaySchedule.empty}">
-                        <th:block th:each="schedule : ${mondaySchedule}">
-                            <p><strong>Jadwal saat ini:</strong> 
-                               <span th:if="${schedule.isActive}">
+                        <th:block th:if="${mondaySchedule != null and !mondaySchedule.empty}">
+                            <th:block th:each="schedule : ${mondaySchedule}">
+                                <p class="schedule-existing-title">Jadwal saat ini:</p>
+                                <p th:if="${schedule.isActive}" class="schedule-existing-time schedule-status-active">
                                    <span th:text="${schedule.startTime}">08:00</span> - <span th:text="${schedule.endTime}">17:00</span>
-                               </span>
-                               <span th:unless="${schedule.isActive}">Tidak bekerja</span>
-                            </p>
+                                </p>
+                                <p th:unless="${schedule.isActive}" class="schedule-existing-inactive schedule-status-inactive">Tidak bekerja</p>
+                            </th:block>
                         </th:block>
+                        <div th:if="${mondaySchedule == null or mondaySchedule.empty}">
+                            <p class="schedule-existing-title">Jadwal saat ini:</p>
+                            <p class="schedule-existing-none schedule-status-none">Belum diatur</p>
+                        </div>
                     </th:block>
-                    <p th:if="${mondaySchedule == null or mondaySchedule.empty}">
-                        <strong>Jadwal saat ini:</strong> <em>Belum diatur</em>
-                    </p>
-                </th:block>
+                </div>
             </div>
         </div>
 
-        <div class="day-schedule">
-            <h3>Selasa</h3>
-            <form method="post" action="/schedule/setup">
-                <input type="hidden" name="dayOfWeek" value="2">
+        <div class="schedule-day-card">
+            <div class="schedule-day-header">
+                <h3 class="schedule-day-title">Selasa</h3>
+            </div>
+            <div class="schedule-day-content">
+                <form method="post" action="/schedule/setup" class="schedule-form">
+                    <div class="schedule-form-check">
+                        <th:block th:with="tuesdaySchedule=${weeklySchedule != null ? weeklySchedule.?[dayOfWeek == 2] : null}">
+                            <input type="checkbox" name="isActive" value="true" id="tuesday-active" class="schedule-form-checkbox"
+                                   th:checked="${tuesdaySchedule != null and !tuesdaySchedule.empty and tuesdaySchedule[0].isActive}">
+                            <label for="tuesday-active" class="schedule-form-check-label">Bekerja di hari Selasa</label>
+                        </th:block>
+                    </div>
+                    
+                    <div class="schedule-time-inputs">
+                        <div class="schedule-time-group">
+                            <label for="tuesday-start" class="schedule-time-label">Waktu Mulai</label>
+                            <th:block th:with="tuesdaySchedule=${weeklySchedule != null ? weeklySchedule.?[dayOfWeek == 2] : null}">
+                                <input type="time" name="startTime" id="tuesday-start" class="schedule-time-input"
+                                       th:value="${tuesdaySchedule != null and !tuesdaySchedule.empty and tuesdaySchedule[0].startTime != null ? tuesdaySchedule[0].startTime : '08:00'}">
+                            </th:block>
+                        </div>
+                        <div class="schedule-time-group">
+                            <label for="tuesday-end" class="schedule-time-label">Waktu Selesai</label>
+                            <th:block th:with="tuesdaySchedule=${weeklySchedule != null ? weeklySchedule.?[dayOfWeek == 2] : null}">
+                                <input type="time" name="endTime" id="tuesday-end" class="schedule-time-input"
+                                       th:value="${tuesdaySchedule != null and !tuesdaySchedule.empty and tuesdaySchedule[0].endTime != null ? tuesdaySchedule[0].endTime : '17:00'}">
+                            </th:block>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="schedule-btn-primary">
+                        <svg class="schedule-btn-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                        </svg>
+                        Simpan Selasa
+                    </button>
+
+                    <input type="hidden" name="dayOfWeek" value="2">
+                </form>
                 
-                <div class="form-check">
+                <div class="schedule-existing-info">
                     <th:block th:with="tuesdaySchedule=${weeklySchedule != null ? weeklySchedule.?[dayOfWeek == 2] : null}">
-                        <input type="checkbox" name="isActive" value="true" id="tuesday-active"
-                               th:checked="${tuesdaySchedule != null and !tuesdaySchedule.empty and tuesdaySchedule[0].isActive}">
-                        <label for="tuesday-active">Bekerja di hari Selasa</label>
-                    </th:block>
-                </div>
-                
-                <div class="time-inputs">
-                    <div class="time-input-group">
-                        <label for="tuesday-start">Waktu Mulai</label>
-                        <th:block th:with="tuesdaySchedule=${weeklySchedule != null ? weeklySchedule.?[dayOfWeek == 2] : null}">
-                            <input type="time" name="startTime" id="tuesday-start" 
-                                   th:value="${tuesdaySchedule != null and !tuesdaySchedule.empty and tuesdaySchedule[0].startTime != null ? tuesdaySchedule[0].startTime : '08:00'}">
-                        </th:block>
-                    </div>
-                    <div class="time-input-group">
-                        <label for="tuesday-end">Waktu Selesai</label>
-                        <th:block th:with="tuesdaySchedule=${weeklySchedule != null ? weeklySchedule.?[dayOfWeek == 2] : null}">
-                            <input type="time" name="endTime" id="tuesday-end" 
-                                   th:value="${tuesdaySchedule != null and !tuesdaySchedule.empty and tuesdaySchedule[0].endTime != null ? tuesdaySchedule[0].endTime : '17:00'}">
-                        </th:block>
-                    </div>
-                </div>
-                
-                <button type="submit" class="btn btn-primary">Simpan Selasa</button>
-            </form>
-            
-            <div class="existing-schedule">
-                <th:block th:with="tuesdaySchedule=${weeklySchedule != null ? weeklySchedule.?[dayOfWeek == 2] : null}">
-                    <th:block th:if="${tuesdaySchedule != null and !tuesdaySchedule.empty}">
-                        <th:block th:each="schedule : ${tuesdaySchedule}">
-                            <p><strong>Jadwal saat ini:</strong> 
-                               <span th:if="${schedule.isActive}">
+                        <th:block th:if="${tuesdaySchedule != null and !tuesdaySchedule.empty}">
+                            <th:block th:each="schedule : ${tuesdaySchedule}">
+                                <p class="schedule-existing-title">Jadwal saat ini:</p>
+                                <p th:if="${schedule.isActive}" class="schedule-existing-time schedule-status-active">
                                    <span th:text="${schedule.startTime}">08:00</span> - <span th:text="${schedule.endTime}">17:00</span>
-                               </span>
-                               <span th:unless="${schedule.isActive}">Tidak bekerja</span>
-                            </p>
+                                </p>
+                                <p th:unless="${schedule.isActive}" class="schedule-existing-inactive schedule-status-inactive">Tidak bekerja</p>
+                            </th:block>
                         </th:block>
+                        <div th:if="${tuesdaySchedule == null or tuesdaySchedule.empty}">
+                            <p class="schedule-existing-title">Jadwal saat ini:</p>
+                            <p class="schedule-existing-none schedule-status-none">Belum diatur</p>
+                        </div>
                     </th:block>
-                    <p th:if="${tuesdaySchedule == null or tuesdaySchedule.empty}">
-                        <strong>Jadwal saat ini:</strong> <em>Belum diatur</em>
-                    </p>
-                </th:block>
+                </div>
             </div>
         </div>
 
-        <div class="day-schedule">
-            <h3>Rabu</h3>
-            <form method="post" action="/schedule/setup">
-                <input type="hidden" name="dayOfWeek" value="3">
+        <div class="schedule-day-card">
+            <div class="schedule-day-header">
+                <h3 class="schedule-day-title">Rabu</h3>
+            </div>
+            <div class="schedule-day-content">
+                <form method="post" action="/schedule/setup" class="schedule-form">
+                    <div class="schedule-form-check">
+                        <th:block th:with="wednesdaySchedule=${weeklySchedule != null ? weeklySchedule.?[dayOfWeek == 3] : null}">
+                            <input type="checkbox" name="isActive" value="true" id="wednesday-active" class="schedule-form-checkbox"
+                                   th:checked="${wednesdaySchedule != null and !wednesdaySchedule.empty and wednesdaySchedule[0].isActive}">
+                            <label for="wednesday-active" class="schedule-form-check-label">Bekerja di hari Rabu</label>
+                        </th:block>
+                    </div>
+                    
+                    <div class="schedule-time-inputs">
+                        <div class="schedule-time-group">
+                            <label for="wednesday-start" class="schedule-time-label">Waktu Mulai</label>
+                            <th:block th:with="wednesdaySchedule=${weeklySchedule != null ? weeklySchedule.?[dayOfWeek == 3] : null}">
+                                <input type="time" name="startTime" id="wednesday-start" class="schedule-time-input"
+                                       th:value="${wednesdaySchedule != null and !wednesdaySchedule.empty and wednesdaySchedule[0].startTime != null ? wednesdaySchedule[0].startTime : '08:00'}">
+                            </th:block>
+                        </div>
+                        <div class="schedule-time-group">
+                            <label for="wednesday-end" class="schedule-time-label">Waktu Selesai</label>
+                            <th:block th:with="wednesdaySchedule=${weeklySchedule != null ? weeklySchedule.?[dayOfWeek == 3] : null}">
+                                <input type="time" name="endTime" id="wednesday-end" class="schedule-time-input"
+                                       th:value="${wednesdaySchedule != null and !wednesdaySchedule.empty and wednesdaySchedule[0].endTime != null ? wednesdaySchedule[0].endTime : '17:00'}">
+                            </th:block>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="schedule-btn-primary">
+                        <svg class="schedule-btn-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                        </svg>
+                        Simpan Rabu
+                    </button>
+
+                    <input type="hidden" name="dayOfWeek" value="3">
+                </form>
                 
-                <div class="form-check">
+                <div class="schedule-existing-info">
                     <th:block th:with="wednesdaySchedule=${weeklySchedule != null ? weeklySchedule.?[dayOfWeek == 3] : null}">
-                        <input type="checkbox" name="isActive" value="true" id="wednesday-active"
-                               th:checked="${wednesdaySchedule != null and !wednesdaySchedule.empty and wednesdaySchedule[0].isActive}">
-                        <label for="wednesday-active">Bekerja di hari Rabu</label>
-                    </th:block>
-                </div>
-                
-                <div class="time-inputs">
-                    <div class="time-input-group">
-                        <label for="wednesday-start">Waktu Mulai</label>
-                        <th:block th:with="wednesdaySchedule=${weeklySchedule != null ? weeklySchedule.?[dayOfWeek == 3] : null}">
-                            <input type="time" name="startTime" id="wednesday-start" 
-                                   th:value="${wednesdaySchedule != null and !wednesdaySchedule.empty and wednesdaySchedule[0].startTime != null ? wednesdaySchedule[0].startTime : '08:00'}">
-                        </th:block>
-                    </div>
-                    <div class="time-input-group">
-                        <label for="wednesday-end">Waktu Selesai</label>
-                        <th:block th:with="wednesdaySchedule=${weeklySchedule != null ? weeklySchedule.?[dayOfWeek == 3] : null}">
-                            <input type="time" name="endTime" id="wednesday-end" 
-                                   th:value="${wednesdaySchedule != null and !wednesdaySchedule.empty and wednesdaySchedule[0].endTime != null ? wednesdaySchedule[0].endTime : '17:00'}">
-                        </th:block>
-                    </div>
-                </div>
-                
-                <button type="submit" class="btn btn-primary">Simpan Rabu</button>
-            </form>
-            
-            <div class="existing-schedule">
-                <th:block th:with="wednesdaySchedule=${weeklySchedule != null ? weeklySchedule.?[dayOfWeek == 3] : null}">
-                    <th:block th:if="${wednesdaySchedule != null and !wednesdaySchedule.empty}">
-                        <th:block th:each="schedule : ${wednesdaySchedule}">
-                            <p><strong>Jadwal saat ini:</strong> 
-                               <span th:if="${schedule.isActive}">
+                        <th:block th:if="${wednesdaySchedule != null and !wednesdaySchedule.empty}">
+                            <th:block th:each="schedule : ${wednesdaySchedule}">
+                                <p class="schedule-existing-title">Jadwal saat ini:</p>
+                                <p th:if="${schedule.isActive}" class="schedule-existing-time schedule-status-active">
                                    <span th:text="${schedule.startTime}">08:00</span> - <span th:text="${schedule.endTime}">17:00</span>
-                               </span>
-                               <span th:unless="${schedule.isActive}">Tidak bekerja</span>
-                            </p>
+                                </p>
+                                <p th:unless="${schedule.isActive}" class="schedule-existing-inactive schedule-status-inactive">Tidak bekerja</p>
+                            </th:block>
                         </th:block>
+                        <div th:if="${wednesdaySchedule == null or wednesdaySchedule.empty}">
+                            <p class="schedule-existing-title">Jadwal saat ini:</p>
+                            <p class="schedule-existing-none schedule-status-none">Belum diatur</p>
+                        </div>
                     </th:block>
-                    <p th:if="${wednesdaySchedule == null or wednesdaySchedule.empty}">
-                        <strong>Jadwal saat ini:</strong> <em>Belum diatur</em>
-                    </p>
-                </th:block>
+                </div>
             </div>
         </div>
 
-        <div class="day-schedule">
-            <h3>Kamis</h3>
-            <form method="post" action="/schedule/setup">
-                <input type="hidden" name="dayOfWeek" value="4">
+        <div class="schedule-day-card">
+            <div class="schedule-day-header">
+                <h3 class="schedule-day-title">Kamis</h3>
+            </div>
+            <div class="schedule-day-content">
+                <form method="post" action="/schedule/setup" class="schedule-form">
+                    <div class="schedule-form-check">
+                        <th:block th:with="thursdaySchedule=${weeklySchedule != null ? weeklySchedule.?[dayOfWeek == 4] : null}">
+                            <input type="checkbox" name="isActive" value="true" id="thursday-active" class="schedule-form-checkbox"
+                                   th:checked="${thursdaySchedule != null and !thursdaySchedule.empty and thursdaySchedule[0].isActive}">
+                            <label for="thursday-active" class="schedule-form-check-label">Bekerja di hari Kamis</label>
+                        </th:block>
+                    </div>
+                    
+                    <div class="schedule-time-inputs">
+                        <div class="schedule-time-group">
+                            <label for="thursday-start" class="schedule-time-label">Waktu Mulai</label>
+                            <th:block th:with="thursdaySchedule=${weeklySchedule != null ? weeklySchedule.?[dayOfWeek == 4] : null}">
+                                <input type="time" name="startTime" id="thursday-start" class="schedule-time-input"
+                                       th:value="${thursdaySchedule != null and !thursdaySchedule.empty and thursdaySchedule[0].startTime != null ? thursdaySchedule[0].startTime : '08:00'}">
+                            </th:block>
+                        </div>
+                        <div class="schedule-time-group">
+                            <label for="thursday-end" class="schedule-time-label">Waktu Selesai</label>
+                            <th:block th:with="thursdaySchedule=${weeklySchedule != null ? weeklySchedule.?[dayOfWeek == 4] : null}">
+                                <input type="time" name="endTime" id="thursday-end" class="schedule-time-input"
+                                       th:value="${thursdaySchedule != null and !thursdaySchedule.empty and thursdaySchedule[0].endTime != null ? thursdaySchedule[0].endTime : '17:00'}">
+                            </th:block>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="schedule-btn-primary">
+                        <svg class="schedule-btn-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                        </svg>
+                        Simpan Kamis
+                    </button>
+
+                    <input type="hidden" name="dayOfWeek" value="4">
+                </form>
                 
-                <div class="form-check">
+                <div class="schedule-existing-info">
                     <th:block th:with="thursdaySchedule=${weeklySchedule != null ? weeklySchedule.?[dayOfWeek == 4] : null}">
-                        <input type="checkbox" name="isActive" value="true" id="thursday-active"
-                               th:checked="${thursdaySchedule != null and !thursdaySchedule.empty and thursdaySchedule[0].isActive}">
-                        <label for="thursday-active">Bekerja di hari Kamis</label>
-                    </th:block>
-                </div>
-                
-                <div class="time-inputs">
-                    <div class="time-input-group">
-                        <label for="thursday-start">Waktu Mulai</label>
-                        <th:block th:with="thursdaySchedule=${weeklySchedule != null ? weeklySchedule.?[dayOfWeek == 4] : null}">
-                            <input type="time" name="startTime" id="thursday-start" 
-                                   th:value="${thursdaySchedule != null and !thursdaySchedule.empty and thursdaySchedule[0].startTime != null ? thursdaySchedule[0].startTime : '08:00'}">
-                        </th:block>
-                    </div>
-                    <div class="time-input-group">
-                        <label for="thursday-end">Waktu Selesai</label>
-                        <th:block th:with="thursdaySchedule=${weeklySchedule != null ? weeklySchedule.?[dayOfWeek == 4] : null}">
-                            <input type="time" name="endTime" id="thursday-end" 
-                                   th:value="${thursdaySchedule != null and !thursdaySchedule.empty and thursdaySchedule[0].endTime != null ? thursdaySchedule[0].endTime : '17:00'}">
-                        </th:block>
-                    </div>
-                </div>
-                
-                <button type="submit" class="btn btn-primary">Simpan Kamis</button>
-            </form>
-            
-            <div class="existing-schedule">
-                <th:block th:with="thursdaySchedule=${weeklySchedule != null ? weeklySchedule.?[dayOfWeek == 4] : null}">
-                    <th:block th:if="${thursdaySchedule != null and !thursdaySchedule.empty}">
-                        <th:block th:each="schedule : ${thursdaySchedule}">
-                            <p><strong>Jadwal saat ini:</strong> 
-                               <span th:if="${schedule.isActive}">
+                        <th:block th:if="${thursdaySchedule != null and !thursdaySchedule.empty}">
+                            <th:block th:each="schedule : ${thursdaySchedule}">
+                                <p class="schedule-existing-title">Jadwal saat ini:</p>
+                                <p th:if="${schedule.isActive}" class="schedule-existing-time schedule-status-active">
                                    <span th:text="${schedule.startTime}">08:00</span> - <span th:text="${schedule.endTime}">17:00</span>
-                               </span>
-                               <span th:unless="${schedule.isActive}">Tidak bekerja</span>
-                            </p>
+                                </p>
+                                <p th:unless="${schedule.isActive}" class="schedule-existing-inactive schedule-status-inactive">Tidak bekerja</p>
+                            </th:block>
                         </th:block>
+                        <div th:if="${thursdaySchedule == null or thursdaySchedule.empty}">
+                            <p class="schedule-existing-title">Jadwal saat ini:</p>
+                            <p class="schedule-existing-none schedule-status-none">Belum diatur</p>
+                        </div>
                     </th:block>
-                    <p th:if="${thursdaySchedule == null or thursdaySchedule.empty}">
-                        <strong>Jadwal saat ini:</strong> <em>Belum diatur</em>
-                    </p>
-                </th:block>
+                </div>
             </div>
         </div>
 
-        <div class="day-schedule">
-            <h3>Jumat</h3>
-            <form method="post" action="/schedule/setup">
-                <input type="hidden" name="dayOfWeek" value="5">
+        <div class="schedule-day-card">
+            <div class="schedule-day-header">
+                <h3 class="schedule-day-title">Jumat</h3>
+            </div>
+            <div class="schedule-day-content">
+                <form method="post" action="/schedule/setup" class="schedule-form">
+                    <div class="schedule-form-check">
+                        <th:block th:with="fridaySchedule=${weeklySchedule != null ? weeklySchedule.?[dayOfWeek == 5] : null}">
+                            <input type="checkbox" name="isActive" value="true" id="friday-active" class="schedule-form-checkbox"
+                                   th:checked="${fridaySchedule != null and !fridaySchedule.empty and fridaySchedule[0].isActive}">
+                            <label for="friday-active" class="schedule-form-check-label">Bekerja di hari Jumat</label>
+                        </th:block>
+                    </div>
+                    
+                    <div class="schedule-time-inputs">
+                        <div class="schedule-time-group">
+                            <label for="friday-start" class="schedule-time-label">Waktu Mulai</label>
+                            <th:block th:with="fridaySchedule=${weeklySchedule != null ? weeklySchedule.?[dayOfWeek == 5] : null}">
+                                <input type="time" name="startTime" id="friday-start" class="schedule-time-input"
+                                       th:value="${fridaySchedule != null and !fridaySchedule.empty and fridaySchedule[0].startTime != null ? fridaySchedule[0].startTime : '08:00'}">
+                            </th:block>
+                        </div>
+                        <div class="schedule-time-group">
+                            <label for="friday-end" class="schedule-time-label">Waktu Selesai</label>
+                            <th:block th:with="fridaySchedule=${weeklySchedule != null ? weeklySchedule.?[dayOfWeek == 5] : null}">
+                                <input type="time" name="endTime" id="friday-end" class="schedule-time-input"
+                                       th:value="${fridaySchedule != null and !fridaySchedule.empty and fridaySchedule[0].endTime != null ? fridaySchedule[0].endTime : '17:00'}">
+                            </th:block>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="schedule-btn-primary">
+                        <svg class="schedule-btn-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                        </svg>
+                        Simpan Jumat
+                    </button>
+
+                    <input type="hidden" name="dayOfWeek" value="5">
+                </form>
                 
-                <div class="form-check">
+                <div class="schedule-existing-info">
                     <th:block th:with="fridaySchedule=${weeklySchedule != null ? weeklySchedule.?[dayOfWeek == 5] : null}">
-                        <input type="checkbox" name="isActive" value="true" id="friday-active"
-                               th:checked="${fridaySchedule != null and !fridaySchedule.empty and fridaySchedule[0].isActive}">
-                        <label for="friday-active">Bekerja di hari Jumat</label>
-                    </th:block>
-                </div>
-                
-                <div class="time-inputs">
-                    <div class="time-input-group">
-                        <label for="friday-start">Waktu Mulai</label>
-                        <th:block th:with="fridaySchedule=${weeklySchedule != null ? weeklySchedule.?[dayOfWeek == 5] : null}">
-                            <input type="time" name="startTime" id="friday-start" 
-                                   th:value="${fridaySchedule != null and !fridaySchedule.empty and fridaySchedule[0].startTime != null ? fridaySchedule[0].startTime : '08:00'}">
-                        </th:block>
-                    </div>
-                    <div class="time-input-group">
-                        <label for="friday-end">Waktu Selesai</label>
-                        <th:block th:with="fridaySchedule=${weeklySchedule != null ? weeklySchedule.?[dayOfWeek == 5] : null}">
-                            <input type="time" name="endTime" id="friday-end" 
-                                   th:value="${fridaySchedule != null and !fridaySchedule.empty and fridaySchedule[0].endTime != null ? fridaySchedule[0].endTime : '17:00'}">
-                        </th:block>
-                    </div>
-                </div>
-                
-                <button type="submit" class="btn btn-primary">Simpan Jumat</button>
-            </form>
-            
-            <div class="existing-schedule">
-                <th:block th:with="fridaySchedule=${weeklySchedule != null ? weeklySchedule.?[dayOfWeek == 5] : null}">
-                    <th:block th:if="${fridaySchedule != null and !fridaySchedule.empty}">
-                        <th:block th:each="schedule : ${fridaySchedule}">
-                            <p><strong>Jadwal saat ini:</strong> 
-                               <span th:if="${schedule.isActive}">
+                        <th:block th:if="${fridaySchedule != null and !fridaySchedule.empty}">
+                            <th:block th:each="schedule : ${fridaySchedule}">
+                                <p class="schedule-existing-title">Jadwal saat ini:</p>
+                                <p th:if="${schedule.isActive}" class="schedule-existing-time schedule-status-active">
                                    <span th:text="${schedule.startTime}">08:00</span> - <span th:text="${schedule.endTime}">17:00</span>
-                               </span>
-                               <span th:unless="${schedule.isActive}">Tidak bekerja</span>
-                            </p>
+                                </p>
+                                <p th:unless="${schedule.isActive}" class="schedule-existing-inactive schedule-status-inactive">Tidak bekerja</p>
+                            </th:block>
                         </th:block>
+                        <div th:if="${fridaySchedule == null or fridaySchedule.empty}">
+                            <p class="schedule-existing-title">Jadwal saat ini:</p>
+                            <p class="schedule-existing-none schedule-status-none">Belum diatur</p>
+                        </div>
                     </th:block>
-                    <p th:if="${fridaySchedule == null or fridaySchedule.empty}">
-                        <strong>Jadwal saat ini:</strong> <em>Belum diatur</em>
-                    </p>
-                </th:block>
+                </div>
             </div>
         </div>
 
-        <div class="day-schedule">
-            <h3>Sabtu</h3>
-            <form method="post" action="/schedule/setup">
-                <input type="hidden" name="dayOfWeek" value="6">
+        <div class="schedule-day-card">
+            <div class="schedule-day-header">
+                <h3 class="schedule-day-title">Sabtu</h3>
+            </div>
+            <div class="schedule-day-content">
+                <form method="post" action="/schedule/setup" class="schedule-form">
+                    <div class="schedule-form-check">
+                        <th:block th:with="saturdaySchedule=${weeklySchedule != null ? weeklySchedule.?[dayOfWeek == 6] : null}">
+                            <input type="checkbox" name="isActive" value="true" id="saturday-active" class="schedule-form-checkbox"
+                                   th:checked="${saturdaySchedule != null and !saturdaySchedule.empty and saturdaySchedule[0].isActive}">
+                            <label for="saturday-active" class="schedule-form-check-label">Bekerja di hari Sabtu</label>
+                        </th:block>
+                    </div>
+                    
+                    <div class="schedule-time-inputs">
+                        <div class="schedule-time-group">
+                            <label for="saturday-start" class="schedule-time-label">Waktu Mulai</label>
+                            <th:block th:with="saturdaySchedule=${weeklySchedule != null ? weeklySchedule.?[dayOfWeek == 6] : null}">
+                                <input type="time" name="startTime" id="saturday-start" class="schedule-time-input"
+                                       th:value="${saturdaySchedule != null and !saturdaySchedule.empty and saturdaySchedule[0].startTime != null ? saturdaySchedule[0].startTime : '08:00'}">
+                            </th:block>
+                        </div>
+                        <div class="schedule-time-group">
+                            <label for="saturday-end" class="schedule-time-label">Waktu Selesai</label>
+                            <th:block th:with="saturdaySchedule=${weeklySchedule != null ? weeklySchedule.?[dayOfWeek == 6] : null}">
+                                <input type="time" name="endTime" id="saturday-end" class="schedule-time-input"
+                                       th:value="${saturdaySchedule != null and !saturdaySchedule.empty and saturdaySchedule[0].endTime != null ? saturdaySchedule[0].endTime : '17:00'}">
+                            </th:block>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="schedule-btn-primary">
+                        <svg class="schedule-btn-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                        </svg>
+                        Simpan Sabtu
+                    </button>
+
+                    <input type="hidden" name="dayOfWeek" value="6">
+                </form>
                 
-                <div class="form-check">
+                <div class="schedule-existing-info">
                     <th:block th:with="saturdaySchedule=${weeklySchedule != null ? weeklySchedule.?[dayOfWeek == 6] : null}">
-                        <input type="checkbox" name="isActive" value="true" id="saturday-active"
-                               th:checked="${saturdaySchedule != null and !saturdaySchedule.empty and saturdaySchedule[0].isActive}">
-                        <label for="saturday-active">Bekerja di hari Sabtu</label>
-                    </th:block>
-                </div>
-                
-                <div class="time-inputs">
-                    <div class="time-input-group">
-                        <label for="saturday-start">Waktu Mulai</label>
-                        <th:block th:with="saturdaySchedule=${weeklySchedule != null ? weeklySchedule.?[dayOfWeek == 6] : null}">
-                            <input type="time" name="startTime" id="saturday-start" 
-                                   th:value="${saturdaySchedule != null and !saturdaySchedule.empty and saturdaySchedule[0].startTime != null ? saturdaySchedule[0].startTime : '08:00'}">
-                        </th:block>
-                    </div>
-                    <div class="time-input-group">
-                        <label for="saturday-end">Waktu Selesai</label>
-                        <th:block th:with="saturdaySchedule=${weeklySchedule != null ? weeklySchedule.?[dayOfWeek == 6] : null}">
-                            <input type="time" name="endTime" id="saturday-end" 
-                                   th:value="${saturdaySchedule != null and !saturdaySchedule.empty and saturdaySchedule[0].endTime != null ? saturdaySchedule[0].endTime : '17:00'}">
-                        </th:block>
-                    </div>
-                </div>
-                
-                <button type="submit" class="btn btn-primary">Simpan Sabtu</button>
-            </form>
-            
-            <div class="existing-schedule">
-                <th:block th:with="saturdaySchedule=${weeklySchedule != null ? weeklySchedule.?[dayOfWeek == 6] : null}">
-                    <th:block th:if="${saturdaySchedule != null and !saturdaySchedule.empty}">
-                        <th:block th:each="schedule : ${saturdaySchedule}">
-                            <p><strong>Jadwal saat ini:</strong> 
-                               <span th:if="${schedule.isActive}">
+                        <th:block th:if="${saturdaySchedule != null and !saturdaySchedule.empty}">
+                            <th:block th:each="schedule : ${saturdaySchedule}">
+                                <p class="schedule-existing-title">Jadwal saat ini:</p>
+                                <p th:if="${schedule.isActive}" class="schedule-existing-time schedule-status-active">
                                    <span th:text="${schedule.startTime}">08:00</span> - <span th:text="${schedule.endTime}">17:00</span>
-                               </span>
-                               <span th:unless="${schedule.isActive}">Tidak bekerja</span>
-                            </p>
+                                </p>
+                                <p th:unless="${schedule.isActive}" class="schedule-existing-inactive schedule-status-inactive">Tidak bekerja</p>
+                            </th:block>
                         </th:block>
+                        <div th:if="${saturdaySchedule == null or saturdaySchedule.empty}">
+                            <p class="schedule-existing-title">Jadwal saat ini:</p>
+                            <p class="schedule-existing-none schedule-status-none">Belum diatur</p>
+                        </div>
                     </th:block>
-                    <p th:if="${saturdaySchedule == null or saturdaySchedule.empty}">
-                        <strong>Jadwal saat ini:</strong> <em>Belum diatur</em>
-                    </p>
-                </th:block>
+                </div>
             </div>
         </div>
 
-        <div class="day-schedule">
-            <h3>Minggu</h3>
-            <form method="post" action="/schedule/setup">
-                <input type="hidden" name="dayOfWeek" value="7">
+        <div class="schedule-day-card">
+            <div class="schedule-day-header">
+                <h3 class="schedule-day-title">Minggu</h3>
+            </div>
+            <div class="schedule-day-content">
+                <form method="post" action="/schedule/setup" class="schedule-form">
+                    <div class="schedule-form-check">
+                        <th:block th:with="sundaySchedule=${weeklySchedule != null ? weeklySchedule.?[dayOfWeek == 7] : null}">
+                            <input type="checkbox" name="isActive" value="true" id="sunday-active" class="schedule-form-checkbox"
+                                   th:checked="${sundaySchedule != null and !sundaySchedule.empty and sundaySchedule[0].isActive}">
+                            <label for="sunday-active" class="schedule-form-check-label">Bekerja di hari Minggu</label>
+                        </th:block>
+                    </div>
+                    
+                    <div class="schedule-time-inputs">
+                        <div class="schedule-time-group">
+                            <label for="sunday-start" class="schedule-time-label">Waktu Mulai</label>
+                            <th:block th:with="sundaySchedule=${weeklySchedule != null ? weeklySchedule.?[dayOfWeek == 7] : null}">
+                                <input type="time" name="startTime" id="sunday-start" class="schedule-time-input"
+                                       th:value="${sundaySchedule != null and !sundaySchedule.empty and sundaySchedule[0].startTime != null ? sundaySchedule[0].startTime : '08:00'}">
+                            </th:block>
+                        </div>
+                        <div class="schedule-time-group">
+                            <label for="sunday-end" class="schedule-time-label">Waktu Selesai</label>
+                            <th:block th:with="sundaySchedule=${weeklySchedule != null ? weeklySchedule.?[dayOfWeek == 7] : null}">
+                                <input type="time" name="endTime" id="sunday-end" class="schedule-time-input"
+                                       th:value="${sundaySchedule != null and !sundaySchedule.empty and sundaySchedule[0].endTime != null ? sundaySchedule[0].endTime : '17:00'}">
+                            </th:block>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="schedule-btn-primary">
+                        <svg class="schedule-btn-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                        </svg>
+                        Simpan Minggu
+                    </button>
+
+                    <input type="hidden" name="dayOfWeek" value="7">
+                </form>
                 
-                <div class="form-check">
+                <div class="schedule-existing-info">
                     <th:block th:with="sundaySchedule=${weeklySchedule != null ? weeklySchedule.?[dayOfWeek == 7] : null}">
-                        <input type="checkbox" name="isActive" value="true" id="sunday-active"
-                               th:checked="${sundaySchedule != null and !sundaySchedule.empty and sundaySchedule[0].isActive}">
-                        <label for="sunday-active">Bekerja di hari Minggu</label>
-                    </th:block>
-                </div>
-                
-                <div class="time-inputs">
-                    <div class="time-input-group">
-                        <label for="sunday-start">Waktu Mulai</label>
-                        <th:block th:with="sundaySchedule=${weeklySchedule != null ? weeklySchedule.?[dayOfWeek == 7] : null}">
-                            <input type="time" name="startTime" id="sunday-start" 
-                                   th:value="${sundaySchedule != null and !sundaySchedule.empty and sundaySchedule[0].startTime != null ? sundaySchedule[0].startTime : '08:00'}">
-                        </th:block>
-                    </div>
-                    <div class="time-input-group">
-                        <label for="sunday-end">Waktu Selesai</label>
-                        <th:block th:with="sundaySchedule=${weeklySchedule != null ? weeklySchedule.?[dayOfWeek == 7] : null}">
-                            <input type="time" name="endTime" id="sunday-end" 
-                                   th:value="${sundaySchedule != null and !sundaySchedule.empty and sundaySchedule[0].endTime != null ? sundaySchedule[0].endTime : '17:00'}">
-                        </th:block>
-                    </div>
-                </div>
-                
-                <button type="submit" class="btn btn-primary">Simpan Minggu</button>
-            </form>
-            
-            <div class="existing-schedule">
-                <th:block th:with="sundaySchedule=${weeklySchedule != null ? weeklySchedule.?[dayOfWeek == 7] : null}">
-                    <th:block th:if="${sundaySchedule != null and !sundaySchedule.empty}">
-                        <th:block th:each="schedule : ${sundaySchedule}">
-                            <p><strong>Jadwal saat ini:</strong> 
-                               <span th:if="${schedule.isActive}">
+                        <th:block th:if="${sundaySchedule != null and !sundaySchedule.empty}">
+                            <th:block th:each="schedule : ${sundaySchedule}">
+                                <p class="schedule-existing-title">Jadwal saat ini:</p>
+                                <p th:if="${schedule.isActive}" class="schedule-existing-time schedule-status-active">
                                    <span th:text="${schedule.startTime}">08:00</span> - <span th:text="${schedule.endTime}">17:00</span>
-                               </span>
-                               <span th:unless="${schedule.isActive}">Tidak bekerja</span>
-                            </p>
+                                </p>
+                                <p th:unless="${schedule.isActive}" class="schedule-existing-inactive schedule-status-inactive">Tidak bekerja</p>
+                            </th:block>
                         </th:block>
+                        <div th:if="${sundaySchedule == null or sundaySchedule.empty}">
+                            <p class="schedule-existing-title">Jadwal saat ini:</p>
+                            <p class="schedule-existing-none schedule-status-none">Belum diatur</p>
+                        </div>
                     </th:block>
-                    <p th:if="${sundaySchedule == null or sundaySchedule.empty}">
-                        <strong>Jadwal saat ini:</strong> <em>Belum diatur</em>
-                    </p>
-                </th:block>
+                </div>
             </div>
         </div>
 
-    </div>
+        </div>
 
-    <div class="navigation">
-        <a href="/dashboard/vet" class="btn btn-outline">← Kembali ke Dasbor</a>
-        <button type="submit" form="save-all-form" class="btn-save-all">
-          Simpan Jadwal Semua Hari
-        </button>
+        <div class="schedule-save-all-container">
+          <form method="post" action="/schedule/setup/save-all" id="save-all-form">
+            <th:block th:with="mondaySchedule=${weeklySchedule != null ? weeklySchedule.?[dayOfWeek == 1] : null}">
+              <input type="hidden" name="day1_isActive" th:value="${mondaySchedule != null and !mondaySchedule.empty and mondaySchedule[0].isActive}">
+              <input type="hidden" name="day1_startTime" th:value="${mondaySchedule != null and !mondaySchedule.empty and mondaySchedule[0].startTime != null ? mondaySchedule[0].startTime : ''}">
+              <input type="hidden" name="day1_endTime" th:value="${mondaySchedule != null and !mondaySchedule.empty and mondaySchedule[0].endTime != null ? mondaySchedule[0].endTime : ''}">
+            </th:block>
+            
+            <th:block th:with="tuesdaySchedule=${weeklySchedule != null ? weeklySchedule.?[dayOfWeek == 2] : null}">
+              <input type="hidden" name="day2_isActive" th:value="${tuesdaySchedule != null and !tuesdaySchedule.empty and tuesdaySchedule[0].isActive}">
+              <input type="hidden" name="day2_startTime" th:value="${tuesdaySchedule != null and !tuesdaySchedule.empty and tuesdaySchedule[0].startTime != null ? tuesdaySchedule[0].startTime : ''}">
+              <input type="hidden" name="day2_endTime" th:value="${tuesdaySchedule != null and !tuesdaySchedule.empty and tuesdaySchedule[0].endTime != null ? tuesdaySchedule[0].endTime : ''}">
+            </th:block>
+            
+            <th:block th:with="wednesdaySchedule=${weeklySchedule != null ? weeklySchedule.?[dayOfWeek == 3] : null}">
+              <input type="hidden" name="day3_isActive" th:value="${wednesdaySchedule != null and !wednesdaySchedule.empty and wednesdaySchedule[0].isActive}">
+              <input type="hidden" name="day3_startTime" th:value="${wednesdaySchedule != null and !wednesdaySchedule.empty and wednesdaySchedule[0].startTime != null ? wednesdaySchedule[0].startTime : ''}">
+              <input type="hidden" name="day3_endTime" th:value="${wednesdaySchedule != null and !wednesdaySchedule.empty and wednesdaySchedule[0].endTime != null ? wednesdaySchedule[0].endTime : ''}">
+            </th:block>
+            
+            <th:block th:with="thursdaySchedule=${weeklySchedule != null ? weeklySchedule.?[dayOfWeek == 4] : null}">
+              <input type="hidden" name="day4_isActive" th:value="${thursdaySchedule != null and !thursdaySchedule.empty and thursdaySchedule[0].isActive}">
+              <input type="hidden" name="day4_startTime" th:value="${thursdaySchedule != null and !thursdaySchedule.empty and thursdaySchedule[0].startTime != null ? thursdaySchedule[0].startTime : ''}">
+              <input type="hidden" name="day4_endTime" th:value="${thursdaySchedule != null and !thursdaySchedule.empty and thursdaySchedule[0].endTime != null ? thursdaySchedule[0].endTime : ''}">
+            </th:block>
+            
+            <th:block th:with="fridaySchedule=${weeklySchedule != null ? weeklySchedule.?[dayOfWeek == 5] : null}">
+              <input type="hidden" name="day5_isActive" th:value="${fridaySchedule != null and !fridaySchedule.empty and fridaySchedule[0].isActive}">
+              <input type="hidden" name="day5_startTime" th:value="${fridaySchedule != null and !fridaySchedule.empty and fridaySchedule[0].startTime != null ? fridaySchedule[0].startTime : ''}">
+              <input type="hidden" name="day5_endTime" th:value="${fridaySchedule != null and !fridaySchedule.empty and fridaySchedule[0].endTime != null ? fridaySchedule[0].endTime : ''}">
+            </th:block>
+            
+            <th:block th:with="saturdaySchedule=${weeklySchedule != null ? weeklySchedule.?[dayOfWeek == 6] : null}">
+              <input type="hidden" name="day6_isActive" th:value="${saturdaySchedule != null and !saturdaySchedule.empty and saturdaySchedule[0].isActive}">
+              <input type="hidden" name="day6_startTime" th:value="${saturdaySchedule != null and !saturdaySchedule.empty and saturdaySchedule[0].startTime != null ? saturdaySchedule[0].startTime : ''}">
+              <input type="hidden" name="day6_endTime" th:value="${saturdaySchedule != null and !saturdaySchedule.empty and saturdaySchedule[0].endTime != null ? saturdaySchedule[0].endTime : ''}">
+            </th:block>
+            
+            <th:block th:with="sundaySchedule=${weeklySchedule != null ? weeklySchedule.?[dayOfWeek == 7] : null}">
+              <input type="hidden" name="day7_isActive" th:value="${sundaySchedule != null and !sundaySchedule.empty and sundaySchedule[0].isActive}">
+              <input type="hidden" name="day7_startTime" th:value="${sundaySchedule != null and !sundaySchedule.empty and sundaySchedule[0].startTime != null ? sundaySchedule[0].startTime : ''}">
+              <input type="hidden" name="day7_endTime" th:value="${sundaySchedule != null and !sundaySchedule.empty and sundaySchedule[0].endTime != null ? sundaySchedule[0].endTime : ''}">
+            </th:block>
+            
+            <button type="submit" class="schedule-save-all-btn">
+              <svg class="schedule-btn-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+              Simpan Jadwal Semua Hari
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
   </div>
 
   <th:block id="page-scripts">
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        const timeInputs = document.querySelectorAll('input[type="time"]');
-        
-        const saveAllForm = document.getElementById('save-all-form');
-        if (saveAllForm) {
-          saveAllForm.addEventListener('submit', function(e) {
-            for (let day = 1; day <= 7; day++) {
-              const dayForm = document.querySelector(`form input[name="dayOfWeek"][value="${day}"]`).closest('form');
-              
-              const isActiveCheckbox = dayForm.querySelector('input[name="isActive"]');
-              const startTimeInput = dayForm.querySelector('input[name="startTime"]');
-              const endTimeInput = dayForm.querySelector('input[name="endTime"]');
-              
-              const hiddenIsActive = saveAllForm.querySelector(`input[name="day${day}_isActive"]`);
-              const hiddenStartTime = saveAllForm.querySelector(`input[name="day${day}_startTime"]`);
-              const hiddenEndTime = saveAllForm.querySelector(`input[name="day${day}_endTime"]`);
-              
-              if (hiddenIsActive) {
-                hiddenIsActive.value = isActiveCheckbox.checked;
-              }
-              if (hiddenStartTime) {
-                hiddenStartTime.value = startTimeInput.value || '';
-              }
-              if (hiddenEndTime) {
-                hiddenEndTime.value = endTimeInput.value || '';
-              }
-            }
-          });
-        }
-        
-        timeInputs.forEach(function(input) {
-          input.type = 'text';
-          input.placeholder = 'JJ:MM';
-          input.maxLength = 5;
-          
-          if (input.value && input.value.length > 5) {
-            input.value = input.value.substring(0, 5);
-          }
-          
-          function formatTimeInput(value) {
-            value = value.replace(/[^\d:]/g, '');
-            
-            if (value.length === 2 && !value.includes(':')) {
-              value += ':';
-            }
-            
-            if (value.length > 5) {
-              value = value.substring(0, 5);
-            }
-            
-            return value;
-          }
-          
-          input.addEventListener('input', function() {
-            this.value = formatTimeInput(this.value);
-          });
-          
-          input.addEventListener('paste', function(e) {
-            setTimeout(() => {
-              this.value = formatTimeInput(this.value);
-            }, 0);
-          });
-          
-          input.addEventListener('focus', function() {
-            this.style.borderColor = '#5271ff';
-          });
-          
-          input.addEventListener('blur', function() {
-            this.style.borderColor = '';
-          });
-        });
-      });
-    </script>
+    <script th:src="@{/js/schedule.js}"></script>
   </th:block>
 </html>
 

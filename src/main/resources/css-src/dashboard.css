@@ -1,0 +1,60 @@
+.dashboard-layout-body {
+  @apply bg-gray-100;
+}
+
+.dashboard-sidebar-overlay {
+  @apply fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden;
+  display: none !important;
+}
+
+.dashboard-sidebar-overlay:not(.hidden) {
+  display: block !important;
+}
+
+.dashboard-main-container {
+  @apply lg:pl-64;
+}
+
+.dashboard-main-content {
+  @apply min-h-screen;
+}
+
+.dashboard-toggle-button {
+  @apply fixed top-1/2 left-0 z-50 lg:hidden bg-primary text-white p-2 rounded-r-lg shadow-lg hover:bg-primary-dark transition-all duration-300 transform -translate-y-1/2;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.dashboard-toggle-icon {
+  @apply h-5 w-5 transition-transform duration-300;
+}
+
+.dashboard-sidebar-open .dashboard-toggle-button {
+  left: 240px;
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+}
+
+.dashboard-sidebar-open .dashboard-toggle-icon {
+  transform: rotate(180deg);
+}
+
+.dashboard-sidebar-closed .dashboard-toggle-button {
+  left: 0px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.dashboard-sidebar-closed .dashboard-toggle-icon {
+  transform: rotate(0deg);
+}
+
+@media (min-width: 1024px) {
+  .dashboard-toggle-button {
+    display: none;
+  }
+
+  .dashboard-sidebar-overlay {
+    display: none !important;
+  }
+}
